@@ -1,0 +1,10 @@
+{
+"SpaProxyServer": {
+"ServerUrl": "https://localhost:52742",
+"RedirectUrl": "",
+"LaunchCommand": "npm run dev",
+"WorkingDirectory": "C:\\Users\\knavafilip\\Desktop\\WannabeGoogleCalendar\\WannabeGoogleCalendar\\WannabeGoogleCalendar.Server\\..\\wannabegooglecalendar.client",
+"MaxTimeoutInSeconds": "120",
+"KeepRunning": "false"
+}
+}

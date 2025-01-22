@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "CWvxV3kJvSM=",
+  "dgSpecHash": "aPd7VkG/CsQ=",
   "success": true,
-  "projectFilePath": "C:\\Users\\knavafilip\\Desktop\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\WannabeGCalendar.csproj",
+  "projectFilePath": "C:\\Users\\knavafilip\\Desktop\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\WannabeGCalendar.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\knavafilip\\.nuget\\packages\\bouncycastle.cryptography\\2.3.1\\bouncycastle.cryptography.2.3.1.nupkg.sha512",
     "C:\\Users\\knavafilip\\.nuget\\packages\\google.protobuf\\3.26.1\\google.protobuf.3.26.1.nupkg.sha512",

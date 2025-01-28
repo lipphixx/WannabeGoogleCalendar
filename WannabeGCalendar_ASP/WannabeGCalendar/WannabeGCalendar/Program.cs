@@ -1,4 +1,3 @@
-
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using WannabeGCalendar.Data;
@@ -18,15 +17,7 @@ namespace WannabeGCalendar
                 options.UseMySQL(connectionString);
             });
 
-            // Add services to the container.
-
-            builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
-
-            var app = builder.Build();
-
+            // Pøidání CORS politiky správnì
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowAll", policy =>
@@ -34,6 +25,13 @@ namespace WannabeGCalendar
                     policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
                 });
             });
+
+            // Add services to the container.
+            builder.Services.AddControllers();
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
+
+            var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -43,9 +41,9 @@ namespace WannabeGCalendar
             }
 
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
 
+            // Použití CORS politiky
             app.UseCors("AllowAll");
 
             app.MapControllers();

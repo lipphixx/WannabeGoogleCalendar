@@ -41,7 +41,7 @@ async function fetchJoke(day){
   <div class="day" @click="addEvent">
 
     <span class="day-number">{{ day }}</span>
-    <span>{{name}}</span>
+    <span v-if="name">{{name}}</span>
     <div v-if="events && events.length" class="events">
       <div
           v-for="(event, index) in events"

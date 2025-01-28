@@ -1,6 +1,9 @@
 <script setup>
 import Day from "@/components/day.vue";
 import { onMounted, reactive, ref, watch } from "vue";
+import axios from "axios";
+
+
 
 const currentYear = ref(0);
 const currentMonth = ref(0);
@@ -18,6 +21,7 @@ const selectedDay = ref(null);
 
 const eventName = ref(null);
 const eventTime = ref(null);
+const eventNote = ref(null);
 const allDayEvent = ref(null);
 
 const nationalHolidays = ref([]);
@@ -36,12 +40,7 @@ onMounted(async () => {
   currentYear.value = date.getFullYear();
   daysInCurrentMonth.value = new Date(currentYear.value, currentMonth.value + 1, 0).getDate();
 
-  // pokud eventy existuji, vytvori se do pole, pokud ne, vytvori se prazdne pole
-  const loadedEvents = JSON.parse(localStorage.getItem('events')) || {};
-
-  for (let key in loadedEvents) {
-    events[key] = loadedEvents[key]; //nacitam ulozene eventy daneho dne co pole vsech eventu
-  }
+  await fetchEvents();
 
   sortAllEvents(); //serazeni
   await fetchHolidays();
@@ -97,8 +96,9 @@ function showModal(day){
   addEventDialog.value.showModal();
   selectedDay.value = day;
 }
-function addEvent() {
+async function addEvent() {
   const key = selectedDay.value.getTime();
+
   if (!eventName.value){
     alert('Zadejte název události!');
     return;
@@ -126,12 +126,36 @@ function addEvent() {
   events[key].push(eventDetails);
   sortEventsForDay(events[key]);
 
+  let newEvent;
+
+  if(!eventTime){
+    newEvent = {
+      eventId: parseInt(key),
+      eventName: eventName.value,
+      eventDate: `${selectedDay.value.getFullYear()}-${(selectedDay.value.getMonth() + 1).toString().padStart(2, '0')}-${selectedDay.value.getDate().toString().padStart(2, '0')}`,
+      eventNote: eventNote.value,
+      ownerId: 1
+    };
+  }else{
+    newEvent = {
+      eventId: parseInt(key),
+      eventName: eventName.value,
+      eventDate: `${selectedDay.value.getFullYear()}-${(selectedDay.value.getMonth() + 1).toString().padStart(2, '0')}-${selectedDay.value.getDate().toString().padStart(2, '0')}`,
+      eventTime: `${eventTime.value}:00`,
+      eventNote: eventNote.value,
+      ownerId: 1
+    };
+  }
+
   //reset dialogu
   eventName.value = null;
   eventTime.value = null;
+  eventNote.value = null;
   allDayEvent.value = false;
 
   addEventDialog.value.close();
+
+  await axios.post("https://localhost:7198/api/Events", newEvent);
 }
 function nextMonth() {
   if (currentMonth.value === 11) {
@@ -159,9 +183,10 @@ function showNow() {
 }
 
 //prebira dany den a event ktery chceme smazat
-function removeEvent(day, index) {
+async function removeEvent(day, index) {
   const key = day.getTime();
   events[key].splice(index, 1);
+  await axios.delete(`https://localhost:7198/api/Events/${key}`);
 }
 
 //porovnavani casu u eventu ve dni
@@ -191,7 +216,6 @@ async function fetchHolidays(){
   const formattedMonth = currentMonth.value < 10 ? `0${currentMonth.value + 1}` : `${currentMonth.value + 1}`;
 
   const fullUrl = `${baseUrl}${currentYear.value}-${formattedMonth}-01/interval/${daysInCurrentMonth.value}`;
-  console.log(fullUrl);
 
   try {
     const response = await fetch(fullUrl);
@@ -207,16 +231,54 @@ async function fetchHolidays(){
   }
 
 }
+
+async function fetchEvents(){
+  const url = "https://localhost:7198/api/Events";
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+
+    data.forEach(x => {
+      const id = x.eventId;
+      const eventDetails = {
+        name: x.eventName,
+        time: x.eventTime
+      };
+
+      if (!allDayEvent.value && eventTime.value) {
+        eventDetails.time = eventTime.value;
+      }
+
+      if (!events[id]) {
+        events[id] = [];
+      }
+
+      events[id].push(eventDetails);
+      sortEventsForDay(events[id]);
+    })
+
+  } catch (error) {
+    console.log(error);
+  }
+
+}
 </script>
 
 <template>
   <dialog ref="addEventDialog">
-    <input type="text" v-model="eventName">
-    <input type="time" v-model="eventTime" v-if="!allDayEvent">
-    <label>
-      Celý den
-      <input type="checkbox" v-model="allDayEvent">
-    </label>
+    <div>
+      <input type="text" v-model="eventName" placeholder="Název události">
+      <input type="time" v-model="eventTime" v-if="!allDayEvent">
+      <label>
+        Celý den
+        <input type="checkbox" v-model="allDayEvent">
+      </label>
+
+    </div>
+    <div>
+      <input type="text" placeholder="Poznámka" v-model="eventNote">
+    </div>
     <button @click="addEvent()">Přidat</button>
   </dialog>
 
@@ -261,7 +323,7 @@ async function fetchHolidays(){
         :key="day"
         :day="day.getDate()"
         :events="events[day.getTime()] || []"
-        @addEvent="addEvent(day)"
+        @addEvent="showModal(day)"
         @removeEvent="(index) => removeEvent(day, index)"
         :class="{ 'notCurrentMonth': true, 'today': isToday(day) }"
 

@@ -11,13 +11,7 @@ defineProps({
   }
 });
 
-const emit = defineEmits(["addEvent", "removeEvent"]);
-function addEvent() {
-  emit("addEvent");
-}
-function removeEvent(index) {
-  emit("removeEvent", index); // Emitujeme správný index
-}
+const emit = defineEmits(['addEvent', 'removeEvent']);
 
 async function fetchJoke(day){
   // const url = new URL('https://api.chucknorris.io/jokes/random');
@@ -38,7 +32,7 @@ async function fetchJoke(day){
 </script>
 
 <template>
-  <div class="day" @click="addEvent">
+  <div class="day" @click="emit('addEvent')">
 
     <span class="day-number">{{ day }}</span>
     <span v-if="name">{{name}}</span>
@@ -47,10 +41,11 @@ async function fetchJoke(day){
           v-for="(event, index) in events"
           :key="index"
           :class="[event.time ? 'timeEvent' : 'fDEvent']"
+          @click.stop="emit('showEvent', event)"
       >
         <span>{{ event.name }}</span>
         <span v-if="event.time"> {{ event.time }}</span>
-        <a href="#" @click.stop="removeEvent(index)">❌</a>
+        <a href="#" @click.stop="emit('removeEvent', index)">❌</a>
       </div>
     </div>
 

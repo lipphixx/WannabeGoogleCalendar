@@ -13,11 +13,13 @@ const daysBefore = ref([]);
 const daysCurrent = ref([]);
 const daysAfter = ref([]);
 
-//pouzivam reactive, protoze je to slozitejsi datovy typ
 const events = reactive({});
 
 const addEventDialog = ref(null);
 const selectedDay = ref(null);
+
+const selectedEvent = ref(null);
+const eventDialog = ref(null);
 
 const eventName = ref(null);
 const eventTime = ref(null);
@@ -42,7 +44,7 @@ onMounted(async () => {
 
   await fetchEvents();
 
-  sortAllEvents(); //serazeni
+  sortAllEvents();
   await fetchHolidays();
   drawCalendar();
 });
@@ -51,7 +53,6 @@ watch(events, () => {
   localStorage.setItem('events', JSON.stringify(events));
   sortAllEvents();
 }, { deep: true });
-//deep: true sleduje hlubsi zmeny nez v prvni vrstve - pokud se neco zmeni v day, tak i tak to bude sledovat
 
 function drawCalendar() {
   daysInCurrentMonth.value = new Date(currentYear.value, currentMonth.value + 1, 0).getDate();
@@ -108,7 +109,6 @@ async function addEvent() {
     return;
   }
 
-  //pokud na danem dni neni zadny event, vytvori se tam prazdne pole
   if (!events[key]) {
     events[key] = [];
   }
@@ -117,28 +117,25 @@ async function addEvent() {
     name: eventName.value,
   };
 
-  //defaultne se prida jen nazev eventu, pokud je zadan i cas, tak se zde prida i cas eventu
   if (!allDayEvent.value && eventTime.value) {
     eventDetails.time = eventTime.value;
   }
 
-  //na danem dni se prida event
   events[key].push(eventDetails);
   sortEventsForDay(events[key]);
 
   let newEvent;
 
-  if(!eventTime){
+  if(!eventTime.value){
     newEvent = {
-      eventId: parseInt(key),
       eventName: eventName.value,
       eventDate: `${selectedDay.value.getFullYear()}-${(selectedDay.value.getMonth() + 1).toString().padStart(2, '0')}-${selectedDay.value.getDate().toString().padStart(2, '0')}`,
+      eventTime: null,
       eventNote: eventNote.value,
       ownerId: 1
     };
   }else{
     newEvent = {
-      eventId: parseInt(key),
       eventName: eventName.value,
       eventDate: `${selectedDay.value.getFullYear()}-${(selectedDay.value.getMonth() + 1).toString().padStart(2, '0')}-${selectedDay.value.getDate().toString().padStart(2, '0')}`,
       eventTime: `${eventTime.value}:00`,
@@ -147,7 +144,6 @@ async function addEvent() {
     };
   }
 
-  //reset dialogu
   eventName.value = null;
   eventTime.value = null;
   eventNote.value = null;
@@ -184,9 +180,9 @@ function showNow() {
 
 //prebira dany den a event ktery chceme smazat
 async function removeEvent(day, index) {
-  const key = day.getTime();
-  events[key].splice(index, 1);
-  await axios.delete(`https://localhost:7198/api/Events/${key}`);
+
+  events[new Date(day).getTime()].splice(index, 1);
+  await axios.delete(`https://localhost:7198/api/Events/${index}`);
 }
 
 //porovnavani casu u eventu ve dni
@@ -240,22 +236,28 @@ async function fetchEvents(){
     const data = await response.json();
 
     data.forEach(x => {
-      const id = x.eventId;
       const eventDetails = {
+        id: x.eventId,
         name: x.eventName,
-        time: x.eventTime
+        date: x.eventDate,
+        note: x.eventNote,
+        time: x.eventTime,
+        owner: x.ownerId,
+        participant: x.participantId
       };
 
       if (!allDayEvent.value && eventTime.value) {
         eventDetails.time = eventTime.value;
       }
 
-      if (!events[id]) {
-        events[id] = [];
+      const key = new Date(x.eventDate).getTime();
+
+      if (!events[key]) {
+        events[key] = [];
       }
 
-      events[id].push(eventDetails);
-      sortEventsForDay(events[id]);
+      events[key].push(eventDetails);
+      sortEventsForDay(events[key]);
     })
 
   } catch (error) {
@@ -263,9 +265,23 @@ async function fetchEvents(){
   }
 
 }
+
+function showEventDetail(event){
+  selectedEvent.value = event;
+  eventDialog.value.showModal();
+}
 </script>
 
 <template>
+  <dialog ref="eventDialog">
+    <div v-if="selectedEvent">
+      <h3>Událost: {{selectedEvent.name}}</h3>
+      <div>
+      <p v-if="selectedEvent.date">Datum: {{new Date(selectedEvent.date).toLocaleDateString()}}</p>
+      <p v-if="selectedEvent.time">Čas: {{selectedEvent.time}}</p>
+      </div>
+    </div>
+  </dialog>
   <dialog ref="addEventDialog">
     <div>
       <input type="text" v-model="eventName" placeholder="Název události">
@@ -315,6 +331,7 @@ async function fetchEvents(){
         @removeEvent="(index) => removeEvent(day, index)"
         :class="{ 'today': isToday(day) }"
         :name="nationalHolidays.find(holiday => new Date(holiday.id).getDate() === day.getDate()).name"
+        @showEvent="showEventDetail"
     />
 
     <!--    dny nasledujici mesic-->

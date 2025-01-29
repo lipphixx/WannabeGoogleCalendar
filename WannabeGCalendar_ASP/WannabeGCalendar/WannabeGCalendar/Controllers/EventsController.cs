@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WannabeGCalendar.Data;
-using WannabeGCalendar; // Přidal jsem, pokud modely jsou v jiném namespace
-using System.Linq;
 using WannabeGCalendar.Entities;
 
 namespace WannabeGCalendar.Controllers

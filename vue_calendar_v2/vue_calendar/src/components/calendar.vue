@@ -282,6 +282,7 @@ function showEventDetail(event){
       <p v-if="selectedEvent.date">Datum: {{new Date(selectedEvent.date).toLocaleDateString()}}</p>
       <p v-if="selectedEvent.time">Čas: {{selectedEvent.time}}</p>
       </div>
+      <button @click="eventDialog.close()">Zavřít</button>
     </div>
   </dialog>
   <dialog ref="addEventDialog">

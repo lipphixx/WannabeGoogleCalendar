@@ -45,7 +45,7 @@ async function fetchJoke(day){
       >
         <span>{{ event.name }}</span>
         <span v-if="event.time"> {{ event.time }}</span>
-        <a href="#" @click.stop="emit('removeEvent', index)">❌</a>
+        <a href="#" @click.stop="emit('removeEvent', event.id)">❌</a>
       </div>
     </div>
 

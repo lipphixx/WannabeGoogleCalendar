@@ -180,8 +180,8 @@ function showNow() {
 
 //prebira dany den a event ktery chceme smazat
 async function removeEvent(day, index) {
-
-  events[new Date(day).getTime()].splice(index, 1);
+  const key = events[new Date(day).getTime()].find(x => x.id === index);
+  events[new Date(day).getTime()].splice(key, 1);
   await axios.delete(`https://localhost:7198/api/Events/${index}`);
 }
 
@@ -241,10 +241,12 @@ async function fetchEvents(){
         name: x.eventName,
         date: x.eventDate,
         note: x.eventNote,
-        time: x.eventTime,
+        time: x.eventTime ? x.eventTime.slice(0, 5) : null,
         owner: x.ownerId,
         participant: x.participantId
       };
+
+      console.log(eventDetails)
 
       if (!allDayEvent.value && eventTime.value) {
         eventDetails.time = eventTime.value;

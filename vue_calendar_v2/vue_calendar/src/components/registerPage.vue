@@ -11,7 +11,7 @@ const password = ref(null);
 </script>
 
 <template>
-  <div>
+  <form>
     <h2>Registrace</h2>
     <label>
       Jméno:
@@ -38,9 +38,47 @@ const password = ref(null);
       <input type="password" placeholder="Heslo" v-model="password">
     </label>
     <button>Registrovat se</button>
-  </div>
+  </form>
 </template>
 
 <style scoped>
+.login {
+  width: 300px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
 
+form div {
+  margin-bottom: 10px;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+}
 </style>

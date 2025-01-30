@@ -1,62 +1,41 @@
-<template>
-  <div class="login">
-    <h2>Login</h2>
-    <form @submit.prevent="login">
-      <div>
-        <label for="username">Username</label>
-        <input
-            type="text"
-            id="username"
-            v-model="username"
-            placeholder="Enter username"
-            required
-        />
-      </div>
-      <div>
-        <label for="password">Password</label>
-        <input
-            type="password"
-            id="password"
-            v-model="password"
-            placeholder="Enter password"
-            required
-        />
-      </div>
-      <button type="submit">Log In</button>
-    </form>
+<script setup>
 
-    <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
-  </div>
-</template>
+import {ref} from "vue";
+import axios from "axios";
 
-<script>
-export default {
-  data() {
-    return {
-      username: "",
-      password: "",
-      errorMessage: null,
-      // Přednastavené uživatelské údaje (můžete to nahradit voláním API)
-      validUsername: "admin",
-      validPassword: "admin123",
-    };
-  },
-  methods: {
-    login() {
-      // Ověření uživatele (v tomto případě jednoduché porovnání)
-      if (this.username === this.validUsername && this.password === this.validPassword) {
-        // Přihlášení bylo úspěšné
-        alert("Login successful!");
-        // Můžete přesměrovat uživatele po úspěšném přihlášení
-        this.$router.push("/dashboard");
-      } else {
-        // Chyba při přihlášení
-        this.errorMessage = "Invalid username or password.";
-      }
-    },
-  },
-};
+const email = ref(null);
+const password = ref(null);
+
+async function fetchLogin(){
+  const url = "https://localhost:7198/api/Auth/login";
+
+  try {
+    const loginDetails = {
+      "email": email.value,
+      "password": password.value
+    }
+    await axios.post(url, loginDetails);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 </script>
+
+<template>
+  <form @submit.prevent="fetchLogin()">
+    <h2>Login</h2>
+    <label>
+      Email:
+      <input type="text" placeholder="Jméno" v-model="email">
+    </label>
+    <label>
+      Heslo:
+      <input type="password" placeholder="Příjmení" v-model="password">
+    </label>
+    <button type="submit">Přihlásit se</button>
+  </form>
+</template>
 
 <style scoped>
 .login {

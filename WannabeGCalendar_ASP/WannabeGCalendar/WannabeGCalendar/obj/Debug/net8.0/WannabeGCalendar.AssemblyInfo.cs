@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WannabeGCalendar")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+37a88af34011f82199f848c86282217d79ed47fa")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2aa7e8abd7eeecfa12f6cbefe4b2315f422145d6")]
 [assembly: System.Reflection.AssemblyProductAttribute("WannabeGCalendar")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WannabeGCalendar")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

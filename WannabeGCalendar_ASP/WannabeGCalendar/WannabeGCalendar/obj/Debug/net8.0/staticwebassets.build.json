@@ -1,12 +1,11 @@
 {
   "Version": 1,
-  "Hash": "p13v7WX3Kxr43eP6DXLhT9zFO7ySBLenCdQxp+kiFB4=",
+  "Hash": "Js1dgn11lh2hNfKLQxRjHM7M3kBJDcy1vdw2fIo//rQ=",
   "Source": "WannabeGCalendar",
   "BasePath": "_content/WannabeGCalendar",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": [],
-  "Endpoints": []
+  "Assets": []
 }

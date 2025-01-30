@@ -1,25 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\knavafilip\\Desktop\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\WannabeGCalendar.csproj": {}
+    "C:\\Users\\ondra\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\WannabeGCalendar.csproj": {}
   },
   "projects": {
-    "C:\\Users\\knavafilip\\Desktop\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\WannabeGCalendar.csproj": {
+    "C:\\Users\\ondra\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\WannabeGCalendar.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\knavafilip\\Desktop\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\WannabeGCalendar.csproj",
+        "projectUniqueName": "C:\\Users\\ondra\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\WannabeGCalendar.csproj",
         "projectName": "WannabeGCalendar",
-        "projectPath": "C:\\Users\\knavafilip\\Desktop\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\WannabeGCalendar.csproj",
-        "packagesPath": "C:\\Users\\knavafilip\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\knavafilip\\Desktop\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\obj\\",
+        "projectPath": "C:\\Users\\ondra\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\WannabeGCalendar.csproj",
+        "packagesPath": "C:\\Users\\ondra\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ondra\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\knavafilip\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\ondra\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -44,8 +39,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.100"
+        }
       },
       "frameworks": {
         "net8.0": {
@@ -87,7 +81,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

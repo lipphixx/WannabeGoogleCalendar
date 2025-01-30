@@ -1,4 +1,4 @@
-<script setup>
+ <script setup>
 
 import {ref} from "vue";
 import axios from "axios";
@@ -6,18 +6,25 @@ import axios from "axios";
 const email = ref(null);
 const password = ref(null);
 
+const emit = defineEmits('fetchLogin');
+
 async function fetchLogin(){
   const url = "https://localhost:7198/api/Auth/login";
 
   try {
     const loginDetails = {
-      "email": email.value,
-      "password": password.value
+          email: email.value,
+          password: password.value,
+          twoFactorCode: 'nigga',
+          twoFactorRecoveryCode: 'ahoj'
     }
     await axios.post(url, loginDetails);
+    emit('fetchLogin', false);
   } catch (error) {
     console.log(error);
+    emit('fetchLogin', true);
   }
+
 }
 
 </script>

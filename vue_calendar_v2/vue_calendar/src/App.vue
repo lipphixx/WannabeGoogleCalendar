@@ -3,10 +3,12 @@
 import Calendar from "@/components/calendar.vue";
 import registerPage from "@/components/registerPage.vue";
 import loginPage from "@/components/loginPage.vue";
-import {computed, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 
 const register = document.querySelector('a#register');
 const login = document.querySelector('a#login');
+
+const onLogin = ref(true);
 
 const routes = {
   '/registerPage': registerPage,
@@ -29,20 +31,20 @@ const currView = computed(() => {
   return routes[newRoute];
 });
 
-function hideMenu() {
-  register.style.display = "none";
-  login.style.display = "none";
+function hideMenu(loginPhase) {
+  onLogin.value = loginPhase;
 }
 
 </script>
 
 <template>
-  <section>
-    <a href="#/registerPage" id="register" @click="hideMenu">Registrovat se</a>
-    <a href="#/loginPage" id="login" @click="hideMenu">Přihlásit se</a>
+  <section v-if="onLogin">
+    <a href="#/registerPage" id="register">Registrovat se</a>
+    <a href="#/loginPage" id="login">Přihlásit se</a>
   </section>
 
-  <component :is="currView"></component>
+  <component :is="currView"
+  @fetchLogin="hideMenu"></component>
 
 </template>
 

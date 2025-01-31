@@ -1,53 +1,47 @@
 <script setup>
-
+import { computed, ref } from "vue";
 import Calendar from "@/components/calendar.vue";
 import registerPage from "@/components/registerPage.vue";
 import loginPage from "@/components/loginPage.vue";
-import {computed, onMounted, ref} from "vue";
 
-const register = document.querySelector('a#register');
-const login = document.querySelector('a#login');
-
-const onLogin = ref(true);
+const onLogin = ref(false); // Stav pro přihlášení
+const currPath = ref(window.location.hash);
+const userId = ref(null);
 
 const routes = {
-  '/registerPage': registerPage,
-  '/loginPage': loginPage
-}
+  "/registerPage": registerPage,
+  "/loginPage": loginPage
+};
 
-const currPath = ref(window.location.hash);
-
-window.addEventListener('hashchange', () => {
+window.addEventListener("hashchange", () => {
   currPath.value = window.location.hash;
 });
 
 const currView = computed(() => {
-  const newRoute= currPath.value.slice(1);
-
-  if (!newRoute) {
-    return null;
-  }
-
+  const newRoute = currPath.value.slice(1);
+  if (!newRoute) return null;
   return routes[newRoute];
 });
 
-function hideMenu(loginPhase) {
+function hideMenu(loginPhase, user) {
   onLogin.value = loginPhase;
+  console.log(onLogin.value)
+  if (loginPhase) {
+    window.location.hash = '#/calendar';
+    userId.value = user;
+    console.log(userId.value)
+  }
 }
-
 </script>
 
 <template>
-  <section v-if="onLogin">
-    <a href="#/registerPage" id="register">Registrovat se</a>
-    <a href="#/loginPage" id="login">Přihlásit se</a>
+  <section v-if="!onLogin">
+    <a href="#/registerPage">Registrovat se</a>
+    <a href="#/loginPage">Přihlásit se</a>
   </section>
 
-  <component :is="currView"
-  @fetchLogin="hideMenu"></component>
+  <component :is="currView" @fetchLogin="hideMenu"></component>
 
+  <Calendar v-if="onLogin" :loggedUser="userId" />
 </template>
 
-<style scoped>
-
-</style>

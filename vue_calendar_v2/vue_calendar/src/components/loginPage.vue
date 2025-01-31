@@ -1,36 +1,36 @@
- <script setup>
-
-import {ref} from "vue";
+<script setup>
+import { ref } from "vue";
 import axios from "axios";
 
 const email = ref(null);
 const password = ref(null);
 
-const emit = defineEmits('fetchLogin');
+const emit = defineEmits(["fetchLogin"]);
+const props = defineProps(['userId']);
 
-async function fetchLogin(){
+async function fetchLogin() {
   const url = "https://localhost:7198/api/Auth/login";
 
   try {
     const loginDetails = {
-          email: email.value,
-          password: password.value,
-          twoFactorCode: 'nigga',
-          twoFactorRecoveryCode: 'ahoj'
-    }
-    await axios.post(url, loginDetails);
-    emit('fetchLogin', false);
+      email: email.value,
+      password: password.value,
+      twoFactorCode: "1234",
+      twoFactorRecoveryCode: "abcd",
+    };
+
+    const response = await axios.post(url, loginDetails);
+    console.log(response);
+    emit("fetchLogin", true, response.data.userId); // Odeslat event do rodiče
   } catch (error) {
     console.log(error);
-    emit('fetchLogin', true);
+    emit("fetchLogin", false);
   }
-
 }
-
 </script>
 
 <template>
-  <form @submit.prevent="fetchLogin()">
+  <form @submit.prevent="fetchLogin">
     <h2>Login</h2>
     <label>
       Email:
@@ -43,45 +43,3 @@ async function fetchLogin(){
     <button type="submit">Přihlásit se</button>
   </form>
 </template>
-
-<style scoped>
-.login {
-  width: 300px;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
-
-form div {
-  margin-bottom: 10px;
-}
-
-input {
-  width: 100%;
-  padding: 8px;
-  margin: 5px 0;
-  border-radius: 4px;
-  border: 1px solid #ddd;
-}
-
-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #45a049;
-}
-
-.error {
-  color: red;
-  font-size: 14px;
-  margin-top: 10px;
-}
-</style>

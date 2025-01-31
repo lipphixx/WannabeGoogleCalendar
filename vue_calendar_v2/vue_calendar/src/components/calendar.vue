@@ -29,6 +29,8 @@ const allDayEvent = ref(null);
 const nationalHolidays = ref([]);
 
 const today = new Date();
+
+const props = defineProps(['loggedUser']);
 const isToday = (day) => {
   return day.getDate() === today.getDate() &&
       day.getMonth() === today.getMonth() &&
@@ -132,7 +134,7 @@ async function addEvent() {
       eventDate: `${selectedDay.value.getFullYear()}-${(selectedDay.value.getMonth() + 1).toString().padStart(2, '0')}-${selectedDay.value.getDate().toString().padStart(2, '0')}`,
       eventTime: null,
       eventNote: eventNote.value,
-      ownerId: 1
+      ownerId: props.loggedUser
     };
   }else{
     newEvent = {
@@ -140,7 +142,7 @@ async function addEvent() {
       eventDate: `${selectedDay.value.getFullYear()}-${(selectedDay.value.getMonth() + 1).toString().padStart(2, '0')}-${selectedDay.value.getDate().toString().padStart(2, '0')}`,
       eventTime: `${eventTime.value}:00`,
       eventNote: eventNote.value,
-      ownerId: 1
+      ownerId: props.loggedUser
     };
   }
 
@@ -235,7 +237,9 @@ async function fetchEvents(){
     const response = await fetch(url);
     const data = await response.json();
 
-    data.forEach(x => {
+    const usersEvents = data.filter(x => x.ownerId === props.loggedUser)
+
+    usersEvents.forEach(x => {
       const eventDetails = {
         id: x.eventId,
         name: x.eventName,
@@ -245,8 +249,6 @@ async function fetchEvents(){
         owner: x.ownerId,
         participant: x.participantId
       };
-
-      console.log(eventDetails)
 
       if (!allDayEvent.value && eventTime.value) {
         eventDetails.time = eventTime.value;
@@ -265,7 +267,6 @@ async function fetchEvents(){
   } catch (error) {
     console.log(error);
   }
-
 }
 
 function showEventDetail(event){

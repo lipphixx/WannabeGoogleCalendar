@@ -23,7 +23,7 @@ const currView = computed(() => {
   return routes[newRoute];
 });
 
-function hideMenu(loginPhase, user) {
+function fetchLogin(loginPhase, user) {
   onLogin.value = loginPhase;
   console.log(onLogin.value)
   if (loginPhase) {
@@ -40,7 +40,7 @@ function hideMenu(loginPhase, user) {
     <a href="#/loginPage">Přihlásit se</a>
   </section>
 
-  <component :is="currView" @fetchLogin="hideMenu"></component>
+  <component :is="currView" @fetchLogin="fetchLogin"></component>
 
   <Calendar v-if="onLogin" :loggedUser="userId" />
 </template>

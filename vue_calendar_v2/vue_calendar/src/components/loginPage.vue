@@ -21,7 +21,8 @@ async function fetchLogin() {
 
     const response = await axios.post(url, loginDetails);
     console.log(response);
-    emit("fetchLogin", true, response.data.userId); // Odeslat event do rodiče
+    emit("fetchLogin", true, response.data); // Odeslat event do rodiče
+    console.log(response.data);
   } catch (error) {
     console.log(error);
     emit("fetchLogin", false);

@@ -34,8 +34,10 @@ async function fetchJoke(day){
 <template>
   <div class="day" @click="emit('addEvent')">
 
+    <section>
     <span class="day-number">{{ day }}</span>
-    <span v-if="name">{{name}}</span>
+    <span id="day-svatek" v-if="name">{{name}}</span>
+    </section>
     <div v-if="events && events.length" class="events">
       <div
           v-for="(event, index) in events"
@@ -95,6 +97,17 @@ async function fetchJoke(day){
   padding: 2px;
   border-radius: 4px;
   width: 140px;
+}
+
+section {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 2px;
+}
+
+#day-svatek {
+  color: #FFFFFF90;
+  font-size: 80%;
 }
 
 </style>

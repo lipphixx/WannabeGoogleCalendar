@@ -1,38 +1,42 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\filis\\OneDrive\\Plocha\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\",
+  "WorkspaceRootPath": "C:\\Users\\knavafilip\\Desktop\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{665590D2-9AB5-4167-9101-9F0BCDB27A5A}|WannabeGCalendar\\WannabeGCalendar.csproj|c:\\users\\filis\\onedrive\\plocha\\wannabegooglecalendar\\wannabegcalendar_asp\\wannabegcalendar\\wannabegcalendar\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{665590D2-9AB5-4167-9101-9F0BCDB27A5A}|WannabeGCalendar\\WannabeGCalendar.csproj|c:\\users\\knavafilip\\desktop\\wannabegooglecalendar\\wannabegcalendar_asp\\wannabegcalendar\\wannabegcalendar\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{665590D2-9AB5-4167-9101-9F0BCDB27A5A}|WannabeGCalendar\\WannabeGCalendar.csproj|solutionrelative:wannabegcalendar\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{665590D2-9AB5-4167-9101-9F0BCDB27A5A}|WannabeGCalendar\\WannabeGCalendar.csproj|c:\\users\\filis\\onedrive\\plocha\\wannabegooglecalendar\\wannabegcalendar_asp\\wannabegcalendar\\wannabegcalendar\\controllers\\eventscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{665590D2-9AB5-4167-9101-9F0BCDB27A5A}|WannabeGCalendar\\WannabeGCalendar.csproj|c:\\users\\knavafilip\\desktop\\wannabegooglecalendar\\wannabegcalendar_asp\\wannabegcalendar\\wannabegcalendar\\controllers\\eventscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{665590D2-9AB5-4167-9101-9F0BCDB27A5A}|WannabeGCalendar\\WannabeGCalendar.csproj|solutionrelative:wannabegcalendar\\controllers\\eventscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{665590D2-9AB5-4167-9101-9F0BCDB27A5A}|WannabeGCalendar\\WannabeGCalendar.csproj|c:\\users\\filis\\onedrive\\plocha\\wannabegooglecalendar\\wannabegcalendar_asp\\wannabegcalendar\\wannabegcalendar\\wannabegcalendar.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
-      "RelativeMoniker": "D:0:0:{665590D2-9AB5-4167-9101-9F0BCDB27A5A}|WannabeGCalendar\\WannabeGCalendar.csproj|solutionrelative:wannabegcalendar\\wannabegcalendar.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{665590D2-9AB5-4167-9101-9F0BCDB27A5A}|WannabeGCalendar\\WannabeGCalendar.csproj|c:\\users\\filis\\onedrive\\plocha\\wannabegooglecalendar\\wannabegcalendar_asp\\wannabegcalendar\\wannabegcalendar\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{665590D2-9AB5-4167-9101-9F0BCDB27A5A}|WannabeGCalendar\\WannabeGCalendar.csproj|solutionrelative:wannabegcalendar\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{665590D2-9AB5-4167-9101-9F0BCDB27A5A}|WannabeGCalendar\\WannabeGCalendar.csproj|c:\\users\\filis\\onedrive\\plocha\\wannabegooglecalendar\\wannabegcalendar_asp\\wannabegcalendar\\wannabegcalendar\\entities\\event.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{665590D2-9AB5-4167-9101-9F0BCDB27A5A}|WannabeGCalendar\\WannabeGCalendar.csproj|c:\\users\\knavafilip\\desktop\\wannabegooglecalendar\\wannabegcalendar_asp\\wannabegcalendar\\wannabegcalendar\\entities\\event.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{665590D2-9AB5-4167-9101-9F0BCDB27A5A}|WannabeGCalendar\\WannabeGCalendar.csproj|solutionrelative:wannabegcalendar\\entities\\event.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{665590D2-9AB5-4167-9101-9F0BCDB27A5A}|WannabeGCalendar\\WannabeGCalendar.csproj|c:\\users\\filis\\onedrive\\plocha\\wannabegooglecalendar\\wannabegcalendar_asp\\wannabegcalendar\\wannabegcalendar\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "AbsoluteMoniker": "D:0:0:{665590D2-9AB5-4167-9101-9F0BCDB27A5A}|WannabeGCalendar\\WannabeGCalendar.csproj|c:\\users\\knavafilip\\desktop\\wannabegooglecalendar\\wannabegcalendar_asp\\wannabegcalendar\\wannabegcalendar\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{665590D2-9AB5-4167-9101-9F0BCDB27A5A}|WannabeGCalendar\\WannabeGCalendar.csproj|solutionrelative:wannabegcalendar\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{665590D2-9AB5-4167-9101-9F0BCDB27A5A}|WannabeGCalendar\\WannabeGCalendar.csproj|c:\\users\\filis\\onedrive\\plocha\\wannabegooglecalendar\\wannabegcalendar_asp\\wannabegcalendar\\wannabegcalendar\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{665590D2-9AB5-4167-9101-9F0BCDB27A5A}|WannabeGCalendar\\WannabeGCalendar.csproj|solutionrelative:wannabegcalendar\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{665590D2-9AB5-4167-9101-9F0BCDB27A5A}|WannabeGCalendar\\WannabeGCalendar.csproj|c:\\users\\knavafilip\\desktop\\wannabegooglecalendar\\wannabegcalendar_asp\\wannabegcalendar\\wannabegcalendar\\wannabegcalendar.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{665590D2-9AB5-4167-9101-9F0BCDB27A5A}|WannabeGCalendar\\WannabeGCalendar.csproj|solutionrelative:wannabegcalendar\\wannabegcalendar.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{665590D2-9AB5-4167-9101-9F0BCDB27A5A}|WannabeGCalendar\\WannabeGCalendar.csproj|c:\\users\\filis\\onedrive\\plocha\\wannabegooglecalendar\\wannabegcalendar_asp\\wannabegcalendar\\wannabegcalendar\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{665590D2-9AB5-4167-9101-9F0BCDB27A5A}|WannabeGCalendar\\WannabeGCalendar.csproj|c:\\users\\knavafilip\\desktop\\wannabegooglecalendar\\wannabegcalendar_asp\\wannabegcalendar\\wannabegcalendar\\data\\applicationregisterrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{665590D2-9AB5-4167-9101-9F0BCDB27A5A}|WannabeGCalendar\\WannabeGCalendar.csproj|solutionrelative:wannabegcalendar\\data\\applicationregisterrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{665590D2-9AB5-4167-9101-9F0BCDB27A5A}|WannabeGCalendar\\WannabeGCalendar.csproj|c:\\users\\knavafilip\\desktop\\wannabegooglecalendar\\wannabegcalendar_asp\\wannabegcalendar\\wannabegcalendar\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{665590D2-9AB5-4167-9101-9F0BCDB27A5A}|WannabeGCalendar\\WannabeGCalendar.csproj|solutionrelative:wannabegcalendar\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{665590D2-9AB5-4167-9101-9F0BCDB27A5A}|WannabeGCalendar\\WannabeGCalendar.csproj|c:\\users\\knavafilip\\desktop\\wannabegooglecalendar\\wannabegcalendar_asp\\wannabegcalendar\\wannabegcalendar\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{665590D2-9AB5-4167-9101-9F0BCDB27A5A}|WannabeGCalendar\\WannabeGCalendar.csproj|solutionrelative:wannabegcalendar\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{665590D2-9AB5-4167-9101-9F0BCDB27A5A}|WannabeGCalendar\\WannabeGCalendar.csproj|c:\\users\\knavafilip\\desktop\\wannabegooglecalendar\\wannabegcalendar_asp\\wannabegcalendar\\wannabegcalendar\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{665590D2-9AB5-4167-9101-9F0BCDB27A5A}|WannabeGCalendar\\WannabeGCalendar.csproj|solutionrelative:wannabegcalendar\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,17 +46,34 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ApplicationRegisterRequest.cs",
+              "DocumentMoniker": "C:\\Users\\knavafilip\\Desktop\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\Data\\ApplicationRegisterRequest.cs",
+              "RelativeDocumentMoniker": "WannabeGCalendar\\Data\\ApplicationRegisterRequest.cs",
+              "ToolTip": "C:\\Users\\knavafilip\\Desktop\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\Data\\ApplicationRegisterRequest.cs",
+              "RelativeToolTip": "WannabeGCalendar\\Data\\ApplicationRegisterRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-03T09:21:18.846Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "AuthController.cs",
-              "DocumentMoniker": "C:\\Users\\filis\\OneDrive\\Plocha\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\Controllers\\AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\knavafilip\\Desktop\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "WannabeGCalendar\\Controllers\\AuthController.cs",
-              "ToolTip": "C:\\Users\\filis\\OneDrive\\Plocha\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\knavafilip\\Desktop\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\Controllers\\AuthController.cs",
               "RelativeToolTip": "WannabeGCalendar\\Controllers\\AuthController.cs",
-              "ViewState": "AQIAAAUAAAAAMzMzMzMbwB4AAAAFAAAA",
+              "ViewState": "AgIAAA0AAAAAAAAAAIA6wCUAAABkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-29T08:25:01.131Z",
               "EditorCaption": ""
@@ -61,81 +82,87 @@
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "EventsController.cs",
-              "DocumentMoniker": "C:\\Users\\filis\\OneDrive\\Plocha\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\Controllers\\EventsController.cs",
+              "DocumentMoniker": "C:\\Users\\knavafilip\\Desktop\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\Controllers\\EventsController.cs",
               "RelativeDocumentMoniker": "WannabeGCalendar\\Controllers\\EventsController.cs",
-              "ToolTip": "C:\\Users\\filis\\OneDrive\\Plocha\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\Controllers\\EventsController.cs",
+              "ToolTip": "C:\\Users\\knavafilip\\Desktop\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\Controllers\\EventsController.cs",
               "RelativeToolTip": "WannabeGCalendar\\Controllers\\EventsController.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAoAAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAxwAoAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-22T08:03:19.348Z"
+              "WhenOpened": "2025-01-22T08:03:19.348Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\filis\\OneDrive\\Plocha\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\knavafilip\\Desktop\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\Program.cs",
               "RelativeDocumentMoniker": "WannabeGCalendar\\Program.cs",
-              "ToolTip": "C:\\Users\\filis\\OneDrive\\Plocha\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\Program.cs",
+              "ToolTip": "C:\\Users\\knavafilip\\Desktop\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\Program.cs",
               "RelativeToolTip": "WannabeGCalendar\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADYAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABwAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-22T07:49:25.118Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "User.cs",
-              "DocumentMoniker": "C:\\Users\\filis\\OneDrive\\Plocha\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\Entities\\User.cs",
-              "RelativeDocumentMoniker": "WannabeGCalendar\\Entities\\User.cs",
-              "ToolTip": "C:\\Users\\filis\\OneDrive\\Plocha\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\Entities\\User.cs",
-              "RelativeToolTip": "WannabeGCalendar\\Entities\\User.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-22T07:32:27.673Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "WannabeGCalendar.http",
-              "DocumentMoniker": "C:\\Users\\filis\\OneDrive\\Plocha\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\WannabeGCalendar.http",
-              "RelativeDocumentMoniker": "WannabeGCalendar\\WannabeGCalendar.http",
-              "ToolTip": "C:\\Users\\filis\\OneDrive\\Plocha\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\WannabeGCalendar.http",
-              "RelativeToolTip": "WannabeGCalendar\\WannabeGCalendar.http",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
-              "WhenOpened": "2025-01-22T07:49:24.932Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\filis\\OneDrive\\Plocha\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\appsettings.json",
-              "RelativeDocumentMoniker": "WannabeGCalendar\\appsettings.json",
-              "ToolTip": "C:\\Users\\filis\\OneDrive\\Plocha\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\appsettings.json",
-              "RelativeToolTip": "WannabeGCalendar\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAABtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-01-22T07:48:34.097Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Event.cs",
-              "DocumentMoniker": "C:\\Users\\filis\\OneDrive\\Plocha\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\Entities\\Event.cs",
-              "RelativeDocumentMoniker": "WannabeGCalendar\\Entities\\Event.cs",
-              "ToolTip": "C:\\Users\\filis\\OneDrive\\Plocha\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\Entities\\Event.cs",
-              "RelativeToolTip": "WannabeGCalendar\\Entities\\Event.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-22T07:32:35.579Z"
+              "WhenOpened": "2025-01-22T07:49:25.118Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\knavafilip\\Desktop\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\Entities\\User.cs",
+              "RelativeDocumentMoniker": "WannabeGCalendar\\Entities\\User.cs",
+              "ToolTip": "C:\\Users\\knavafilip\\Desktop\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\Entities\\User.cs",
+              "RelativeToolTip": "WannabeGCalendar\\Entities\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-22T07:32:27.673Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "WannabeGCalendar.http",
+              "DocumentMoniker": "C:\\Users\\knavafilip\\Desktop\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\WannabeGCalendar.http",
+              "RelativeDocumentMoniker": "WannabeGCalendar\\WannabeGCalendar.http",
+              "ToolTip": "C:\\Users\\knavafilip\\Desktop\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\WannabeGCalendar.http",
+              "RelativeToolTip": "WannabeGCalendar\\WannabeGCalendar.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2025-01-22T07:49:24.932Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\knavafilip\\Desktop\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\appsettings.json",
+              "RelativeDocumentMoniker": "WannabeGCalendar\\appsettings.json",
+              "ToolTip": "C:\\Users\\knavafilip\\Desktop\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\appsettings.json",
+              "RelativeToolTip": "WannabeGCalendar\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAABtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-01-22T07:48:34.097Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Event.cs",
+              "DocumentMoniker": "C:\\Users\\knavafilip\\Desktop\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\Entities\\Event.cs",
+              "RelativeDocumentMoniker": "WannabeGCalendar\\Entities\\Event.cs",
+              "ToolTip": "C:\\Users\\knavafilip\\Desktop\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\Entities\\Event.cs",
+              "RelativeToolTip": "WannabeGCalendar\\Entities\\Event.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-22T07:32:35.579Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "ApplicationDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\filis\\OneDrive\\Plocha\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\Data\\ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\knavafilip\\Desktop\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\Data\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "WannabeGCalendar\\Data\\ApplicationDbContext.cs",
-              "ToolTip": "C:\\Users\\filis\\OneDrive\\Plocha\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\knavafilip\\Desktop\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\Data\\ApplicationDbContext.cs",
               "RelativeToolTip": "WannabeGCalendar\\Data\\ApplicationDbContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",

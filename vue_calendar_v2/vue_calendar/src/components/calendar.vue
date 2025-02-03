@@ -237,7 +237,10 @@ async function fetchEvents(){
     const response = await fetch(url);
     const data = await response.json();
 
-    const usersEvents = data.filter(x => x.ownerId === props.loggedUser)
+
+    console.log(props.loggedUser + 'mrdka');
+    const usersEvents = data.filter(x => x.ownerId === props.loggedUser);
+  console.log(usersEvents);
 
     usersEvents.forEach(x => {
       const eventDetails = {
@@ -334,7 +337,7 @@ function showEventDetail(event){
         @addEvent="showModal(day)"
         @removeEvent="(index) => removeEvent(day, index)"
         :class="{ 'today': isToday(day) }"
-        :name="nationalHolidays.find(holiday => new Date(holiday.id).getDate() === day.getDate()).name"
+        :name="nationalHolidays.find(holiday => holiday.id && new Date(holiday.id).getDate() === day.getDate())?.name || ''"
         @showEvent="showEventDetail"
     />
 

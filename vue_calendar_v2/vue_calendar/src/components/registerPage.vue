@@ -1,6 +1,7 @@
 <script setup>
 
 import {ref} from "vue";
+import axios from "axios";
 
 const name = ref(null);
 const surname = ref(null);
@@ -8,6 +9,28 @@ const username = ref(null);
 const email = ref(null);
 const phone = ref(0);
 const password = ref(null);
+
+async function fetchLogin() {
+  const url = "https://localhost:7198/api/Auth/register";
+
+  try {
+    const registerDetails = {
+      email: email.value,
+      password: password.value,
+      username: username.value,
+      fullName: `${name.value} ${surname.value}`,
+      phone: phone.value
+    };
+
+    const response = await axios.post(url, registerDetails);
+    console.log(response);
+    emit("fetchLogin", true, response.data); // Odeslat event do rodiče
+    console.log(response.data);
+  } catch (error) {
+    console.log(error);
+    emit("fetchLogin", false);
+  }
+}
 </script>
 
 <template>

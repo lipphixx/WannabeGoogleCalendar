@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../vue_knihaJizd/vue-knihaJizd/.idea/vue-knihaJizd.iml" filepath="$PROJECT_DIR$/../../vue_knihaJizd/vue-knihaJizd/.idea/vue-knihaJizd.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/vue_calendar_v2.iml" filepath="$PROJECT_DIR$/.idea/vue_calendar_v2.iml" />
     </modules>
   </component>

@@ -30,13 +30,12 @@ const nationalHolidays = ref([]);
 
 const today = new Date();
 
-const props = defineProps(['loggedUser']);
+const props = defineProps(['loggedUser', 'previousMonth']);
 const isToday = (day) => {
   return day.getDate() === today.getDate() &&
       day.getMonth() === today.getMonth() &&
       day.getFullYear() === today.getFullYear();
 }
-
 
 onMounted(async () => {
   const date = new Date();

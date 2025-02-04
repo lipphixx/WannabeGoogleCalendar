@@ -7,34 +7,36 @@ const name = ref(null);
 const surname = ref(null);
 const username = ref(null);
 const email = ref(null);
-const phone = ref(0);
+const phone = ref(null);
 const password = ref(null);
 
-async function fetchLogin() {
+const emit = defineEmits('fetchLogin')
+
+async function postRegister() {
   const url = "https://localhost:7198/api/Auth/register";
 
-  try {
-    const registerDetails = {
-      email: email.value,
-      password: password.value,
-      username: username.value,
-      fullName: `${name.value} ${surname.value}`,
-      phone: phone.value
-    };
+  const fullName = `${name.value} ${surname.value}`
+  const registerDetails = {
+    email: email.value,
+    password: password.value,
+    username: username.value,
+    fullName: fullName,
+    phoneNumber: phone.value.toString()
+  };
 
+  try {
     const response = await axios.post(url, registerDetails);
-    console.log(response);
-    emit("fetchLogin", true, response.data); // Odeslat event do rodiče
-    console.log(response.data);
+    emit("fetchLogin", true, response.data);
   } catch (error) {
     console.log(error);
     emit("fetchLogin", false);
   }
+
 }
 </script>
 
 <template>
-  <form>
+  <form @submit.prevent="postRegister">
     <h2>Registrace</h2>
     <label>
       Jméno:
@@ -60,7 +62,7 @@ async function fetchLogin() {
       Heslo:
       <input type="password" placeholder="Heslo" v-model="password">
     </label>
-    <button>Registrovat se</button>
+    <button type="submit">Registrovat se</button>
   </form>
 </template>
 

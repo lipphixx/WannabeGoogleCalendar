@@ -3,10 +3,12 @@ import { computed, ref } from "vue";
 import Calendar from "@/components/calendar.vue";
 import registerPage from "@/components/registerPage.vue";
 import loginPage from "@/components/loginPage.vue";
+import AppHeader from "@/components/AppHeader.vue";
 
 const onLogin = ref(false); // Stav pro přihlášení
 const currPath = ref(window.location.hash);
 const userId = ref(null);
+
 
 const routes = {
   "/registerPage": registerPage,
@@ -32,6 +34,13 @@ function fetchLogin(loginPhase, user) {
     console.log(userId.value)
   }
 }
+
+function logOut(){
+  userId.value = null;
+  window.location.hash = '#';
+
+}
+
 </script>
 
 <template>
@@ -42,6 +51,9 @@ function fetchLogin(loginPhase, user) {
 
   <component :is="currView" @fetchLogin="fetchLogin"></component>
 
-  <Calendar v-if="onLogin" :loggedUser="userId" />
+  <Calendar v-if="onLogin" :loggedUser="userId"/>
+
+  <AppHeader :logged-user="userId" v-if="onLogin"
+  @log-out="logOut"></AppHeader>
 </template>
 

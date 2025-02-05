@@ -25,7 +25,7 @@ namespace WannabeGCalendar.Controllers
                 return Unauthorized("Login Failed!");
             }
 
-            return Ok(user.UserId);
+            return Ok(user);
         }
 
         [HttpPost("register")]

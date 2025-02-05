@@ -30,7 +30,7 @@ const nationalHolidays = ref([]);
 
 const today = new Date();
 
-const props = defineProps(['loggedUser', 'previousMonth']);
+const props = defineProps(['loggedUser', 'action']);
 const isToday = (day) => {
   return day.getDate() === today.getDate() &&
       day.getMonth() === today.getMonth() &&
@@ -152,7 +152,7 @@ async function addEvent() {
 
   addEventDialog.value.close();
 
-  await axios.post("https://localhost:7198/api/Events", newEvent);
+  await axios.post("http://localhost:5261/api/Events", newEvent);
 }
 function nextMonth() {
   if (currentMonth.value === 11) {
@@ -183,7 +183,7 @@ function showNow() {
 async function removeEvent(day, index) {
   const key = events[new Date(day).getTime()].find(x => x.id === index);
   events[new Date(day).getTime()].splice(key, 1);
-  await axios.delete(`https://localhost:7198/api/Events/${index}`);
+  await axios.delete(`http://localhost:5261/api/Events/${index}`);
 }
 
 //porovnavani casu u eventu ve dni
@@ -230,7 +230,7 @@ async function fetchHolidays(){
 }
 
 async function fetchEvents(){
-  const url = "https://localhost:7198/api/Events";
+  const url = "http://localhost:5261/api/Events";
 
   try {
     const response = await fetch(url);
@@ -275,9 +275,26 @@ function showEventDetail(event){
   selectedEvent.value = event;
   eventDialog.value.showModal();
 }
+
+watch(props.action, () => {
+  console.log(props.action)
+  if(props.action.action === 0){
+    showNow();
+  }
+  else if(props.action.action === 1){
+    previousMonth();
+  }
+  else if(props.action.action === 2){
+    nextMonth()
+  }
+  else if (props.action.action === 3){
+    showNow();
+  }
+})
 </script>
 
 <template>
+
   <dialog ref="eventDialog">
     <div v-if="selectedEvent">
       <h3>Událost: {{selectedEvent.name}}</h3>
@@ -305,12 +322,6 @@ function showEventDetail(event){
   </dialog>
 
   <body>
-  <div class="calendar-controls">
-    <button @click="previousMonth">Předchozí</button>
-    <button @click="nextMonth">Následující</button>
-    <button @click="showNow">Nyní</button>
-  </div>
-
   <!--  zobrazeni aktualniho mesice a roku-->
   <h1>{{new Date(currentMonth, currentMonth).toLocaleDateString('cs-CZ', { month: 'long' })}} {{currentYear}}</h1>
 

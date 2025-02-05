@@ -9,7 +9,7 @@ const emit = defineEmits(["fetchLogin"]);
 const props = defineProps(['userId']);
 
 async function fetchLogin() {
-  const url = "https://localhost:7198/api/Auth/login";
+  const url = "http://localhost:5261/api/Auth/login";
 
   try {
     const loginDetails = {

@@ -56,14 +56,15 @@ async function fetchJoke(day){
 
 <style scoped>
 .day {
-  border: 1px solid #444;
-  min-height: 100px;
-  min-width: 150px;
+  border: 1px solid #36363690;
+  min-height: 111px;
+  min-width: 170px;
   width: fit-content;
   position: relative;
   padding: 4px;
   cursor: pointer;
   color: white;
+  border-radius: 3px;
 }
 .day-number {
   font-weight: bold;
@@ -102,12 +103,13 @@ async function fetchJoke(day){
 section {
   display: flex;
   justify-content: space-between;
-  margin-right: 2px;
+  margin-right: 5px;
 }
 
 #day-svatek {
   color: #FFFFFF90;
   font-size: 80%;
+  text-align: right;
 }
 
 </style>

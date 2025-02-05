@@ -322,8 +322,16 @@ watch(props.action, () => {
   </dialog>
 
   <body>
-  <!--  zobrazeni aktualniho mesice a roku-->
-  <h1>{{new Date(currentMonth, currentMonth).toLocaleDateString('cs-CZ', { month: 'long' })}} {{currentYear}}</h1>
+
+  <header>
+    <p>Po</p>
+    <p>Út</p>
+    <p>St</p>
+    <p>Čt</p>
+    <p>Pá</p>
+    <p>So</p>
+    <p>Ne</p>
+  </header>
 
   <main>
     <!--    dny predchoziho mesice-->
@@ -368,11 +376,19 @@ watch(props.action, () => {
 </template>
 
 <style scoped>
+header{
+  display: flex;
+  flex-direction: row;
+  gap: 13.75%;
+  margin-left: 7%;
+  margin-bottom: 1%;
+}
+
 body{
   display: flex;
   flex-direction: column;
   margin-left: 10%;
-  margin-top: 5%;
+  margin-top: 1%;
 }
 
 h1{
@@ -410,5 +426,11 @@ span {
   border: solid 2px cornflowerblue; /* světle žlutá nebo jiná barva pro zvýraznění */
   color: white;
   font-weight: bold;
+}
+
+main{
+  background-color: #1f1f1f;
+  padding: 10px;
+  border-radius: 10px;
 }
 </style>

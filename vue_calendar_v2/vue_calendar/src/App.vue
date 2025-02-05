@@ -1,5 +1,5 @@
 <script setup>
-import {computed, reactive, ref, watch} from "vue";
+import {computed, onMounted, reactive, ref, watch} from "vue";
 import Calendar from "@/components/calendar.vue";
 import registerPage from "@/components/registerPage.vue";
 import loginPage from "@/components/loginPage.vue";
@@ -10,6 +10,7 @@ const currPath = ref(window.location.hash);
 const userId = ref(null);
 const username = ref(null);
 const refAction = ref({});
+
 
 const routes = {
   "/registerPage": registerPage,
@@ -40,6 +41,7 @@ function logOut(){
   userId.value = null;
   window.location.hash = '#';
 }
+
 </script>
 
 <template>
@@ -57,16 +59,19 @@ function logOut(){
 
   <component :is="currView" @fetchLogin="fetchLogin"></component>
 
-  <Calendar v-if="onLogin" :loggedUser="userId" :action="refAction" @update:action="refAction = $event"/>
+    <div id="calendarComp">
+  <Calendar v-if="onLogin" :loggedUser="userId"
+            :action="refAction" @update:action="refAction = $event"/>
+    </div>
   </main>
 </template>
 
 <style scoped>
 
+
 main {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   margin: 0;
 }
 
@@ -74,4 +79,11 @@ main {
 display: flex;
   width: 100%;
 }
+
+#calendarComp {
+  display: flex;
+  width: 90%;
+  justify-content: center;
+  text-align: center;
+ }
 </style>

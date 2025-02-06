@@ -1,8 +1,7 @@
 <script setup>
 import Day from "@/components/day.vue";
-import { onMounted, reactive, ref, watch } from "vue";
+import {onMounted, reactive, ref, watch} from "vue";
 import axios from "axios";
-
 
 
 const currentYear = ref(0);
@@ -53,7 +52,7 @@ onMounted(async () => {
 watch(events, () => {
   localStorage.setItem('events', JSON.stringify(events));
   sortAllEvents();
-}, { deep: true });
+}, {deep: true});
 
 function drawCalendar() {
   daysInCurrentMonth.value = new Date(currentYear.value, currentMonth.value + 1, 0).getDate();
@@ -90,22 +89,24 @@ function drawCalendar() {
   }
   let daysToSeven = 7 - new Date(currentYear.value, currentMonth.value + 1, 0).getDay();
   for (let z = 0; z < daysToSeven; z++) {
-    daysAfter.value.push(new Date(sussyYear, nextMonth, z +1));
+    daysAfter.value.push(new Date(sussyYear, nextMonth, z + 1));
   }
   fetchHolidays()
 }
-function showModal(day){
+
+function showModal(day) {
   addEventDialog.value.showModal();
   selectedDay.value = day;
 }
+
 async function addEvent() {
   const key = selectedDay.value.getTime();
 
-  if (!eventName.value){
+  if (!eventName.value) {
     alert('Zadejte název události!');
     return;
   }
-  if (!eventTime.value && !allDayEvent.value){
+  if (!eventTime.value && !allDayEvent.value) {
     alert('Zadejte čas nebo vyberte "Celý den"!');
     return;
   }
@@ -127,7 +128,7 @@ async function addEvent() {
 
   let newEvent;
 
-  if(!eventTime.value){
+  if (!eventTime.value) {
     newEvent = {
       eventName: eventName.value,
       eventDate: `${selectedDay.value.getFullYear()}-${(selectedDay.value.getMonth() + 1).toString().padStart(2, '0')}-${selectedDay.value.getDate().toString().padStart(2, '0')}`,
@@ -135,7 +136,7 @@ async function addEvent() {
       eventNote: eventNote.value,
       ownerId: props.loggedUser
     };
-  }else{
+  } else {
     newEvent = {
       eventName: eventName.value,
       eventDate: `${selectedDay.value.getFullYear()}-${(selectedDay.value.getMonth() + 1).toString().padStart(2, '0')}-${selectedDay.value.getDate().toString().padStart(2, '0')}`,
@@ -154,6 +155,7 @@ async function addEvent() {
 
   await axios.post("http://localhost:5261/api/Events", newEvent);
 }
+
 function nextMonth() {
   if (currentMonth.value === 11) {
     currentMonth.value = 0;
@@ -163,6 +165,7 @@ function nextMonth() {
   }
   drawCalendar();
 }
+
 function previousMonth() {
   if (currentMonth.value === 0) {
     currentMonth.value = 11;
@@ -172,6 +175,7 @@ function previousMonth() {
   }
   drawCalendar();
 }
+
 function showNow() {
   const now = new Date();
   currentMonth.value = now.getMonth();
@@ -200,6 +204,7 @@ function sortEventsForDay(dayEvents) {
     return 0;
   });
 }
+
 function sortAllEvents() {
   //prochazime vsechny dny
   for (let day in events) {
@@ -207,7 +212,7 @@ function sortAllEvents() {
   }
 }
 
-async function fetchHolidays(){
+async function fetchHolidays() {
   const baseUrl = "https://svatkyapi.cz/api/day/";
 
   const formattedMonth = currentMonth.value < 10 ? `0${currentMonth.value + 1}` : `${currentMonth.value + 1}`;
@@ -229,7 +234,7 @@ async function fetchHolidays(){
 
 }
 
-async function fetchEvents(){
+async function fetchEvents() {
   const url = "http://localhost:5261/api/Events";
 
   try {
@@ -239,7 +244,7 @@ async function fetchEvents(){
 
     console.log(props.loggedUser + 'mrdka');
     const usersEvents = data.filter(x => x.ownerId === props.loggedUser);
-  console.log(usersEvents);
+    console.log(usersEvents);
 
     usersEvents.forEach(x => {
       const eventDetails = {
@@ -271,56 +276,57 @@ async function fetchEvents(){
   }
 }
 
-function showEventDetail(event){
+function showEventDetail(event) {
   selectedEvent.value = event;
   eventDialog.value.showModal();
 }
 
 watch(props.action, () => {
   console.log(props.action)
-  if(props.action.action === 0){
+  if (props.action.action === 0) {
     showNow();
-  }
-  else if(props.action.action === 1){
+  } else if (props.action.action === 1) {
     previousMonth();
-  }
-  else if(props.action.action === 2){
+  } else if (props.action.action === 2) {
     nextMonth()
-  }
-  else if (props.action.action === 3){
+  } else if (props.action.action === 3) {
     showNow();
   }
 })
 </script>
 
 <template>
-
-  <dialog ref="eventDialog">
-    <div v-if="selectedEvent">
-      <h3>Událost: {{selectedEvent.name}}</h3>
-      <div>
-      <p v-if="selectedEvent.date">Datum: {{new Date(selectedEvent.date).toLocaleDateString()}}</p>
-      <p v-if="selectedEvent.time">Čas: {{selectedEvent.time}}</p>
+  <div class="dialogContainer">
+    <dialog ref="eventDialog" class="dialogs">
+      <div v-if="selectedEvent">
+        <h3>Událost: {{ selectedEvent.name }}</h3>
+        <div>
+          <p v-if="selectedEvent.date">Datum: {{ new Date(selectedEvent.date).toLocaleDateString() }}</p>
+          <p v-if="selectedEvent.time">Čas: {{ selectedEvent.time }}</p>
+        </div>
+        <button @click="eventDialog.close()">Zavřít</button>
       </div>
-      <button @click="eventDialog.close()">Zavřít</button>
-    </div>
-  </dialog>
-  <dialog ref="addEventDialog">
-    <div>
-      <input type="text" v-model="eventName" placeholder="Název události">
-      <input type="time" v-model="eventTime" v-if="!allDayEvent">
-      <label>
-        Celý den
-        <input type="checkbox" v-model="allDayEvent">
-      </label>
+    </dialog>
+  </div>
+  <div class="dialogContainer">
+    <dialog ref="addEventDialog" class="dialogs">
+      <div>
+        <div class="inputContainer">
+        <input class="inputStyle" id="inputName" type="text" v-model="eventName" placeholder="Název události">
+        <input class="inputStyle" id="inputTime" type="time" v-model="eventTime" v-if="!allDayEvent">
+        </div>
+        <label id="wholeDay">
+          Celý den
+          <input class="inputStyle" type="checkbox" v-model="allDayEvent">
+        </label>
 
-    </div>
-    <div>
-      <input type="text" placeholder="Poznámka" v-model="eventNote">
-    </div>
-    <button @click="addEvent()">Přidat</button>
-  </dialog>
-
+      </div>
+      <div>
+        <input type="text" placeholder="Poznámka" v-model="eventNote">
+      </div>
+      <button @click="addEvent()">Přidat</button>
+    </dialog>
+  </div>
   <body>
 
   <header>
@@ -376,7 +382,7 @@ watch(props.action, () => {
 </template>
 
 <style scoped>
-header{
+header {
   display: flex;
   flex-direction: row;
   gap: 13.75%;
@@ -384,14 +390,14 @@ header{
   margin-bottom: 1%;
 }
 
-body{
+body {
   display: flex;
   flex-direction: column;
   margin-left: 10%;
   margin-top: 1%;
 }
 
-h1{
+h1 {
   margin-bottom: 1%;
 }
 
@@ -418,7 +424,7 @@ span {
   font-size: 18px;
 }
 
-.notCurrentMonth{
+.notCurrentMonth {
   color: darkgrey;
 }
 
@@ -428,9 +434,49 @@ span {
   font-weight: bold;
 }
 
-main{
+main {
   background-color: #1f1f1f;
   padding: 10px;
   border-radius: 10px;
+}
+
+.dialogs {
+  border: none;
+  background-color: #1f1f1f;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.inputStyle {
+  background-color: #1f1f1f;
+  border: 1px solid #36363690;
+  height: 30px;
+}
+
+#wholeDay {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  color: white;
+}
+
+.inputContainer {
+  display: flex;
+}
+
+#inputName {
+  border-right: none;
+  color: white;
+}
+
+#inputTime {
+  border-left: none;
+  color: white;
+}
+
+#inputName:focus, #inputTime:focus {
+  outline: none;
 }
 </style>

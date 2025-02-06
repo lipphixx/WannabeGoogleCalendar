@@ -5,7 +5,7 @@ import registerPage from "@/components/registerPage.vue";
 import loginPage from "@/components/loginPage.vue";
 import AppHeader from "@/components/AppHeader.vue";
 
-const onLogin = ref(false); // Stav pro přihlášení
+const onLogin = ref(true); // Stav pro přihlášení
 const currPath = ref(window.location.hash);
 const userId = ref(null);
 const username = ref(null);

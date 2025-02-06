@@ -12,6 +12,13 @@ onMounted(() => {
   const date = new Date();
   currentMonth.value = date.getMonth();
   currentYear.value = date.getFullYear();
+  if (menuDialog.value) {
+    menuDialog.value.addEventListener('click', (e) => {
+      if (e.target === menuDialog.value) {
+        menuDialog.value.close();
+      }
+    });
+  }
 });
 function showMenuDialog() {
   menuDialog.value.showModal();
@@ -70,8 +77,8 @@ function showNow() {
     <a class="material-symbols-outlined" @click.prevent="showMenuDialog"> menu </a>
 
   </header>
-
-  <dialog ref="menuDialog">
+<div id="popupContainer">
+  <dialog ref="menuDialog" id="popupMenu">
     <div id="firRow">
       <a class="material-symbols-outlined" @click.prevent="showMenuDialog"> person </a>
       <p>{{props.loggedUser}}</p>
@@ -80,10 +87,11 @@ function showNow() {
       <!--        <img src="vue_calendar/src/assets/settings.svg" alt="settings">-->
       <div>
         <!--          <img src="vue_calendar/src/assets/logout.svg">-->
-        <button @click="logOut">Log out</button>
+        <button class="tlacitko" @click="logOut">Log out</button>
       </div>
     </div>
   </dialog>
+</div>
 </template>
 
 <style scoped>
@@ -126,5 +134,23 @@ h1 {
 .tlacitko:hover {
   background-color: #36363680;
   -webkit-box-shadow:inset 0px 0px 0px 3px rgba(81, 81, 81, 0.30);
+}
+
+#popupContainer {
+
+}
+
+#popupMenu {
+  margin-left: auto;
+  margin-right: 0;
+  margin-top: 3%;
+  width: 10%;
+  height: 15%;
+  border: none;
+  background-color: #1f1f1f;
+}
+
+#popupMenu::backdrop {
+  background: none;
 }
 </style>

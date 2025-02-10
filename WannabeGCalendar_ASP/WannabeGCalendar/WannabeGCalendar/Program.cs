@@ -40,12 +40,12 @@ namespace WannabeGCalendar
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
+            app.UseRouting();
+            //app.UseHttpsRedirection();
             app.UseAuthorization();
 
             // Použití CORS politiky
             app.UseCors("AllowAll");
-
             app.MapControllers();
 
             app.Run();

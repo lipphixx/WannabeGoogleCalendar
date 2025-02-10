@@ -18,12 +18,16 @@ const addEventDialog = ref(null);
 const selectedDay = ref(null);
 
 const selectedEvent = ref(null);
+const selectedEventParticipants = ref(null);
 const eventDialog = ref(null);
 
 const eventName = ref(null);
 const eventTime = ref(null);
 const eventNote = ref(null);
 const allDayEvent = ref(null);
+const currentParticipant = ref(null);
+
+const participants = ref(null);
 
 const nationalHolidays = ref([]);
 
@@ -126,34 +130,45 @@ async function addEvent() {
   events[key].push(eventDetails);
   sortEventsForDay(events[key]);
 
-  let newEvent;
-
-  if (!eventTime.value) {
-    newEvent = {
+  let newEvent = {
       eventName: eventName.value,
       eventDate: `${selectedDay.value.getFullYear()}-${(selectedDay.value.getMonth() + 1).toString().padStart(2, '0')}-${selectedDay.value.getDate().toString().padStart(2, '0')}`,
-      eventTime: null,
+      eventTime: eventTime.value ? eventTime.value : null,
       eventNote: eventNote.value,
-      ownerId: props.loggedUser
+      ownerId: props.loggedUser,
+      participants: JSON.stringify(participants.value)
     };
-  } else {
-    newEvent = {
-      eventName: eventName.value,
-      eventDate: `${selectedDay.value.getFullYear()}-${(selectedDay.value.getMonth() + 1).toString().padStart(2, '0')}-${selectedDay.value.getDate().toString().padStart(2, '0')}`,
-      eventTime: `${eventTime.value}:00`,
-      eventNote: eventNote.value,
-      ownerId: props.loggedUser
-    };
-  }
 
   eventName.value = null;
   eventTime.value = null;
   eventNote.value = null;
   allDayEvent.value = false;
+  participants.value = null;
 
   addEventDialog.value.close();
 
-  await axios.post("http://localhost:5261/api/Events", newEvent);
+  await axios.post("https://localhost:7198/api/Events", newEvent);
+}
+
+async function addParticipant(){
+  if (!Array.isArray(participants.value)) {
+    participants.value = [];
+  }
+  if (currentParticipant.value !== null) {
+
+    const response = await fetch("https://localhost:7198/api/Users");
+    const data = await response.json();
+
+    console.log(data);
+
+    const participant = (data.find(x => x.email === currentParticipant.value)).userId;
+
+    console.log(participant);
+
+    participants.value.push(participant);
+    currentParticipant.value = null;
+  }
+  console.log(participants.value)
 }
 
 function nextMonth() {
@@ -187,7 +202,7 @@ function showNow() {
 async function removeEvent(day, index) {
   const key = events[new Date(day).getTime()].find(x => x.id === index);
   events[new Date(day).getTime()].splice(key, 1);
-  await axios.delete(`http://localhost:5261/api/Events/${index}`);
+  await axios.delete(`https://localhost:7198/api/Events/${index}`);
 }
 
 //porovnavani casu u eventu ve dni
@@ -235,18 +250,25 @@ async function fetchHolidays() {
 }
 
 async function fetchEvents() {
-  const url = "http://localhost:5261/api/Events";
+  const url = "https://localhost:7198/api/Events";
 
   try {
     const response = await fetch(url);
     const data = await response.json();
+    const ownerEvents = data.filter(x => x.ownerId === props.loggedUser);
 
+    const participantEvents = data.filter(x => {
+      if (!x.participants) return false;
+      const participants = x.participants;
+      return participants.includes(props.loggedUser);
+    });
 
-    console.log(props.loggedUser + 'mrdka');
-    const usersEvents = data.filter(x => x.ownerId === props.loggedUser);
-    console.log(usersEvents);
+    const uniqueEvents = [...ownerEvents, ...participantEvents].reduce((acc, event) => {
+      acc.set(event.eventId, event);
+      return acc;
+    }, new Map());
 
-    usersEvents.forEach(x => {
+    uniqueEvents.forEach(x => {
       const eventDetails = {
         id: x.eventId,
         name: x.eventName,
@@ -254,12 +276,8 @@ async function fetchEvents() {
         note: x.eventNote,
         time: x.eventTime ? x.eventTime.slice(0, 5) : null,
         owner: x.ownerId,
-        participant: x.participantId
+        participants: x.participants || [] // Uložíme účastníky jako pole čísel
       };
-
-      if (!allDayEvent.value && eventTime.value) {
-        eventDetails.time = eventTime.value;
-      }
 
       const key = new Date(x.eventDate).getTime();
 
@@ -269,15 +287,26 @@ async function fetchEvents() {
 
       events[key].push(eventDetails);
       sortEventsForDay(events[key]);
-    })
+    });
 
   } catch (error) {
-    console.log(error);
+    console.log("Chyba při načítání událostí:", error);
   }
 }
 
-function showEventDetail(event) {
+async function showEventDetail(event) {
   selectedEvent.value = event;
+  let selectedEventParticipantsIds = JSON.parse(selectedEvent.value.participants);
+  selectedEventParticipants.value = [];
+
+  const response = await fetch("https://localhost:7198/api/Users");
+  const data = await response.json();
+
+  selectedEventParticipantsIds.forEach(x => {
+    let user = (data.find(y => y.userId === x))
+    selectedEventParticipants.value.push(user.email);
+  });
+
   eventDialog.value.showModal();
 }
 
@@ -303,6 +332,10 @@ watch(props.action, () => {
         <div>
           <p v-if="selectedEvent.date">Datum: {{ new Date(selectedEvent.date).toLocaleDateString() }}</p>
           <p v-if="selectedEvent.time">Čas: {{ selectedEvent.time }}</p>
+          <h4>
+            Účastníci
+          </h4>
+          <p v-for="participant in selectedEventParticipants">{{participant}}</p>
         </div>
         <button @click="eventDialog.close()">Zavřít</button>
       </div>
@@ -319,7 +352,8 @@ watch(props.action, () => {
           Celý den
           <input class="inputStyle" type="checkbox" v-model="allDayEvent">
         </label>
-
+        <input type="email" placeholder="Host" v-model="currentParticipant">
+        <button @click="addParticipant()">Pozvat</button>
       </div>
       <div>
         <input type="text" placeholder="Poznámka" v-model="eventNote">
@@ -395,6 +429,7 @@ body {
   flex-direction: column;
   margin-left: 10%;
   margin-top: 1%;
+
 }
 
 h1 {
@@ -447,6 +482,7 @@ main {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  color: white;
 }
 
 .inputStyle {

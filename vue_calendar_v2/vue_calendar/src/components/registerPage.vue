@@ -10,7 +10,7 @@ const email = ref(null);
 const phone = ref(null);
 const password = ref(null);
 
-const emit = defineEmits('fetchLogin')
+const emit = defineEmits('fetchLogin');
 
 async function postRegister() {
   const url = "https://localhost:7198/api/Auth/register";

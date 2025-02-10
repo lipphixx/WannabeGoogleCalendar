@@ -17,7 +17,6 @@ namespace WannabeGCalendar.Entities
         public string? EventNote  { get; set; }
         [Column("OwnerID")]
         public int OwnerId { get; set; }
-        [Column("ParticipantID")]
-        public int? ParticipantId { get; set; }
+        public string? Participants { get; set; }
     }
 }

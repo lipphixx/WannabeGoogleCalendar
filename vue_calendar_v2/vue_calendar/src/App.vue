@@ -4,13 +4,14 @@ import Calendar from "@/components/calendar.vue";
 import registerPage from "@/components/registerPage.vue";
 import loginPage from "@/components/loginPage.vue";
 import AppHeader from "@/components/AppHeader.vue";
+import AppSidebar from "@/components/AppSidebar.vue";
 
-const onLogin = ref(true); // Stav pro přihlášení
+const onLogin = ref(false); // Stav pro přihlášení
 const currPath = ref(window.location.hash);
 const userId = ref(null);
 const username = ref(null);
 const refAction = ref({});
-
+const sidebar = document.querySelector('div#sidebar');
 
 const routes = {
   "/registerPage": registerPage,
@@ -37,9 +38,14 @@ function fetchLogin(loginPhase, user) {
     console.log(userId.value, username.value);
   }
 }
-function logOut(){
+
+function logOut() {
   userId.value = null;
   window.location.hash = '#';
+}
+
+function openSidebar(){
+  sidebar.classList.add('shown');
 }
 
 </script>
@@ -47,21 +53,24 @@ function logOut(){
 <template>
   <main>
     <div id="appHeader">
-    <AppHeader :logged-user="username" v-if="onLogin"
-               @log-out="logOut"
-               :action="refAction"></AppHeader>
+      <AppHeader :logged-user="username" v-if="onLogin"
+                 @log-out="logOut"
+                 :action="refAction"
+                 :openMenu="openSidebar"></AppHeader>
     </div>
 
-  <section v-if="!onLogin">
-    <a href="#/registerPage">Registrovat se</a>
-    <a href="#/loginPage">Přihlásit se</a>
-  </section>
+    <section v-if="!onLogin">
+      <a href="#/registerPage">Registrovat se</a>
+      <a href="#/loginPage">Přihlásit se</a>
+    </section>
 
-  <component :is="currView" @fetchLogin="fetchLogin"></component>
-
+    <component :is="currView" @fetchLogin="fetchLogin"></component>
     <div id="calendarComp">
-  <Calendar v-if="onLogin" :loggedUser="userId"
-            :action="refAction" @update:action="refAction = $event"/>
+      <Calendar v-if="onLogin" :loggedUser="userId"
+                :action="refAction" @update:action="refAction = $event"/>
+    </div>
+    <div id="sidebar">
+      <AppSidebar></AppSidebar>
     </div>
   </main>
 </template>
@@ -76,14 +85,26 @@ main {
 }
 
 #appHeader {
-display: flex;
+  display: flex;
   width: 100%;
 }
 
 #calendarComp {
   display: flex;
+  position: absolute;
   width: 90%;
-  justify-content: center;
-  text-align: center;
- }
+  left: -7%;
+  top: 8%;
+}
+
+#sidebar {
+  display: flex;
+  justify-content: flex-end;
+  left: 20%;
+}
+
+.shown {
+  left: 0;
+}
+
 </style>

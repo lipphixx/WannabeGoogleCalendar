@@ -4,7 +4,7 @@ import {onMounted, ref} from "vue";
 
 const props = defineProps(['loggedUser', 'action']);
 const menuDialog = ref(null);
-const emit = defineEmits(['logOut']);
+const emit = defineEmits(['logOut', 'openMenu']);
 const currentMonth = ref(0);
 const currentYear = ref(0);
 
@@ -21,7 +21,8 @@ onMounted(() => {
   }
 });
 function showMenuDialog() {
-  menuDialog.value.showModal();
+  //menuDialog.value.showModal();
+  emit('openMenu');
 }
 
 function logOut() {
@@ -131,13 +132,13 @@ h1 {
   border-radius: 5px;
 }
 
+p {
+  color: white;
+}
+
 .tlacitko:hover {
   background-color: #36363680;
   -webkit-box-shadow:inset 0px 0px 0px 3px rgba(81, 81, 81, 0.30);
-}
-
-#popupContainer {
-
 }
 
 #popupMenu {

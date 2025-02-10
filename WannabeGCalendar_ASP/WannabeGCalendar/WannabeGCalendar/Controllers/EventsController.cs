@@ -19,7 +19,15 @@ namespace WannabeGCalendar.Controllers
         [HttpGet(Name = "GetAllEvents")]
         public IActionResult GetAllEvents()
         {
-            return Ok(dbContext.Events.ToList());
+            try
+            {
+                return Ok(dbContext.Events.ToList());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Chyba při načítání událostí: {ex.Message}");
+                return StatusCode(500, new { message = "Chyba serveru", error = ex.Message });
+            }
         }
 
         // POST: api/Events

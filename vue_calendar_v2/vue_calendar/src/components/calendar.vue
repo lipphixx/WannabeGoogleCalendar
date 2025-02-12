@@ -31,13 +31,17 @@ const isHostOn = ref(false);
 const isNoteOn = ref(false);
 
 const eventNote = ref(null);
-const allDayEvent = ref(null);
 
 const currentParticipant = ref(null);
 const participants = ref(null);
 const participantsIds = ref(null);
 const participantsEmails = ref(null);
 const participantsIncluded = ref(null);
+
+const nameInp = ref(null);
+const dateInp = ref(null);
+const timeInp = ref(null);
+const noteInp = ref(null);
 
 const onEdit = ref(false);
 
@@ -51,7 +55,6 @@ const isToday = (day) => {
       day.getMonth() === today.getMonth() &&
       day.getFullYear() === today.getFullYear();
 }
-
 onMounted(async () => {
   const date = new Date();
   currentMonth.value = date.getMonth();
@@ -64,12 +67,22 @@ onMounted(async () => {
   await fetchHolidays();
   drawCalendar();
 });
-
 watch(events, () => {
   localStorage.setItem('events', JSON.stringify(events));
   sortAllEvents();
 }, {deep: true});
-
+watch(props.action, () => {
+  console.log(props.action)
+  if (props.action.action === 0) {
+    showNow();
+  } else if (props.action.action === 1) {
+    previousMonth();
+  } else if (props.action.action === 2) {
+    nextMonth()
+  } else if (props.action.action === 3) {
+    showNow();
+  }
+})
 function drawCalendar() {
   daysInCurrentMonth.value = new Date(currentYear.value, currentMonth.value + 1, 0).getDate();
   let firstDayNum = new Date(currentYear.value, currentMonth.value, 0).getDay();
@@ -109,7 +122,6 @@ function drawCalendar() {
   }
   fetchHolidays()
 }
-
 function showModal(day) {
   isTimeOn.value = false;
   isHostOn.value = false;
@@ -127,7 +139,6 @@ function showModal(day) {
   console.log(selectedDay.value);
   addEventDialog.value.showModal();
 }
-
 async function sendEmail() {
   let date = `${selectedDay.value.getDate().toString().padStart(2, '0')}.${(selectedDay.value.getMonth() + 1).toString().padStart(2, '0')}.${selectedDay.value.getFullYear()}`;
   let emailDetails;
@@ -160,15 +171,55 @@ async function sendEmail() {
       Poznámka: ${eventNote.value}`
       }
     }
-      try {
-        await axios.post(`${apiUrl}/api/Mail`, emailDetails);
-        console.log(`Email odeslán na ${x.email}`);
-      } catch (error) {
-        console.error(`Chyba při odesílání e-mailu na ${x.email}:`, error);
-      }
+    try {
+      await axios.post(`${apiUrl}/api/Mail`, emailDetails);
+      console.log(`Email odeslán na ${x.email}`);
+    } catch (error) {
+      console.error(`Chyba při odesílání e-mailu na ${x.email}:`, error);
+    }
   }
 }
-
+async function sendEmailUpdate(name, date, time, note, owner){
+  //let dateToSend = `${date.getDate().toString().padStart(2, '0')}.${(date.getMonth() + 1).toString().padStart(2, '0')}.${date.getFullYear()}`;
+  let emailDetails;
+  for (const x of participants.value) {
+    if (time !== null) {
+      emailDetails = {
+        emailToId: x.email,
+        emailToName: x.fullName,
+        emailSubject: `Upravena událost ${name}`,
+        emailBody: `Událost ${name} byla upravena.
+      <br>
+      Podrobnosti o události:<br>
+      Název události: ${name}<br>
+      Datum události: ${date}<br>
+      Čas události: ${time}<br>
+      Událost vytvořil: ${owner}<br>
+      ${note ? `Poznámka: ${note}` : ''}`
+      }
+    } else {
+      emailDetails = {
+        emailToId: x.email,
+        emailToName: x.fullName,
+        emailSubject: `Upravena událost ${eventName.value}`,
+        emailBody: `Událost ${eventName.value} byla upravena.
+      <br>
+      <br>
+      Podrobnosti o události:<br>
+      Název události: ${name}<br>
+      Datum události: ${date}<br>
+      Událost vytvořil: ${owner}<br>
+      ${note ? `Poznámka: ${note}` : ''}`
+      }
+    }
+    try {
+      await axios.post(`${apiUrl}/api/Mail`, emailDetails);
+      console.log(`Email odeslán na ${x.email}`);
+    } catch (error) {
+      console.error(`Chyba při odesílání e-mailu na ${x.email}:`, error);
+    }
+  }
+}
 async function addEvent() {
   let newEvent;
   const key = selectedDay.value.getTime();
@@ -177,7 +228,7 @@ async function addEvent() {
     alert('Zadejte název události!');
     return;
   }
-  if (!eventTime.value && !allDayEvent.value) {
+  if (!eventTime.value && !isTimeOn) {
     alert('Zadejte čas nebo vyberte "Celý den"!');
     return;
   }
@@ -190,7 +241,7 @@ async function addEvent() {
     name: eventName.value,
   };
 
-  if (!allDayEvent.value && eventTime.value) {
+  if (isTimeOn && eventTime.value) {
     eventDetails.time = eventTime.value;
   }
 
@@ -201,7 +252,6 @@ async function addEvent() {
     participantsIds.value = [];
   }
 
-  console.log(eventTime.value);
   if (participantsIds.value.length !== 0) {
     newEvent = {
       eventName: eventName.value,
@@ -226,15 +276,13 @@ async function addEvent() {
   eventName.value = null;
   eventTime.value = null;
   eventNote.value = null;
-  allDayEvent.value = false;
+  isTimeOn.value = false;
   participantsIds.value = null;
 
   addEventDialog.value.close();
 
-  await axios.post(`${apiUrl}/api/Events`, newEvent);
+  await axios.post(`https://172.20.10.4:5050/api/Events/CreateNewEvent`, newEvent);
 }
-
-
 async function addParticipant() {
   if (!Array.isArray(participantsIds.value)) {
     participantsIds.value = [];
@@ -260,7 +308,6 @@ async function addParticipant() {
     currentParticipant.value = null;
   }
 }
-
 function nextMonth() {
   if (currentMonth.value === 11) {
     currentMonth.value = 0;
@@ -270,7 +317,6 @@ function nextMonth() {
   }
   drawCalendar();
 }
-
 function previousMonth() {
   if (currentMonth.value === 0) {
     currentMonth.value = 11;
@@ -280,20 +326,17 @@ function previousMonth() {
   }
   drawCalendar();
 }
-
 function showNow() {
   const now = new Date();
   currentMonth.value = now.getMonth();
   currentYear.value = now.getFullYear();
   drawCalendar();
 }
-
 async function removeEvent(day, index) {
   const key = events[new Date(day).getTime()].findIndex(x => x.id === index);
   events[new Date(day).getTime()].splice(key, 1);
   await axios.delete(`${apiUrl}/api/Events/${index}`);
 }
-
 function sortEventsForDay(dayEvents) {
   dayEvents.sort((a, b) => {
     if (!a.time && b.time) return -1; //celodenni event
@@ -302,14 +345,12 @@ function sortEventsForDay(dayEvents) {
     return 0;
   });
 }
-
 function sortAllEvents() {
   //prochazime vsechny dny
   for (let day in events) {
     sortEventsForDay(events[day]); //seradime vsechny eventy pro dany den
   }
 }
-
 async function fetchHolidays() {
   const baseUrl = "https://svatkyapi.cz/api/day/";
 
@@ -331,9 +372,8 @@ async function fetchHolidays() {
   }
 
 }
-
 async function fetchEvents() {
-  const url = `${apiUrl}/api/Events`;
+  const url = `${apiUrl}/api/Events/GetAllEvents`;
 
   try {
     const response = await fetch(url);
@@ -375,15 +415,17 @@ async function fetchEvents() {
     console.log("Chyba při načítání událostí:", error);
   }
 }
-
 async function showEventDetail(event) {
+  nameInp.value = null;
+  dateInp.value = null;
+  noteInp.value = null;
+  timeInp.value = null;
+  onEdit.value = false;
   participantsIncluded.value = null;
   selectedEvent.value = event;
   selectedEventParticipants.value = [];
-
   let selectedEventParticipantsIds = [];
 
-  // Kontrola, zda event.participantsIds existuje a není prázdný
   if (event.participantsIds) {
     try {
       selectedEventParticipantsIds = JSON.parse(event.participantsIds);
@@ -394,7 +436,6 @@ async function showEventDetail(event) {
     }
   }
 
-  // Pokud nejsou žádní účastníci, neprovádíme další kroky
   if (participantsIncluded.value === false) {
     eventDialog.value.showModal();
     return;
@@ -420,25 +461,84 @@ async function showEventDetail(event) {
     console.error("Chyba při načítání účastníků:", error);
   }
 }
-
-watch(props.action, () => {
-  console.log(props.action)
-  if (props.action.action === 0) {
-    showNow();
-  } else if (props.action.action === 1) {
-    previousMonth();
-  } else if (props.action.action === 2) {
-    nextMonth()
-  } else if (props.action.action === 3) {
-    showNow();
-  }
-})
-
-function startEdit(){
+async function startEdit(event) {
+  participantsIds.value = null;
   onEdit.value = true;
+  nameInp.value = selectedEvent.value.name;
+  dateInp.value = selectedEvent.value.date.slice(0,10);
+  noteInp.value = selectedEvent.value.note ? selectedEvent.value.note : null;
+  timeInp.value = selectedEvent.value.time ? selectedEvent.value.time : null;
+  selectedEventParticipants.value = [];
+  participants.value = [];
+  participantsIds.value = [];
+  let selectedEventParticipantsIds = [];
+
+  if (event.participantsIds) {
+    try {
+      selectedEventParticipantsIds = JSON.parse(event.participantsIds);
+      participantsIncluded.value = true;
+      isHostOn.value = true;
+    } catch {
+      selectedEventParticipantsIds = []; // Pokud je nevalidní JSON, nastavíme prázdné pole
+      participantsIncluded.value = false;
+      isHostOn.value = false;
+    }
+  }
+  try {
+    const response = await fetch(`${apiUrl}/api/Users`);
+    const data = await response.json();
+
+    const uniqueParticipants = new Set();
+
+    selectedEventParticipantsIds.forEach(x => {
+      let user = data.find(y => y.userId === x);
+      if (user) {
+        uniqueParticipants.add(user.email);
+        participants.value.push(user);
+        participantsIds.value.push(user.userId);
+      }
+    });
+    participantsEmails.value = Array.from(uniqueParticipants);
+    console.log(participantsEmails.value)
+  } catch (error) {
+    console.error("Chyba při načítání účastníků:", error);
+  }
 }
-function saveEdit(){
-  onEdit.value = false;
+async function saveEdit() {
+  let updatedEvent;
+  if (participantsIds.value) {
+    updatedEvent = {
+      eventId: selectedEvent.value.id,
+      eventName: nameInp.value,
+      eventDate: `${dateInp.value}T00:00:00.000Z`,
+      eventTime: `${timeInp.value}:00`,
+      eventNote: noteInp.value,
+      ownerId: selectedEvent.value.owner,
+      participantsIds: JSON.stringify(participantsIds.value)
+    };
+    await sendEmailUpdate(nameInp.value, dateInp.value, timeInp.value, noteInp.value, updatedEvent.ownerId);
+  } else {
+    updatedEvent = {
+      eventId: selectedEvent.value.id,
+      eventName: nameInp.value,
+      eventDate: `${dateInp.value}T00:00:00.000Z`,
+      eventTime: `${timeInp.value}:00`,
+      eventNote: noteInp.value,
+      ownerId: selectedEvent.value.owner,
+      participantsIds: null
+    };
+  }
+  try{
+    await axios.post("https://172.20.10.4:5050/api/Events/UpdateEvent", updatedEvent);
+    nameInp.value = null;
+    dateInp.value = null;
+    noteInp.value = null;
+    timeInp.value = null;
+    onEdit.value = false;
+    eventDialog.value.close();
+  } catch (error) {
+    console.log(error);
+  }
 }
 </script>
 
@@ -446,7 +546,7 @@ function saveEdit(){
   <div class="dialogContainer">
     <dialog ref="eventDialog" class="dialogs">
       <div v-if="selectedEvent">
-        <a @click.prevent="startEdit" v-if="!onEdit">Upravit</a>
+        <a @click.prevent="startEdit(selectedEvent)" v-if="!onEdit">Upravit</a>
 
         <h3 v-if="!onEdit">Událost: {{ selectedEvent.name }}</h3>
         <input type="text" v-if="onEdit" v-model="nameInp">
@@ -458,19 +558,21 @@ function saveEdit(){
           <p v-if="selectedEvent.time && !onEdit">Čas: {{ selectedEvent.time }}</p>
           <input type="time" v-if="onEdit" v-model="timeInp">
 
-          <p v-if="selectedEvent.note && !onEdit">Poznámka: {{selectedEvent.note}}</p>
-          <input type="text" v-if="onEdit">
+          <p v-if="selectedEvent.note && !onEdit">Poznámka: {{ selectedEvent.note }}</p>
+          <input type="text" v-if="onEdit" v-model="noteInp">
 
           <h4 v-if="participantsIncluded && !onEdit">
             Účastníci
           </h4>
           <p v-for="participant in selectedEventParticipants" v-if="!onEdit">{{ participant }}</p>
 
-          <button @click="isHostOn = true" v-if="!isHostOn && onEdit">Přidat hosty</button>
+          <button @click="isHostOn = true" v-if="!isHostOn && onEdit" class="dialogRow">Přidat hosty</button>
 
-          <div v-if="isHostOn && onEdit" id="host">
-            <input type="email" v-model="currentParticipant" class="inputStyle" placeholder="Host">
-            <button @click="addParticipant()" class="tlacitko">Pozvat</button>
+          <div v-if="isHostOn && onEdit">
+            <div id="host">
+              <input type="email" v-model="currentParticipant" class="inputStyle" placeholder="Host">
+              <button @click="addParticipant()">Pozvat</button>
+            </div>
             <div v-for="parti in participantsEmails">
               {{ parti }}
             </div>
@@ -483,37 +585,31 @@ function saveEdit(){
   </div>
   <div class="dialogContainer">
     <dialog ref="addEventDialog" class="dialogs">
-      <div>
         <div class="inputContainer">
-          <input class="inputStyle" id="inputName" type="text" v-model="eventName" placeholder="Název události">
+          <input class="inputStyle dialogRow" type="text" v-model="eventName" placeholder="Název události">
 
-          <div id="dateAndTime">
-            <input class="inputStyle" id="inputDate" type="date" v-model="selectedDate">
-            <button @click="isTimeOn = true" v-if="!isTimeOn" class="tlacitko">Přidat čas</button>
-            <input class="inputStyle" id="inputTime" type="time" v-model="eventTime" v-if="isTimeOn">
+          <div class="dialogRow">
+            <input class="inputStyle" type="date" v-model="selectedDate" style="border-right: none">
+              <button @click="isTimeOn = true" v-if="!isTimeOn" id="buttonTime" style="border-bottom-left-radius: 0; border-top-left-radius: 0; border-left: none;">Přidat čas</button>
+              <input class="inputStyle" id="inputTime" type="time" v-model="eventTime" v-if="isTimeOn" style="border-left: none">
           </div>
 
-          <button @click="isHostOn = true" v-if="!isHostOn">Přidat hosty</button>
+          <button @click="isHostOn = true" v-if="!isHostOn" class="dialogRow">Přidat hosty</button>
 
-          <div v-if="isHostOn" id="host">
-            <input type="email" v-model="currentParticipant" class="inputStyle" placeholder="Host">
-            <button @click="addParticipant()" class="tlacitko">Pozvat</button>
-            <div v-for="parti in participantsEmails">
+          <div v-if="isHostOn" id="dialogColumn">
+            <div class="dialogRow">
+              <input type="email" v-model="currentParticipant" class="inputStyle" placeholder="Host" style="border-right: none">
+              <button @click="addParticipant()" id="buttonInvite" style="border-bottom-left-radius: 0; border-top-left-radius: 0; border-left: none;">Pozvat</button>
+            </div>
+            <div v-for="parti in participantsEmails" class="dialogRow" style="font-size: smaller">
               {{ parti }}
             </div>
           </div>
 
-          <button @click="isNoteOn = true" v-if="!isNoteOn" class="tlacitko">Přidat poznámku</button>
-          <input type="text" v-model="eventNote" v-if="isNoteOn" class="inputStyle" placeholder="Poznámka">
+          <button @click="isNoteOn = true" v-if="!isNoteOn" class="dialogRow">Přidat poznámku</button>
+          <input type="text" v-model="eventNote" v-if="isNoteOn" class="inputStyle dialogRow" placeholder="Poznámka">
+          <button @click="addEvent()" class="dialogRow" id="addBtn">Přidat</button>
         </div>
-      </div>
-      <div>
-        <label id="wholeDay">
-          Celý den
-          <input type="checkbox" v-model="allDayEvent">
-        </label>
-      </div>
-      <button @click="addEvent()">Přidat</button>
     </dialog>
   </div>
   <body>
@@ -571,12 +667,14 @@ function saveEdit(){
 </template>
 
 <style scoped>
+
 header {
   display: flex;
   flex-direction: row;
   gap: 13.75%;
   margin-left: 7%;
   margin-bottom: 1%;
+  color: grey;
 }
 
 body {
@@ -584,11 +682,7 @@ body {
   flex-direction: column;
   margin-left: 10%;
   margin-top: 1%;
-
-}
-
-h1 {
-  margin-bottom: 1%;
+  background-color: #181818;
 }
 
 main {
@@ -596,18 +690,16 @@ main {
   grid-template-columns: repeat(7, 1fr);
 }
 
-.calendar-controls {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
 button {
-  margin: 0 10px;
+  background-color: #36363650;
+  border: 1px solid #36363690;
+  color: White;
+  cursor: pointer;
+  text-align: center;
   padding: 5px 10px;
   font-size: 16px;
-  cursor: pointer;
+  height: 30px;
+  border-radius: 5px;
 }
 
 span {
@@ -631,49 +723,67 @@ main {
 }
 
 .dialogs {
+  width: 400px;
+  padding: 20px;
   border: none;
-  background-color: #1f1f1f;
+  border-radius: 8px;
+  flex-direction: column;
+  gap: 10px;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: white;
-}
-
-.inputStyle {
-  background-color: #1f1f1f;
-  border: 1px solid #36363690;
-  height: 30px;
-  width: 300px;
-}
-
-#wholeDay {
-  display: flex;
-  gap: 4px;
-  align-items: center;
+  background-color: #181818;
   color: white;
 }
 
 .inputContainer {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 10px;
 }
 
-#inputName, #inputDate, #inputTime {
+.dialogRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 35px;
+}
+
+.dialogRow:focus,
+.dialogRow input:focus {
+  outline: none;
+  background: linear-gradient(to top, #36363620, #36363600);
+}
+
+.dialogRow input,
+.dialogRow button,
+#host button {
+  flex: 3;
+  height: 35px;
+}
+
+#addBtn {
+  background-color: cornflowerblue;
+}
+
+.inputStyle {
+  width: 100%;
+  padding: 8px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #363636;
   color: white;
 }
 
-#inputName:focus, #inputTime:focus, #inputDate:focus {
-  outline: none;
+#buttonTime, #buttonInvite, #inputTime {
+  flex: 1;
 }
 
-#dateAndTime, #host {
-  width: 300px;
+#dialogColumn {
   display: flex;
-}
-
-.tlacitko {
-  height: 30px;
+  flex-direction: column;
+  gap: 10px;
 }
 </style>

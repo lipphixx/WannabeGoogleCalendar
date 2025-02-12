@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using WannabeGCalendar.Data;
 using WannabeGCalendar.Entities;
 
@@ -16,7 +17,7 @@ namespace WannabeGCalendar.Controllers
         }
 
         // GET: api/Events
-        [HttpGet(Name = "GetAllEvents")]
+        [HttpGet("GetAllEvents")]
         public IActionResult GetAllEvents()
         {
             try
@@ -29,9 +30,8 @@ namespace WannabeGCalendar.Controllers
                 return StatusCode(500, new { message = "Chyba serveru", error = ex.Message });
             }
         }
-
-        // POST: api/Events
-        [HttpPost(Name = "CreateNewEvent")]
+        
+        [HttpPost("CreateNewEvent")]
         public IActionResult CreateEvent([FromBody] Event newEvent)
         {
             if (newEvent == null)
@@ -42,10 +42,9 @@ namespace WannabeGCalendar.Controllers
             dbContext.Events.Add(newEvent);
             dbContext.SaveChanges();
 
-            return CreatedAtRoute("GetAllEvents", new { id = newEvent.EventId }, newEvent);
+            return Ok(new { message = "Event byl úspěšně vytvořen", eventId = newEvent.EventId });
         }
-
-        // DELETE: api/Events/{id}
+        
         [HttpDelete("{id}", Name = "RemoveEvent")]
         public IActionResult RemoveEvent(Int64 id)
         {
@@ -59,6 +58,27 @@ namespace WannabeGCalendar.Controllers
             dbContext.SaveChanges();
 
             return Ok(eventToRemove);
+        }
+
+        [HttpPost("UpdateEvent")]
+        public IActionResult UpdateEvent([FromBody] Event updatedEvent)
+        {
+            try
+            {
+                var eventToUpdate = dbContext.Events.FirstOrDefault(e => e.EventId == updatedEvent.EventId);
+                
+                eventToUpdate.EventName = updatedEvent.EventName;
+                eventToUpdate.EventDate = updatedEvent.EventDate;
+                eventToUpdate.EventNote = updatedEvent.EventNote;
+                eventToUpdate.EventTime = updatedEvent.EventTime;
+                eventToUpdate.ParticipantsIds = updatedEvent.ParticipantsIds;
+
+                return Ok(dbContext.SaveChanges());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = ex.Message });
+            }
         }
     }
 }

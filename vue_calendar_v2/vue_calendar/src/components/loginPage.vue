@@ -20,11 +20,12 @@ async function fetchLogin() {
     };
 
     const response = await axios.post(url, loginDetails);
-    console.log(response);
+
+    localStorage.setItem("loggedUser", JSON.stringify(response.data.userId));
+    localStorage.setItem("loggedUsername", response.data.username);
+
     emit("fetchLogin", true, response.data); // Odeslat event do rodiče
-    console.log(response.data);
-  } catch (error) {
-    console.log(error);
+  } catch (error) { 
     emit("fetchLogin", false);
   }
 }

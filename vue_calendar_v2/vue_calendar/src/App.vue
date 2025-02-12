@@ -49,11 +49,12 @@ function logOut() {
 </script>
 
 <template>
+  <body>
   <main>
     <div id="appHeader">
       <AppHeader v-if="onLogin"
                  @openMenu="isActive = !isActive"
-      :action="refAction"></AppHeader>
+                 :action="refAction"></AppHeader>
     </div>
 
     <section v-if="!onLogin">
@@ -65,22 +66,26 @@ function logOut() {
     <div class="calendarComp" :class="{ calendarActive: isActive}">
       <Calendar v-if="onLogin" :loggedUser="userId"
                 :action="refAction" @update:action="refAction = $event"
-      :loggedUsername="username"/>
+                :loggedUsername="username"/>
     </div>
-      <AppSidebar class="sidebar" :class="{ sidebarActive: isActive }"
-                  :loggedUser="username" v-if="onLogin"
-                  :action="refAction"
-      @logOut="logOut"></AppSidebar>
+    <AppSidebar class="sidebar" :class="{ sidebarActive: isActive }"
+                :loggedUser="username" v-if="onLogin"
+                :action="refAction"
+                @logOut="logOut"></AppSidebar>
   </main>
+  </body>
 </template>
 
 <style scoped>
 
+body, main, .calendarComp {
+  background-color: #181818FF;
+}
 
 main {
   display: flex;
   flex-direction: column;
-  margin: 0;
+  margin: 0
 }
 
 section {
@@ -108,12 +113,12 @@ section a {
   display: flex;
   position: fixed;
   top: 8%;
-  left: 0;
+  left: 1%;
   transition: left 1s ease-in-out;
 }
 
 .calendarActive {
-  left: -7%;
+  left: -6%;
 }
 
 .sidebar {

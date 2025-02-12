@@ -246,63 +246,131 @@ C:/Users/filis/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/Wannab
 /Users/filis/Desktop/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/WannabeGCalendar.staticwebassets.endpoints.json
 /Users/filis/Desktop/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/staticwebassets.build.endpoints.json
 /Users/filis/Desktop/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/staticwebassets/msbuild.WannabeGCalendar.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\bin\Debug\net8.0\appsettings.Development.json
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\bin\Debug\net8.0\appsettings.json
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\bin\Debug\net8.0\WannabeGCalendar.exe
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\bin\Debug\net8.0\WannabeGCalendar.deps.json
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\bin\Debug\net8.0\WannabeGCalendar.runtimeconfig.json
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\bin\Debug\net8.0\WannabeGCalendar.dll
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\bin\Debug\net8.0\WannabeGCalendar.pdb
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\bin\Debug\net8.0\Google.Protobuf.dll
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\bin\Debug\net8.0\K4os.Compression.LZ4.dll
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\bin\Debug\net8.0\K4os.Compression.LZ4.Streams.dll
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\bin\Debug\net8.0\K4os.Hash.xxHash.dll
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.dll
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.dll
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\bin\Debug\net8.0\Microsoft.Extensions.Caching.Memory.dll
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\bin\Debug\net8.0\Microsoft.OpenApi.dll
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\bin\Debug\net8.0\MySql.Data.dll
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\bin\Debug\net8.0\MySql.EntityFrameworkCore.dll
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\bin\Debug\net8.0\System.Configuration.ConfigurationManager.dll
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\bin\Debug\net8.0\System.Security.Permissions.dll
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\bin\Debug\net8.0\System.Windows.Extensions.dll
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\bin\Debug\net8.0\ZstdSharp.dll
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\bin\Debug\net8.0\runtimes\win-x64\native\comerr64.dll
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\bin\Debug\net8.0\runtimes\win-x64\native\gssapi64.dll
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\bin\Debug\net8.0\runtimes\win-x64\native\k5sprt64.dll
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\bin\Debug\net8.0\runtimes\win-x64\native\krb5_64.dll
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\bin\Debug\net8.0\runtimes\win-x64\native\krbcc64.dll
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Windows.Extensions.dll
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\obj\Debug\net8.0\WannabeGCalendar.csproj.AssemblyReference.cache
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\obj\Debug\net8.0\WannabeGCalendar.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\obj\Debug\net8.0\WannabeGCalendar.AssemblyInfoInputs.cache
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\obj\Debug\net8.0\WannabeGCalendar.AssemblyInfo.cs
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\obj\Debug\net8.0\WannabeGCalendar.csproj.CoreCompileInputs.cache
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\obj\Debug\net8.0\WannabeGCalendar.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\obj\Debug\net8.0\WannabeGCalendar.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\obj\Debug\net8.0\WannabeGCalendar.sourcelink.json
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\obj\Debug\net8.0\staticwebassets.build.json
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\obj\Debug\net8.0\staticwebassets.development.json
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\obj\Debug\net8.0\staticwebassets\msbuild.WannabeGCalendar.Microsoft.AspNetCore.StaticWebAssets.props
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\obj\Debug\net8.0\staticwebassets\msbuild.build.WannabeGCalendar.props
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.WannabeGCalendar.props
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.WannabeGCalendar.props
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\obj\Debug\net8.0\staticwebassets.pack.json
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\obj\Debug\net8.0\scopedcss\bundle\WannabeGCalendar.styles.css
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\obj\Debug\net8.0\WannabeG.4CB62F59.Up2Date
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\obj\Debug\net8.0\WannabeGCalendar.dll
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\obj\Debug\net8.0\refint\WannabeGCalendar.dll
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\obj\Debug\net8.0\WannabeGCalendar.pdb
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\obj\Debug\net8.0\WannabeGCalendar.genruntimeconfig.cache
-C:\Users\ondra\OneDrive\Plocha\WannabeGoogleCalendar\WannabeGCalendar_ASP\WannabeGCalendar\WannabeGCalendar\obj\Debug\net8.0\ref\WannabeGCalendar.dll
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/appsettings.Development.json
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/appsettings.json
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/WannabeGCalendar.exe
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/WannabeGCalendar.deps.json
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/WannabeGCalendar.runtimeconfig.json
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/WannabeGCalendar.dll
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/WannabeGCalendar.pdb
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/BouncyCastle.Cryptography.dll
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/Google.Protobuf.dll
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/K4os.Compression.LZ4.dll
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/K4os.Compression.LZ4.Streams.dll
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/K4os.Hash.xxHash.dll
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.dll
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Abstractions.dll
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Relational.dll
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/Microsoft.Extensions.Caching.Memory.dll
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/Microsoft.Extensions.DependencyInjection.dll
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/Microsoft.Extensions.Logging.dll
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/Microsoft.Extensions.Logging.Abstractions.dll
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/Microsoft.Extensions.Options.dll
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/Microsoft.OpenApi.dll
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/MySql.Data.dll
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/MySql.EntityFrameworkCore.dll
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/Swashbuckle.AspNetCore.Swagger.dll
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/System.Configuration.ConfigurationManager.dll
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/System.Security.Cryptography.ProtectedData.dll
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/System.Security.Permissions.dll
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/System.Windows.Extensions.dll
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/ZstdSharp.dll
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/runtimes/win-x64/native/comerr64.dll
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/runtimes/win-x64/native/gssapi64.dll
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/runtimes/win-x64/native/k5sprt64.dll
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/runtimes/win-x64/native/krb5_64.dll
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/runtimes/win-x64/native/krbcc64.dll
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/runtimes/win/lib/net8.0/System.Windows.Extensions.dll
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/WannabeGCalendar.csproj.AssemblyReference.cache
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/WannabeGCalendar.GeneratedMSBuildEditorConfig.editorconfig
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/WannabeGCalendar.AssemblyInfoInputs.cache
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/WannabeGCalendar.AssemblyInfo.cs
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/WannabeGCalendar.csproj.CoreCompileInputs.cache
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/WannabeGCalendar.MvcApplicationPartsAssemblyInfo.cs
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/WannabeGCalendar.MvcApplicationPartsAssemblyInfo.cache
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/WannabeGCalendar.sourcelink.json
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/staticwebassets.build.json
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/staticwebassets.development.json
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/staticwebassets/msbuild.WannabeGCalendar.Microsoft.AspNetCore.StaticWebAssets.props
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/staticwebassets/msbuild.build.WannabeGCalendar.props
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.WannabeGCalendar.props
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.WannabeGCalendar.props
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/staticwebassets.pack.json
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/scopedcss/bundle/WannabeGCalendar.styles.css
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/WannabeG.4CB62F59.Up2Date
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/WannabeGCalendar.dll
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/refint/WannabeGCalendar.dll
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/WannabeGCalendar.pdb
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/WannabeGCalendar.genruntimeconfig.cache
+C:/Users/ondra/OneDrive/Plocha/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/ref/WannabeGCalendar.dll
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/appsettings.Development.json
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/appsettings.json
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/WannabeGCalendar.staticwebassets.endpoints.json
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/WannabeGCalendar
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/WannabeGCalendar.deps.json
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/WannabeGCalendar.runtimeconfig.json
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/WannabeGCalendar.dll
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/WannabeGCalendar.pdb
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/BouncyCastle.Cryptography.dll
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/Google.Protobuf.dll
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/K4os.Compression.LZ4.dll
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/K4os.Compression.LZ4.Streams.dll
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/K4os.Hash.xxHash.dll
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.dll
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Abstractions.dll
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Relational.dll
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/Microsoft.Extensions.Caching.Memory.dll
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/Microsoft.Extensions.DependencyInjection.dll
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/Microsoft.Extensions.Logging.dll
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/Microsoft.Extensions.Logging.Abstractions.dll
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/Microsoft.Extensions.Options.dll
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/Microsoft.OpenApi.dll
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/MySql.Data.dll
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/MySql.EntityFrameworkCore.dll
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/Swashbuckle.AspNetCore.Swagger.dll
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/System.Configuration.ConfigurationManager.dll
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/System.Security.Cryptography.ProtectedData.dll
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/System.Security.Permissions.dll
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/System.Windows.Extensions.dll
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/ZstdSharp.dll
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/runtimes/win-x64/native/comerr64.dll
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/runtimes/win-x64/native/gssapi64.dll
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/runtimes/win-x64/native/k5sprt64.dll
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/runtimes/win-x64/native/krb5_64.dll
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/runtimes/win-x64/native/krbcc64.dll
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/runtimes/win/lib/net8.0/System.Windows.Extensions.dll
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/WannabeGCalendar.csproj.AssemblyReference.cache
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/WannabeGCalendar.GeneratedMSBuildEditorConfig.editorconfig
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/WannabeGCalendar.AssemblyInfoInputs.cache
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/WannabeGCalendar.AssemblyInfo.cs
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/WannabeGCalendar.csproj.CoreCompileInputs.cache
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/WannabeGCalendar.MvcApplicationPartsAssemblyInfo.cs
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/WannabeGCalendar.MvcApplicationPartsAssemblyInfo.cache
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/WannabeGCalendar.sourcelink.json
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/scopedcss/bundle/WannabeGCalendar.styles.css
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/staticwebassets.build.json
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/staticwebassets.development.json
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/staticwebassets.build.endpoints.json
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/staticwebassets/msbuild.WannabeGCalendar.Microsoft.AspNetCore.StaticWebAssets.props
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/staticwebassets/msbuild.WannabeGCalendar.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/staticwebassets/msbuild.build.WannabeGCalendar.props
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.WannabeGCalendar.props
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.WannabeGCalendar.props
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/staticwebassets.pack.json
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/WannabeG.4CB62F59.Up2Date
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/WannabeGCalendar.dll
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/refint/WannabeGCalendar.dll
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/WannabeGCalendar.pdb
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/WannabeGCalendar.genruntimeconfig.cache
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/Debug/net8.0/ref/WannabeGCalendar.dll
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/MailKit.dll
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/MimeKit.dll
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/System.Security.Cryptography.Pkcs.dll
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/runtimes/win/lib/net8.0/System.Security.Cryptography.Pkcs.dll
+/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/bin/Debug/net8.0/WannabeGCalendar.staticwebassets.runtime.json

@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../../vue_knihaJizd/vue-knihaJizd/.idea/vue-knihaJizd.iml" filepath="$PROJECT_DIR$/../../vue_knihaJizd/vue-knihaJizd/.idea/vue-knihaJizd.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/vue_calendar_v2.iml" filepath="$PROJECT_DIR$/.idea/vue_calendar_v2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../../vue_todo/.idea/vue_todo.iml" filepath="$PROJECT_DIR$/../../../../vue_todo/.idea/vue_todo.iml" />
     </modules>
   </component>
 </project>

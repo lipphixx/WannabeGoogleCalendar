@@ -1,3 +1,3 @@
 ﻿<Project>
-  <Import Project="..\build\WannabeGCalendar.props" />
+  <Import Project="../build/WannabeGCalendar.props" />
 </Project>

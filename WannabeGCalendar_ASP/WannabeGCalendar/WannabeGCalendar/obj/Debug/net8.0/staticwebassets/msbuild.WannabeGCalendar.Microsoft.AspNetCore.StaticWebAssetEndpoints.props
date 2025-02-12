@@ -1,0 +1,28 @@
+﻿<Project>
+  <ItemGroup>
+    <StaticWebAssetEndpoint Include="_content/WannabeGCalendar/img/guguColor.6c9lpl336j.png">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\guguColor.png'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"6c9lpl336j"},{"Name":"integrity","Value":"sha256-hj\u002B51uOOURBpAlS30t66d8\u002BxSUVaz1Hl8CiuEr\u002BncCA="},{"Name":"label","Value":"_content/WannabeGCalendar/img/guguColor.png"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"6330"},{"Name":"Content-Type","Value":"image/png"},{"Name":"ETag","Value":"\u0022hj\u002B51uOOURBpAlS30t66d8\u002BxSUVaz1Hl8CiuEr\u002BncCA=\u0022"},{"Name":"Last-Modified","Value":"Tue, 11 Feb 2025 11:53:24 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/WannabeGCalendar/img/guguColor.png">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\guguColor.png'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-hj\u002B51uOOURBpAlS30t66d8\u002BxSUVaz1Hl8CiuEr\u002BncCA="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"6330"},{"Name":"Content-Type","Value":"image/png"},{"Name":"ETag","Value":"\u0022hj\u002B51uOOURBpAlS30t66d8\u002BxSUVaz1Hl8CiuEr\u002BncCA=\u0022"},{"Name":"Last-Modified","Value":"Tue, 11 Feb 2025 11:53:24 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/WannabeGCalendar/img/guguWhite.png">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\guguWhite.png'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-AMYwDoiDS8\u002BOH0amCxrhZNH4uA3YXSppD57PBXCy7kg="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"2041"},{"Name":"Content-Type","Value":"image/png"},{"Name":"ETag","Value":"\u0022AMYwDoiDS8\u002BOH0amCxrhZNH4uA3YXSppD57PBXCy7kg=\u0022"},{"Name":"Last-Modified","Value":"Tue, 11 Feb 2025 11:53:04 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/WannabeGCalendar/img/guguWhite.stppvz8ytx.png">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\guguWhite.png'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"stppvz8ytx"},{"Name":"integrity","Value":"sha256-AMYwDoiDS8\u002BOH0amCxrhZNH4uA3YXSppD57PBXCy7kg="},{"Name":"label","Value":"_content/WannabeGCalendar/img/guguWhite.png"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"2041"},{"Name":"Content-Type","Value":"image/png"},{"Name":"ETag","Value":"\u0022AMYwDoiDS8\u002BOH0amCxrhZNH4uA3YXSppD57PBXCy7kg=\u0022"},{"Name":"Last-Modified","Value":"Tue, 11 Feb 2025 11:53:04 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+  </ItemGroup>
+</Project>

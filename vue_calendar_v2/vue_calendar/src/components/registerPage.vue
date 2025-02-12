@@ -13,7 +13,7 @@ const password = ref(null);
 const emit = defineEmits('fetchLogin');
 
 async function postRegister() {
-  const url = "https://localhost:7198/api/Auth/register";
+  const url = "https://172.20.10.4:5050/api/Auth/register";
 
   const fullName = `${name.value} ${surname.value}`
   const registerDetails = {

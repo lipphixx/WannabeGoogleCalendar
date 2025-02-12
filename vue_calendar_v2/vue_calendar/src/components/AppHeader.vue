@@ -2,9 +2,9 @@
 
 import {onMounted, ref} from "vue";
 
-const props = defineProps(['loggedUser', 'action']);
+const props = defineProps(['action']);
 const menuDialog = ref(null);
-const emit = defineEmits(['logOut', 'openMenu']);
+const emit = defineEmits(['openMenu']);
 const currentMonth = ref(0);
 const currentYear = ref(0);
 
@@ -24,12 +24,6 @@ function showMenuDialog() {
   //menuDialog.value.showModal();
   emit('openMenu');
 }
-
-function logOut() {
-  emit('logOut');
-  window.location.reload();
-}
-
 function nextMonth() {
   props.action.action = 0;
   props.action.action = 2;

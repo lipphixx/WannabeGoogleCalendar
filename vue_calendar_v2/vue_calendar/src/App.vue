@@ -12,6 +12,7 @@ const userId = ref(null);
 const username = ref(null);
 const refAction = ref({});
 const sidebar = document.querySelector('div#sidebar');
+const isActive = ref(false);
 
 const routes = {
   "/registerPage": registerPage,
@@ -44,19 +45,15 @@ function logOut() {
   window.location.hash = '#';
 }
 
-function openSidebar(){
-  sidebar.classList.add('shown');
-}
 
 </script>
 
 <template>
   <main>
     <div id="appHeader">
-      <AppHeader :logged-user="username" v-if="onLogin"
-                 @log-out="logOut"
-                 :action="refAction"
-                 :openMenu="openSidebar"></AppHeader>
+      <AppHeader v-if="onLogin"
+                 @openMenu="isActive = !isActive"
+      :action="refAction"></AppHeader>
     </div>
 
     <section v-if="!onLogin">
@@ -64,14 +61,16 @@ function openSidebar(){
       <a href="#/loginPage">Přihlásit se</a>
     </section>
 
-    <component :is="currView" @fetchLogin="fetchLogin"></component>
-    <div id="calendarComp">
+    <component :is="currView" @fetchLogin="fetchLogin" id="loginOrRegister"></component>
+    <div class="calendarComp" :class="{ calendarActive: isActive}">
       <Calendar v-if="onLogin" :loggedUser="userId"
-                :action="refAction" @update:action="refAction = $event"/>
+                :action="refAction" @update:action="refAction = $event"
+      :loggedUsername="username"/>
     </div>
-    <div id="sidebar">
-      <AppSidebar></AppSidebar>
-    </div>
+      <AppSidebar class="sidebar" :class="{ sidebarActive: isActive }"
+                  :loggedUser="username" v-if="onLogin"
+                  :action="refAction"
+      @logOut="logOut"></AppSidebar>
   </main>
 </template>
 
@@ -84,27 +83,58 @@ main {
   margin: 0;
 }
 
+section {
+  display: flex;
+  gap: 5px;
+}
+
+section a {
+  height: 10%;
+  width: 150px;
+  text-align: center;
+  background-color: #36363650;
+  border: 1px solid #36363690;
+  color: White;
+  border-radius: 5px;
+
+}
+
 #appHeader {
   display: flex;
   width: 100%;
 }
 
-#calendarComp {
+.calendarComp {
   display: flex;
-  position: absolute;
-  width: 90%;
-  left: -7%;
+  position: fixed;
   top: 8%;
-}
-
-#sidebar {
-  display: flex;
-  justify-content: flex-end;
-  left: 20%;
-}
-
-.shown {
   left: 0;
+  transition: left 1s ease-in-out;
 }
+
+.calendarActive {
+  left: -7%;
+}
+
+.sidebar {
+  position: fixed;
+  right: -15%;
+  height: 100vh;
+  top: 7%;
+  transition: right 1s ease-in-out;
+}
+
+.sidebarActive {
+  right: 0;
+}
+
+#loginOrRegister {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Zarovná vodorovně */
+  height: 50vh; /* Zajistí vertikální zarovnání */
+  width: 100%;
+}
+
 
 </style>

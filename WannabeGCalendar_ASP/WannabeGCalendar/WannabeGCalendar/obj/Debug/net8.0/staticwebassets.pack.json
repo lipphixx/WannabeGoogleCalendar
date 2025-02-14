@@ -1,31 +1,27 @@
 {
   "Files": [
     {
-      "Id": "/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/wwwroot/img/guguColor.png",
-      "PackagePath": "staticwebassets/img/guguColor.png"
+      "Id": "C:\\Users\\ondra\\OneDrive\\Plocha\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\wwwroot\\img\\guguColor.png",
+      "PackagePath": "staticwebassets\\img\\guguColor.png"
     },
     {
-      "Id": "/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/wwwroot/img/guguWhite.png",
-      "PackagePath": "staticwebassets/img/guguWhite.png"
+      "Id": "C:\\Users\\ondra\\OneDrive\\Plocha\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\wwwroot\\img\\guguWhite.png",
+      "PackagePath": "staticwebassets\\img\\guguWhite.png"
     },
     {
-      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.WannabeGCalendar.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
-      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
-    },
-    {
-      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.WannabeGCalendar.Microsoft.AspNetCore.StaticWebAssets.props",
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.WannabeGCalendar.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },
     {
-      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.build.WannabeGCalendar.props",
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.WannabeGCalendar.props",
       "PackagePath": "build\\WannabeGCalendar.props"
     },
     {
-      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.WannabeGCalendar.props",
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.WannabeGCalendar.props",
       "PackagePath": "buildMultiTargeting\\WannabeGCalendar.props"
     },
     {
-      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.WannabeGCalendar.props",
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.WannabeGCalendar.props",
       "PackagePath": "buildTransitive\\WannabeGCalendar.props"
     }
   ],

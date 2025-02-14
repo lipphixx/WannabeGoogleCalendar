@@ -50,12 +50,12 @@ function createEvent()
 <template>
 
   <section>
-    <div class="row">
+    <div class="row" style="justify-content: space-between">
+      <h1 style="font-weight: bold">{{ props.loggedUser }}</h1>
       <a class="material-symbols-outlined"> person </a>
-      <p>{{ props.loggedUser }}</p>
     </div>
     <div class="row">
-      <button class="tlacitko" @click="createEvent">Vytvořit událost</button>
+      <button class="addBtn" @click="createEvent">Vytvořit událost</button>
     </div>
     <div class="row">
       <div id="smolCalendar">
@@ -67,12 +67,12 @@ function createEvent()
     <div class="row">
       <div id="checkboxContainer">
         <h3>Moje kalendáře</h3>
-        <label>
-          <input type="checkbox" name="" id="loggedUserCheck" @change="toggleUserEvents" :checked="!hideEvents">
+        <label class="checkboxik">
+          <input type="checkbox" name="" @change="toggleUserEvents" :checked="!hideEvents">
           {{ props.loggedUser }}
         </label>
-        <label>
-          <input type="checkbox" name="" id="holidayCheck" @change="toggleHolidayEvents" :checked="!hideHolidays">
+        <label class="checkboxik">
+          <input type="checkbox" name="" @change="toggleHolidayEvents" :checked="!hideHolidays">
           Svátky
         </label>
       </div>
@@ -81,7 +81,7 @@ function createEvent()
 
     </div>
     <div id="lastRow">
-      <button class="tlacitko" @click="logOut">Log out</button>
+      <button class="logOut" @click="logOut">Log out</button>
     </div>
     <div id="logoBtm">
       <img src="">
@@ -112,21 +112,36 @@ section {
   flex-direction: column;
 }
 
-.tlacitko {
-  background-color: #36363650;
-  border: 1px solid #36363690;
+button {
+  background: linear-gradient(to right, cornflowerblue, #0d5be8) left;
+  background-size: 200% 100%;
+  transition: background-position 0.3s ease-in-out;
+  border: none;
   padding: 5%;
   color: White;
   border-radius: 5px;
+  width: 100%;
+}
+
+button:hover {
+  background-position: right;
+  cursor: pointer;
+}
+
+.logOut {
+  border: 1px solid cornflowerblue;
+  box-shadow: inset 0 0 0 1px cornflowerblue;
+  background: linear-gradient(to right, #36363620, #36363600);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.logOut:hover {
+  box-shadow: inset 0 0 2px 3px cornflowerblue;
 }
 
 label {
   display: flex;
   gap: 3px;
-}
-
-button {
-  width: 100%;
 }
 
 #smolCalendar {

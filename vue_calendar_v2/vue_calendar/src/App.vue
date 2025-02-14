@@ -104,7 +104,7 @@ function loading() {
                  :currentYear="currentYear"></AppHeader>
     </div>
 
-    <section v-if="!onLogin">
+    <section v-if="!onLogin" class="buttony">
       <a href="#/registerPage">Registrovat se</a>
       <a href="#/loginPage">Přihlásit se</a>
     </section>
@@ -120,7 +120,7 @@ function loading() {
                 @onLoading="loading"
       />
     </div>
-    <img :src="loadingGif" alt="Animace GIF" v-if="onLoading" id="fixed">
+    <p v-if="onLoading" id="fixed" style="font-weight: bolder">Loading...</p>
     <AppSidebar class="sidebar" :class="{ sidebarActive: isActive }"
                 :loggedUser="username" v-if="onLogin"
                 :action="refAction"
@@ -149,7 +149,7 @@ body, main, .calendarComp {
 main {
   display: flex;
   flex-direction: column;
-  margin: 0
+  margin: 0;
 }
 
 section {
@@ -169,10 +169,25 @@ section a {
   width: 150px;
   text-align: center;
   background-color: #36363650;
-  border: 1px solid #36363690;
+  border: 2px solid #36363690;
   color: White;
   border-radius: 5px;
+  cursor: pointer;
+  box-shadow: inset 0 0 0 0px cornflowerblue;
+  transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 
+}
+
+.buttony {
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+a:hover {
+  border: 2px solid cornflowerblue;
+  box-shadow: inset 0 0 2px 1px cornflowerblue;
 }
 
 #appHeader {

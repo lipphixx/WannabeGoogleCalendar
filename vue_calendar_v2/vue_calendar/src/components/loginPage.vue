@@ -7,7 +7,7 @@ const password = ref(null);
 const emit = defineEmits(["fetchLogin"]);
 
 async function fetchLogin() {
-  const url = "https://172.20.10.4:5050/api/Auth/login";
+  const url = "https://localhost:5050/api/Auth/login";
 
   try {
     const loginDetails = {
@@ -73,17 +73,20 @@ input {
 }
 
 button {
+  flex-shrink: 0;
   height: 10%;
   width: 300px;
-  background-color: #36363650;
-  border: 1px solid #36363690;
+  background: linear-gradient(to right, cornflowerblue, #0d5be8) left;
+  background-size: 200% 100%;
+  transition: background-position 0.3s ease-in-out;
   color: White;
+  border: none;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 button:hover {
-  background-color: #36363680;
-  -webkit-box-shadow: inset 0px 0px 0px 3px rgba(81, 81, 81, 0.30);
+  background-position: right;
 }
 
 </style>

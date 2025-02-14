@@ -95,11 +95,11 @@ watch(props.action, () => {
   }
 })
 watch(props.createEvent, () => {
-  if (props.createEvent.action === true)
-  {
+  if (props.createEvent.action === true) {
     showModal(new Date());
   }
 })
+
 function drawCalendar() {
   daysInCurrentMonth.value = new Date(currentYear.value, currentMonth.value + 1, 0).getDate();
   let firstDayNum = new Date(currentYear.value, currentMonth.value, 0).getDay();
@@ -139,6 +139,7 @@ function drawCalendar() {
   }
   fetchHolidays()
 }
+
 function showModal(day) {
   isTimeOn.value = false;
   isHostOn.value = false;
@@ -155,6 +156,7 @@ function showModal(day) {
   selectedDate.value = new Date(day.getFullYear(), day.getMonth(), day.getDate() + 1).toISOString().split("T")[0];
   addEventDialog.value.showModal();
 }
+
 async function sendEmail() {
   let date = `${selectedDay.value.getDate().toString().padStart(2, '0')}.${(selectedDay.value.getMonth() + 1).toString().padStart(2, '0')}.${selectedDay.value.getFullYear()}`;
   let emailDetails;
@@ -188,13 +190,14 @@ async function sendEmail() {
       }
     }
     try {
-      await axios.post(`https://172.20.10.4:5050/api/Mail`, emailDetails);
+      await axios.post(`https://localhost:5050/api/Mail`, emailDetails);
     } catch (error) {
       console.error(`Chyba při odesílání e-mailu na ${x.email}:`, error);
     }
   }
 }
-async function sendEmailUpdate(name, date, time, note, owner){
+
+async function sendEmailUpdate(name, date, time, note, owner) {
   //let dateToSend = `${date.getDate().toString().padStart(2, '0')}.${(date.getMonth() + 1).toString().padStart(2, '0')}.${date.getFullYear()}`;
   let emailDetails;
   for (const x of participants.value) {
@@ -228,12 +231,13 @@ async function sendEmailUpdate(name, date, time, note, owner){
       }
     }
     try {
-      await axios.post(`https://172.20.10.4:5050/api/Mail`, emailDetails);
+      await axios.post(`https://localhost:5050/api/Mail`, emailDetails);
     } catch (error) {
       console.error(`Chyba při odesílání e-mailu na ${x.email}:`, error);
     }
   }
 }
+
 async function addEvent() {
   let newEvent;
   selectedDay.value = new Date(selectedDate.value);
@@ -297,10 +301,11 @@ async function addEvent() {
 
   addEventDialog.value.close();
 
-  await axios.post(`https://172.20.10.4:5050/api/Events/CreateNewEvent`, newEvent);
+  await axios.post(`https://localhost:5050/api/Events/CreateNewEvent`, newEvent);
 
   await resetPage();
 }
+
 async function addParticipant() {
   if (!Array.isArray(participantsIds.value)) {
     participantsIds.value = [];
@@ -314,7 +319,7 @@ async function addParticipant() {
 
   if (currentParticipant.value !== null) {
 
-    const response = await fetch(`https://172.20.10.4:5050/api/Users`);
+    const response = await fetch(`https://localhost:5050/api/Users`);
     const data = await response.json();
 
     const participant = (data.find(x => x.email === currentParticipant.value));
@@ -326,6 +331,7 @@ async function addParticipant() {
     currentParticipant.value = null;
   }
 }
+
 function nextMonth() {
   if (currentMonth.value === 11) {
     currentMonth.value = 0;
@@ -335,6 +341,7 @@ function nextMonth() {
   }
   drawCalendar();
 }
+
 function previousMonth() {
   if (currentMonth.value === 0) {
     currentMonth.value = 11;
@@ -344,18 +351,21 @@ function previousMonth() {
   }
   drawCalendar();
 }
+
 function showNow() {
   const now = new Date();
   currentMonth.value = now.getMonth();
   currentYear.value = now.getFullYear();
   drawCalendar();
 }
+
 async function removeEvent(day, index) {
   const key = events[new Date(day).getTime()].findIndex(x => x.id === index);
   events[new Date(day).getTime()].splice(key, 1);
-  await axios.delete(`https://172.20.10.4:5050/api/Events/${index}`);
+  await axios.delete(`https://localhost:5050/api/Events/${index}`);
   await resetPage();
 }
+
 function sortEventsForDay(dayEvents) {
   dayEvents.sort((a, b) => {
     if (!a.time && b.time) return -1; //celodenni event
@@ -364,12 +374,14 @@ function sortEventsForDay(dayEvents) {
     return 0;
   });
 }
+
 function sortAllEvents() {
   //prochazime vsechny dny
   for (let day in events) {
     sortEventsForDay(events[day]); //seradime vsechny eventy pro dany den
   }
 }
+
 async function fetchHolidays() {
   const baseUrl = "https://svatkyapi.cz/api/day/";
 
@@ -391,8 +403,9 @@ async function fetchHolidays() {
   }
 
 }
+
 async function fetchEvents() {
-  const url = `https://172.20.10.4:5050/api/Events/GetAllEvents`;
+  const url = `https://localhost:5050/api/Events/GetAllEvents`;
 
   try {
     const response = await fetch(url);
@@ -400,7 +413,7 @@ async function fetchEvents() {
 
     const ownerEvents = [];
     data.find(x => {
-      if(String(x.ownerId) === String(loggedUserId.value)){
+      if (String(x.ownerId) === String(loggedUserId.value)) {
         ownerEvents.push(x);
       }
     });
@@ -440,6 +453,7 @@ async function fetchEvents() {
     console.log("Chyba při načítání událostí:", error);
   }
 }
+
 async function showEventDetail(event) {
   nameInp.value = null;
   dateInp.value = null;
@@ -467,7 +481,7 @@ async function showEventDetail(event) {
   }
 
   try {
-    const response = await fetch(`https://172.20.10.4:5050/api/Users`);
+    const response = await fetch(`https://localhost:5050/api/Users`);
     const data = await response.json();
 
     const uniqueParticipants = new Set();
@@ -486,11 +500,12 @@ async function showEventDetail(event) {
     console.error("Chyba při načítání účastníků:", error);
   }
 }
+
 async function startEdit(event) {
   participantsIds.value = null;
   onEdit.value = true;
   nameInp.value = selectedEvent.value.name;
-  dateInp.value = selectedEvent.value.date.slice(0,10);
+  dateInp.value = selectedEvent.value.date.slice(0, 10);
   noteInp.value = selectedEvent.value.note ? selectedEvent.value.note : null;
   timeInp.value = selectedEvent.value.time ? selectedEvent.value.time : null;
   selectedEventParticipants.value = [];
@@ -510,7 +525,7 @@ async function startEdit(event) {
     }
   }
   try {
-    const response = await fetch(`https://172.20.10.4:5050/api/Users`);
+    const response = await fetch(`https://localhost:5050/api/Users`);
     const data = await response.json();
 
     const uniqueParticipants = new Set();
@@ -528,6 +543,7 @@ async function startEdit(event) {
     console.error("Chyba při načítání účastníků:", error);
   }
 }
+
 async function saveEdit() {
   let updatedEvent;
   if (participantsIds.value) {
@@ -552,8 +568,8 @@ async function saveEdit() {
       participantsIds: null
     };
   }
-  try{
-    await axios.post("https://172.20.10.4:5050/api/Events/UpdateEvent", updatedEvent);
+  try {
+    await axios.post("https://localhost:5050/api/Events/UpdateEvent", updatedEvent);
     nameInp.value = null;
     dateInp.value = null;
     noteInp.value = null;
@@ -566,7 +582,8 @@ async function saveEdit() {
     console.log(error);
   }
 }
-async function resetPage(){
+
+async function resetPage() {
   emit('onLoading');
   Object.keys(events).forEach(key => delete events[key]);
   await fetchEvents();
@@ -583,22 +600,24 @@ async function resetPage(){
   <div class="dialogContainer">
     <dialog ref="eventDialog" class="dialogs">
       <div v-if="selectedEvent" class="inputContainer">
-        <a @click.prevent="startEdit(selectedEvent)" v-if="!onEdit">Upravit</a>
-
-        <h3 v-if="!onEdit" class="dialogRow">Událost: {{ selectedEvent.name}}</h3>
-        <input type="text" v-if="onEdit" v-model="nameInp">
 
         <div>
-          <p v-if="!onEdit" class="dialogRow">Datum: {{ new Date(selectedEvent.date).toLocaleDateString() }}</p>
-          <input type="date" v-if="onEdit" v-model="dateInp">
+          <h3 v-if="!onEdit" class="dialogRow inputStyle" style="font-weight: bold">Událost:
+            {{ selectedEvent.name }}</h3>
+          <input type="text" v-if="onEdit" v-model="nameInp" class="inputStyle">
 
-          <p v-if="selectedEvent.time && !onEdit" class="dialogRow">Čas: {{ selectedEvent.time }}</p>
-          <input type="time" v-if="onEdit" v-model="timeInp">
+          <p v-if="!onEdit" class="dialogRow inputStyle">Datum: {{
+              new Date(selectedEvent.date).toLocaleDateString()
+            }}</p>
+          <input type="date" v-if="onEdit" v-model="dateInp" class="inputStyle editDialogRow">
 
-          <p v-if="selectedEvent.note && !onEdit" class="dialogRow">Poznámka: {{ selectedEvent.note }}</p>
-          <input type="text" v-if="onEdit" v-model="noteInp">
+          <p v-if="selectedEvent.time && !onEdit" class="dialogRow inputStyle">Čas: {{ selectedEvent.time }}</p>
+          <input type="time" v-if="onEdit" v-model="timeInp" class="inputStyle editDialogRow">
 
-          <h4 v-if="participantsIncluded && !onEdit" >
+          <p v-if="selectedEvent.note && !onEdit" class="dialogRow inputStyle">Poznámka: {{ selectedEvent.note }}</p>
+          <input type="text" v-if="onEdit" v-model="noteInp" class="inputStyle">
+
+          <h4 v-if="participantsIncluded && !onEdit">
             Účastníci
           </h4>
           <p v-for="participant in selectedEventParticipants" v-if="!onEdit">{{ participant }}</p>
@@ -607,46 +626,58 @@ async function resetPage(){
 
           <div v-if="isHostOn && onEdit" class="dialogColum">
             <div class="dialogRow">
-              <input type="email" v-model="currentParticipant" class="inputStyle" placeholder="Host" style="border-right: none">
-              <button @click="addParticipant()" id="buttonInvite" style="border-bottom-left-radius: 0; border-top-left-radius: 0; border-left: none;">Pozvat</button>
+              <input type="email" v-model="currentParticipant" class="inputStyle" placeholder="Host"
+                     style="border-right: none">
+              <button @click="addParticipant()" id="buttonInvite"
+                      style="border-bottom-left-radius: 0; border-top-left-radius: 0; border-left: none;">Pozvat
+              </button>
             </div>
             <div v-for="parti in participantsEmails">
               {{ parti }}
             </div>
           </div>
         </div>
-        <a @click.prevent="saveEdit()" v-if="onEdit">Uložit</a>
-        <button @click="eventDialog.close()" v-if="!onEdit">Zavřít</button>
+        <div class="dialogRow" style="gap: 10px">
+          <button @click="startEdit(selectedEvent)" v-if="!onEdit" class="editBtn">Upravit</button>
+          <button @click="eventDialog.close()" v-if="!onEdit">Zavřít</button>
+        </div>
+        <button class="dialogRow addBtn" @click="saveEdit()" v-if="onEdit" style="margin-top: -5%">Uložit</button>
       </div>
     </dialog>
   </div>
   <div class="dialogContainer">
     <dialog ref="addEventDialog" class="dialogs">
-        <div class="inputContainer">
-          <input class="inputStyle dialogRow" type="text" v-model="eventName" placeholder="Název události">
+      <div class="inputContainer">
+        <input class="inputStyle dialogRow" type="text" v-model="eventName" placeholder="Název události">
 
-          <div class="dialogRow">
-            <input class="inputStyle" type="date" v-model="selectedDate" style="border-right: none">
-              <button @click="isTimeOn = true" v-if="!isTimeOn" id="buttonTime" style="border-bottom-left-radius: 0; border-top-left-radius: 0; border-left: none;">Přidat čas</button>
-              <input class="inputStyle" id="inputTime" type="time" step="900" v-model="eventTime" v-if="isTimeOn" style="border-left: none">
-          </div>
-
-          <button @click="isHostOn = true" v-if="!isHostOn" class="dialogRow">Přidat hosty</button>
-
-          <div v-if="isHostOn" class="dialogColumn">
-            <div class="dialogRow">
-              <input type="email" v-model="currentParticipant" class="inputStyle" placeholder="Host" style="border-right: none">
-              <button @click="addParticipant()" id="buttonInvite" style="border-bottom-left-radius: 0; border-top-left-radius: 0; border-left: none;">Pozvat</button>
-            </div>
-            <div v-for="parti in participantsEmails" class="dialogRow" style="font-size: smaller">
-              {{ parti }}
-            </div>
-          </div>
-
-          <button @click="isNoteOn = true" v-if="!isNoteOn" class="dialogRow">Přidat poznámku</button>
-          <input type="text" v-model="eventNote" v-if="isNoteOn" class="inputStyle dialogRow" placeholder="Poznámka">
-          <button @click="addEvent()" class="dialogRow" id="addBtn">Přidat</button>
+        <div class="dialogRow">
+          <input class="inputStyle" type="date" v-model="selectedDate" style="border-right: none">
+          <button @click="isTimeOn = true" v-if="!isTimeOn" id="buttonTime"
+                  style="border-bottom-left-radius: 0; border-top-left-radius: 0; border-left: none;">Přidat čas
+          </button>
+          <input class="inputStyle" id="inputTime" type="time" step="900" v-model="eventTime" v-if="isTimeOn"
+                 style="border-left: none">
         </div>
+
+        <button @click="isHostOn = true" v-if="!isHostOn" class="dialogRow">Přidat hosty</button>
+
+        <div v-if="isHostOn" class="dialogColumn">
+          <div class="dialogRow">
+            <input type="email" v-model="currentParticipant" class="inputStyle" placeholder="Host"
+                   style="border-right: none">
+            <button @click="addParticipant()" id="buttonInvite"
+                    style="border-bottom-left-radius: 0; border-top-left-radius: 0; border-left: none;">Pozvat
+            </button>
+          </div>
+          <div v-for="parti in participantsEmails" class="dialogRow" style="font-size: smaller">
+            {{ parti }}
+          </div>
+        </div>
+
+        <button @click="isNoteOn = true" v-if="!isNoteOn" class="dialogRow">Přidat poznámku</button>
+        <input type="text" v-model="eventNote" v-if="isNoteOn" class="inputStyle dialogRow" placeholder="Poznámka">
+        <button @click="addEvent()" class="dialogRow addBtn">Přidat</button>
+      </div>
     </dialog>
   </div>
   <body>
@@ -736,6 +767,17 @@ button {
   border-radius: 5px;
 }
 
+.editBtn {
+  border: 1px solid cornflowerblue;
+  box-shadow: inset 0 0 0 1px cornflowerblue;
+  background: linear-gradient(to right, #36363620, #36363600);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.editBtn:hover {
+  box-shadow: inset 0 0 2px 3px cornflowerblue;
+}
+
 span {
   font-size: 18px;
 }
@@ -785,6 +827,16 @@ main {
   height: 35px;
 }
 
+.editDialogRow {
+  .dialogRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 15px;
+  }
+}
+
 .dialogRow:focus,
 .dialogRow input:focus {
   outline: none;
@@ -798,13 +850,13 @@ main {
   height: 35px;
 }
 
-#addBtn {
+.addBtn {
   background: linear-gradient(to right, cornflowerblue, #0d5be8) left;
   background-size: 200% 100%;
   transition: background-position 0.3s ease-in-out;
 }
 
-#addBtn:hover {
+.addBtn:hover {
   background-position: right;
 }
 
@@ -831,7 +883,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   opacity: 0; /* Skryje ikonku */
   position: absolute;
   width: 60%;
-  height: 100%;
   cursor: pointer;
 }
 
@@ -839,7 +890,6 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   opacity: 0; /* Skryje ikonku */
   position: absolute;
   width: 20%;
-  height: 100%;
   cursor: pointer;
 }
 

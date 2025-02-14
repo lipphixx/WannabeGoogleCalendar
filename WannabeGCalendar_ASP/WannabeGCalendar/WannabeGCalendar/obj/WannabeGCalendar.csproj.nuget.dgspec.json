@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/WannabeGCalendar.csproj": {}
+    "C:\\Users\\ondra\\OneDrive\\Plocha\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\WannabeGCalendar.csproj": {}
   },
   "projects": {
-    "/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/WannabeGCalendar.csproj": {
+    "C:\\Users\\ondra\\OneDrive\\Plocha\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\WannabeGCalendar.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/WannabeGCalendar.csproj",
+        "projectUniqueName": "C:\\Users\\ondra\\OneDrive\\Plocha\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\WannabeGCalendar.csproj",
         "projectName": "WannabeGCalendar",
-        "projectPath": "/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/WannabeGCalendar.csproj",
-        "packagesPath": "/Users/filis/.nuget/packages/",
-        "outputPath": "/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/obj/",
+        "projectPath": "C:\\Users\\ondra\\OneDrive\\Plocha\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\WannabeGCalendar.csproj",
+        "packagesPath": "C:\\Users\\ondra\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ondra\\OneDrive\\Plocha\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/filis/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\ondra\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -37,8 +39,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.100"
+        }
       },
       "frameworks": {
         "net8.0": {
@@ -88,7 +89,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.102/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

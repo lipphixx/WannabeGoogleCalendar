@@ -33,34 +33,6 @@
   },
   {
     "ContainingType": "WannabeGCalendar.Controllers.EventsController",
-    "Method": "GetAllEvents",
-    "RelativePath": "api/Events",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [],
-    "EndpointName": "GetAllEvents"
-  },
-  {
-    "ContainingType": "WannabeGCalendar.Controllers.EventsController",
-    "Method": "CreateEvent",
-    "RelativePath": "api/Events",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "newEvent",
-        "Type": "WannabeGCalendar.Entities.Event",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [],
-    "EndpointName": "CreateNewEvent"
-  },
-  {
-    "ContainingType": "WannabeGCalendar.Controllers.EventsController",
     "Method": "RemoveEvent",
     "RelativePath": "api/Events/{id}",
     "HttpMethod": "DELETE",
@@ -75,6 +47,74 @@
     ],
     "ReturnTypes": [],
     "EndpointName": "RemoveEvent"
+  },
+  {
+    "ContainingType": "WannabeGCalendar.Controllers.EventsController",
+    "Method": "CreateEvent",
+    "RelativePath": "api/Events/CreateNewEvent",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newEvent",
+        "Type": "WannabeGCalendar.Entities.Event",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WannabeGCalendar.Controllers.EventsController",
+    "Method": "GetAllEvents",
+    "RelativePath": "api/Events/GetAllEvents",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WannabeGCalendar.Controllers.EventsController",
+    "Method": "UpdateEvent",
+    "RelativePath": "api/Events/UpdateEvent",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "updatedEvent",
+        "Type": "WannabeGCalendar.Entities.Event",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MailController",
+    "Method": "SendMail",
+    "RelativePath": "api/Mail",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mailData",
+        "Type": "WannabeGCalendar.Data.MailData",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Boolean",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "WannabeGCalendar.Controllers.UsersController",

@@ -1,7 +1,20 @@
 <script setup>
 
+import {computed, onMounted, ref} from "vue";
+
 const props = defineProps(['action', 'currentMonth', 'currentYear']);
 const emit = defineEmits(['openMenu'])
+const localMonth = ref(props.currentMonth);
+const localYear = ref(props.currentYear);
+
+const dateNow = computed(() => {
+  return new Date(localYear.value, localMonth.value).toLocaleDateString("cs-CZ", { month: "long", year: "numeric" });
+});
+
+onMounted(() => {
+  localMonth.value = props.currentMonth;
+  localYear.value = props.currentYear;
+});
 
 function showMenuDialog()
 {
@@ -11,29 +24,29 @@ function showMenuDialog()
 function nextMonth() {
   props.action.action = 0;
   props.action.action = 2;
-  if (currentMonth.value === 11) {
-    currentMonth.value = 0;
-    currentYear.value++;
+  if (props.currentMonth.value === 11) {
+    localMonth.value = 0;
+    localYear.value++;
   } else {
-    currentMonth.value++;
+    localMonth.value++;
   }
 }
 function previousMonth() {
   props.action.action = 0;
   props.action.action = 1;
   if (props.currentMonth.value === 0) {
-    props.currentMonth.value = 11;
-    props.currentYear.value--;
+    localMonth.value = 11;
+    localYear.value--;
   } else {
-    props.currentMonth.value--;
+    localMonth.value--;
   }
 }
 function showNow() {
   props.action.action = 0;
   props.action.action = 3;
   const now = new Date();
-  props.currentMonth.value = now.getMonth();
-  props.currentYear.value = now.getFullYear();
+  localMonth.value = now.getMonth();
+  localYear.value = now.getFullYear();
 }
 </script>
 
@@ -49,7 +62,7 @@ function showNow() {
       <button class="tlacitko" @click="showNow">Nyní</button>
     </div>
 
-    <h1>{{new Date(props.currentMonth, props.currentMonth).toLocaleDateString('cs-CZ', { month: 'long' })}} {{props.currentYear}}</h1>
+    <h1>{{dateNow}}</h1>
 
     <a class="material-symbols-outlined" @click.prevent="showMenuDialog"> menu </a>
 

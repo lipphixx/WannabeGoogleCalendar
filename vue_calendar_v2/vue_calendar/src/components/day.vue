@@ -12,23 +12,6 @@ defineProps({
 });
 
 const emit = defineEmits(['addEvent', 'removeEvent']);
-
-async function fetchJoke(day){
-  // const url = new URL('https://api.chucknorris.io/jokes/random');
-  //
-  // if(category){
-  //   url.searchParams.append('category', category);
-  // }
-  //
-  // try {
-  //   const response = await fetch(url.toString());
-  //   const data = await response.json();
-  //
-  //   jokeDiv.innerHTML = data.value;
-  // } catch (error) {
-  //   jokeDiv.innerHTML = 'Při načítání došlo k chybě!';
-  // }
-}
 </script>
 
 <template>

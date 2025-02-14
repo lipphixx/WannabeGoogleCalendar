@@ -1,9 +1,7 @@
 <script setup>
 import Day from "@/components/day.vue";
-import {onMounted, reactive, ref, watch} from "vue";
+import {computed, onMounted, reactive, ref, watch} from "vue";
 import axios from "axios";
-
-const apiUrl = 'https://172.20.10.4:5050';
 
 const currentYear = ref(0);
 const currentMonth = ref(0);
@@ -44,18 +42,36 @@ const timeInp = ref(null);
 const noteInp = ref(null);
 
 const onEdit = ref(false);
+const loggedUserId = ref(null);
 
 const nationalHolidays = ref([]);
 
 const today = new Date();
 
-const props = defineProps(['loggedUser', 'action', 'loggedUsername']);
+const props = defineProps(['loggedUser', 'action', 'loggedUsername', 'showEvents', 'showHolidays', 'createEvent']);
+const emit = defineEmits(['onLoading'])
+
+const filteredEvents = computed(() => {
+  if (props.showEvents) {
+    return events;
+  } else {
+    return {};
+  }
+});
+const filteredHolidays = computed(() => {
+  if (props.showHolidays) {
+    return nationalHolidays.value;
+  } else {
+    return [];
+  }
+});
 const isToday = (day) => {
   return day.getDate() === today.getDate() &&
       day.getMonth() === today.getMonth() &&
       day.getFullYear() === today.getFullYear();
 }
 onMounted(async () => {
+  loggedUserId.value = props.loggedUser;
   const date = new Date();
   currentMonth.value = date.getMonth();
   currentYear.value = date.getFullYear();
@@ -67,12 +83,7 @@ onMounted(async () => {
   await fetchHolidays();
   drawCalendar();
 });
-watch(events, () => {
-  localStorage.setItem('events', JSON.stringify(events));
-  sortAllEvents();
-}, {deep: true});
 watch(props.action, () => {
-  console.log(props.action)
   if (props.action.action === 0) {
     showNow();
   } else if (props.action.action === 1) {
@@ -81,6 +92,12 @@ watch(props.action, () => {
     nextMonth()
   } else if (props.action.action === 3) {
     showNow();
+  }
+})
+watch(props.createEvent, () => {
+  if (props.createEvent.action === true)
+  {
+    showModal(new Date());
   }
 })
 function drawCalendar() {
@@ -136,7 +153,6 @@ function showModal(day) {
 
   selectedDay.value = day;
   selectedDate.value = new Date(day.getFullYear(), day.getMonth(), day.getDate() + 1).toISOString().split("T")[0];
-  console.log(selectedDay.value);
   addEventDialog.value.showModal();
 }
 async function sendEmail() {
@@ -172,8 +188,7 @@ async function sendEmail() {
       }
     }
     try {
-      await axios.post(`${apiUrl}/api/Mail`, emailDetails);
-      console.log(`Email odeslán na ${x.email}`);
+      await axios.post(`https://172.20.10.4:5050/api/Mail`, emailDetails);
     } catch (error) {
       console.error(`Chyba při odesílání e-mailu na ${x.email}:`, error);
     }
@@ -213,8 +228,7 @@ async function sendEmailUpdate(name, date, time, note, owner){
       }
     }
     try {
-      await axios.post(`${apiUrl}/api/Mail`, emailDetails);
-      console.log(`Email odeslán na ${x.email}`);
+      await axios.post(`https://172.20.10.4:5050/api/Mail`, emailDetails);
     } catch (error) {
       console.error(`Chyba při odesílání e-mailu na ${x.email}:`, error);
     }
@@ -222,6 +236,8 @@ async function sendEmailUpdate(name, date, time, note, owner){
 }
 async function addEvent() {
   let newEvent;
+  selectedDay.value = new Date(selectedDate.value);
+  console.log(new Date(selectedDate.value));
   const key = selectedDay.value.getTime();
 
   if (!eventName.value) {
@@ -282,6 +298,8 @@ async function addEvent() {
   addEventDialog.value.close();
 
   await axios.post(`https://172.20.10.4:5050/api/Events/CreateNewEvent`, newEvent);
+
+  await resetPage();
 }
 async function addParticipant() {
   if (!Array.isArray(participantsIds.value)) {
@@ -296,7 +314,7 @@ async function addParticipant() {
 
   if (currentParticipant.value !== null) {
 
-    const response = await fetch(`${apiUrl}/api/Users`);
+    const response = await fetch(`https://172.20.10.4:5050/api/Users`);
     const data = await response.json();
 
     const participant = (data.find(x => x.email === currentParticipant.value));
@@ -335,7 +353,8 @@ function showNow() {
 async function removeEvent(day, index) {
   const key = events[new Date(day).getTime()].findIndex(x => x.id === index);
   events[new Date(day).getTime()].splice(key, 1);
-  await axios.delete(`${apiUrl}/api/Events/${index}`);
+  await axios.delete(`https://172.20.10.4:5050/api/Events/${index}`);
+  await resetPage();
 }
 function sortEventsForDay(dayEvents) {
   dayEvents.sort((a, b) => {
@@ -373,16 +392,22 @@ async function fetchHolidays() {
 
 }
 async function fetchEvents() {
-  const url = `${apiUrl}/api/Events/GetAllEvents`;
+  const url = `https://172.20.10.4:5050/api/Events/GetAllEvents`;
 
   try {
     const response = await fetch(url);
     const data = await response.json();
-    const ownerEvents = data.filter(x => x.ownerId === props.loggedUser);
+
+    const ownerEvents = [];
+    data.find(x => {
+      if(String(x.ownerId) === String(loggedUserId.value)){
+        ownerEvents.push(x);
+      }
+    });
 
     const participantEvents = data.filter(x => {
       if (!x.participantsIds) return false;
-      return x.participantsIds.includes(props.loggedUser);
+      return x.participantsIds.includes(loggedUserId.value);
     });
 
     const uniqueEvents = [...ownerEvents, ...participantEvents].reduce((acc, event) => {
@@ -442,7 +467,7 @@ async function showEventDetail(event) {
   }
 
   try {
-    const response = await fetch(`${apiUrl}/api/Users`);
+    const response = await fetch(`https://172.20.10.4:5050/api/Users`);
     const data = await response.json();
 
     const uniqueParticipants = new Set();
@@ -485,7 +510,7 @@ async function startEdit(event) {
     }
   }
   try {
-    const response = await fetch(`${apiUrl}/api/Users`);
+    const response = await fetch(`https://172.20.10.4:5050/api/Users`);
     const data = await response.json();
 
     const uniqueParticipants = new Set();
@@ -499,7 +524,6 @@ async function startEdit(event) {
       }
     });
     participantsEmails.value = Array.from(uniqueParticipants);
-    console.log(participantsEmails.value)
   } catch (error) {
     console.error("Chyba při načítání účastníků:", error);
   }
@@ -536,42 +560,55 @@ async function saveEdit() {
     timeInp.value = null;
     onEdit.value = false;
     eventDialog.value.close();
+
+    await resetPage();
   } catch (error) {
     console.log(error);
   }
 }
+async function resetPage(){
+  emit('onLoading');
+  Object.keys(events).forEach(key => delete events[key]);
+  await fetchEvents();
+  sortAllEvents();
+  drawCalendar();
+  setTimeout(() => {
+    emit('onLoading');
+  }, 500)
+}
+
 </script>
 
 <template>
   <div class="dialogContainer">
     <dialog ref="eventDialog" class="dialogs">
-      <div v-if="selectedEvent">
+      <div v-if="selectedEvent" class="inputContainer">
         <a @click.prevent="startEdit(selectedEvent)" v-if="!onEdit">Upravit</a>
 
-        <h3 v-if="!onEdit">Událost: {{ selectedEvent.name }}</h3>
+        <h3 v-if="!onEdit" class="dialogRow">Událost: {{ selectedEvent.name}}</h3>
         <input type="text" v-if="onEdit" v-model="nameInp">
 
         <div>
-          <p v-if="!onEdit">Datum: {{ new Date(selectedEvent.date).toLocaleDateString() }}</p>
+          <p v-if="!onEdit" class="dialogRow">Datum: {{ new Date(selectedEvent.date).toLocaleDateString() }}</p>
           <input type="date" v-if="onEdit" v-model="dateInp">
 
-          <p v-if="selectedEvent.time && !onEdit">Čas: {{ selectedEvent.time }}</p>
+          <p v-if="selectedEvent.time && !onEdit" class="dialogRow">Čas: {{ selectedEvent.time }}</p>
           <input type="time" v-if="onEdit" v-model="timeInp">
 
-          <p v-if="selectedEvent.note && !onEdit">Poznámka: {{ selectedEvent.note }}</p>
+          <p v-if="selectedEvent.note && !onEdit" class="dialogRow">Poznámka: {{ selectedEvent.note }}</p>
           <input type="text" v-if="onEdit" v-model="noteInp">
 
-          <h4 v-if="participantsIncluded && !onEdit">
+          <h4 v-if="participantsIncluded && !onEdit" >
             Účastníci
           </h4>
           <p v-for="participant in selectedEventParticipants" v-if="!onEdit">{{ participant }}</p>
 
           <button @click="isHostOn = true" v-if="!isHostOn && onEdit" class="dialogRow">Přidat hosty</button>
 
-          <div v-if="isHostOn && onEdit">
-            <div id="host">
-              <input type="email" v-model="currentParticipant" class="inputStyle" placeholder="Host">
-              <button @click="addParticipant()">Pozvat</button>
+          <div v-if="isHostOn && onEdit" class="dialogColum">
+            <div class="dialogRow">
+              <input type="email" v-model="currentParticipant" class="inputStyle" placeholder="Host" style="border-right: none">
+              <button @click="addParticipant()" id="buttonInvite" style="border-bottom-left-radius: 0; border-top-left-radius: 0; border-left: none;">Pozvat</button>
             </div>
             <div v-for="parti in participantsEmails">
               {{ parti }}
@@ -591,12 +628,12 @@ async function saveEdit() {
           <div class="dialogRow">
             <input class="inputStyle" type="date" v-model="selectedDate" style="border-right: none">
               <button @click="isTimeOn = true" v-if="!isTimeOn" id="buttonTime" style="border-bottom-left-radius: 0; border-top-left-radius: 0; border-left: none;">Přidat čas</button>
-              <input class="inputStyle" id="inputTime" type="time" v-model="eventTime" v-if="isTimeOn" style="border-left: none">
+              <input class="inputStyle" id="inputTime" type="time" step="900" v-model="eventTime" v-if="isTimeOn" style="border-left: none">
           </div>
 
           <button @click="isHostOn = true" v-if="!isHostOn" class="dialogRow">Přidat hosty</button>
 
-          <div v-if="isHostOn" id="dialogColumn">
+          <div v-if="isHostOn" class="dialogColumn">
             <div class="dialogRow">
               <input type="email" v-model="currentParticipant" class="inputStyle" placeholder="Host" style="border-right: none">
               <button @click="addParticipant()" id="buttonInvite" style="border-bottom-left-radius: 0; border-top-left-radius: 0; border-left: none;">Pozvat</button>
@@ -625,37 +662,34 @@ async function saveEdit() {
   </header>
 
   <main>
-    <!--    dny predchoziho mesice-->
     <Day
         v-for="day in daysBefore"
         :key="day"
         :day="day.getDate()"
-        :events="events[day.getTime()] || []"
+        :filteredEvents="filteredEvents[day.getTime()] || []"
         @addEvent="showModal(day)"
         @removeEvent="(index) => removeEvent(day, index)"
         :class="{ 'notCurrentMonth': true, 'today': isToday(day) }"
 
     />
 
-    <!--    dny aktualniho mesice-->
     <Day
         v-for="day in daysCurrent"
         :key="day"
         :day="day.getDate()"
-        :events="events[day.getTime()] || []"
+        :events="filteredEvents[day.getTime()] || []"
         @addEvent="showModal(day)"
         @removeEvent="(index) => removeEvent(day, index)"
         :class="{ 'today': isToday(day) }"
-        :name="nationalHolidays.find(holiday => holiday.id && new Date(holiday.id).getDate() === day.getDate())?.name || ''"
+        :name="filteredHolidays.find(holiday => holiday.id && new Date(holiday.id).getDate() === day.getDate())?.name || ''"
         @showEvent="showEventDetail"
     />
 
-    <!--    dny nasledujici mesic-->
     <Day
         v-for="day in daysAfter"
         :key="day"
         :day="day.getDate()"
-        :events="events[day.getTime()] || []"
+        :events="filteredEvents[day.getTime()] || []"
         @addEvent="showModal(day)"
         @removeEvent="(index) => removeEvent(day, index)"
         :class="{ 'notCurrentMonth': true, 'today': isToday(day) }"
@@ -765,7 +799,13 @@ main {
 }
 
 #addBtn {
-  background-color: cornflowerblue;
+  background: linear-gradient(to right, cornflowerblue, #0d5be8) left;
+  background-size: 200% 100%;
+  transition: background-position 0.3s ease-in-out;
+}
+
+#addBtn:hover {
+  background-position: right;
 }
 
 .inputStyle {
@@ -781,9 +821,29 @@ main {
   flex: 1;
 }
 
-#dialogColumn {
+.dialogColumn {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0; /* Skryje ikonku */
+  position: absolute;
+  width: 60%;
+  height: 100%;
+  cursor: pointer;
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+  opacity: 0; /* Skryje ikonku */
+  position: absolute;
+  width: 20%;
+  height: 100%;
+  cursor: pointer;
+}
+
+input[type="date"], input[type="time"] {
+  color-scheme: dark;
 }
 </style>

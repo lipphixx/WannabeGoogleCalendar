@@ -1,12 +1,10 @@
 <script setup>
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import axios from "axios";
 
 const email = ref(null);
 const password = ref(null);
-
 const emit = defineEmits(["fetchLogin"]);
-const props = defineProps(['userId']);
 
 async function fetchLogin() {
   const url = "https://172.20.10.4:5050/api/Auth/login";
@@ -23,9 +21,9 @@ async function fetchLogin() {
 
     localStorage.setItem("loggedUser", JSON.stringify(response.data.userId));
     localStorage.setItem("loggedUsername", response.data.username);
+    emit("fetchLogin", true, response.data);
 
-    emit("fetchLogin", true, response.data); // Odeslat event do rodiče
-  } catch (error) { 
+  } catch (error) {
     emit("fetchLogin", false);
   }
 }
@@ -87,4 +85,5 @@ button:hover {
   background-color: #36363680;
   -webkit-box-shadow: inset 0px 0px 0px 3px rgba(81, 81, 81, 0.30);
 }
+
 </style>

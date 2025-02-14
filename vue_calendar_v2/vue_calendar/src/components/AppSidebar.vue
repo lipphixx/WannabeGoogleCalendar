@@ -1,10 +1,49 @@
 <script setup>
-const props = defineProps(['loggedUser']);
-const emit = defineEmits(['logOut']);
+import {onMounted, ref, watch} from "vue";
+import LittleCalendar from "@/components/littleCalendar.vue";
 
+const props = defineProps(['loggedUser', 'currentMonth', 'currentYear', 'createEvent']);
+const emit = defineEmits(['logOut', 'userEvents', 'holidayEvents']);
+const hideEvents = ref(false);
+const hideHolidays = ref(false);
+const daysCurrent = ref([]);
+const daysInCurrentMonth = ref(0);
+
+onMounted(() => {
+  drawCalendar();
+})
+watch([() => props.currentMonth, () => props.currentYear], () => {
+  drawCalendar();
+});
+function drawCalendar() {
+  console.log('start');
+  daysCurrent.value = [];
+  daysInCurrentMonth.value = new Date(props.currentYear.value, props.currentMonth.value + 1, 0).getDate();
+
+  let currentDay = 1;
+  for (let i = 0; i < daysInCurrentMonth.value; i++) {
+    console.log(daysInCurrentMonth.value)
+    console.log(i);
+    daysCurrent.value.push(i);
+    currentDay++;
+  }
+}
 function logOut() {
   emit('logOut');
   window.location.reload();
+}
+function toggleUserEvents() {
+  hideEvents.value = !hideEvents.value
+  emit('userEvents', hideEvents.value)
+}
+function toggleHolidayEvents() {
+  hideHolidays.value = !hideHolidays.value
+  emit('holidayEvents', hideHolidays.value)
+}
+function createEvent()
+{
+  props.createEvent.action = {};
+  props.createEvent.action = true;
 }
 </script>
 
@@ -16,23 +55,30 @@ function logOut() {
       <p>{{ props.loggedUser }}</p>
     </div>
     <div class="row">
-      <button class="tlacitko">Vytvořit událost</button>
+      <button class="tlacitko" @click="createEvent">Vytvořit událost</button>
     </div>
     <div class="row">
-      <div id="checkboxContainer">
-      <h3>Moje kalendáře</h3>
-      <label>
-        <input type="checkbox" name="" id="loggedUserCheck">
-        {{ props.loggedUser }}
-      </label>
-      <label>
-        <input type="checkbox" name="" id="holidayCheck">
-        Státní svátky
-      </label>
+      <div id="smolCalendar">
+        <littleCalendar v-for="day in daysCurrent"
+                        :key="day"
+                        :day="day"></littleCalendar>
       </div>
     </div>
     <div class="row">
-      
+      <div id="checkboxContainer">
+        <h3>Moje kalendáře</h3>
+        <label>
+          <input type="checkbox" name="" id="loggedUserCheck" @change="toggleUserEvents" :checked="!hideEvents">
+          {{ props.loggedUser }}
+        </label>
+        <label>
+          <input type="checkbox" name="" id="holidayCheck" @change="toggleHolidayEvents" :checked="!hideHolidays">
+          Svátky
+        </label>
+      </div>
+    </div>
+    <div class="row">
+
     </div>
     <div id="lastRow">
       <button class="tlacitko" @click="logOut">Log out</button>
@@ -81,5 +127,10 @@ label {
 
 button {
   width: 100%;
+}
+
+#smolCalendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
 }
 </style>

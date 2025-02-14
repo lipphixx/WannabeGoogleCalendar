@@ -1,29 +1,13 @@
 <script setup>
 
-import {onMounted, ref} from "vue";
+const props = defineProps(['action', 'currentMonth', 'currentYear']);
+const emit = defineEmits(['openMenu'])
 
-const props = defineProps(['action']);
-const menuDialog = ref(null);
-const emit = defineEmits(['openMenu']);
-const currentMonth = ref(0);
-const currentYear = ref(0);
-
-onMounted(() => {
-  const date = new Date();
-  currentMonth.value = date.getMonth();
-  currentYear.value = date.getFullYear();
-  if (menuDialog.value) {
-    menuDialog.value.addEventListener('click', (e) => {
-      if (e.target === menuDialog.value) {
-        menuDialog.value.close();
-      }
-    });
-  }
-});
-function showMenuDialog() {
-  //menuDialog.value.showModal();
+function showMenuDialog()
+{
   emit('openMenu');
 }
+
 function nextMonth() {
   props.action.action = 0;
   props.action.action = 2;
@@ -34,24 +18,22 @@ function nextMonth() {
     currentMonth.value++;
   }
 }
-
 function previousMonth() {
   props.action.action = 0;
   props.action.action = 1;
-  if (currentMonth.value === 0) {
-    currentMonth.value = 11;
-    currentYear.value--;
+  if (props.currentMonth.value === 0) {
+    props.currentMonth.value = 11;
+    props.currentYear.value--;
   } else {
-    currentMonth.value--;
+    props.currentMonth.value--;
   }
 }
-
 function showNow() {
   props.action.action = 0;
   props.action.action = 3;
   const now = new Date();
-  currentMonth.value = now.getMonth();
-  currentYear.value = now.getFullYear();
+  props.currentMonth.value = now.getMonth();
+  props.currentYear.value = now.getFullYear();
 }
 </script>
 
@@ -67,26 +49,11 @@ function showNow() {
       <button class="tlacitko" @click="showNow">Nyní</button>
     </div>
 
-    <h1>{{new Date(currentMonth, currentMonth).toLocaleDateString('cs-CZ', { month: 'long' })}} {{currentYear}}</h1>
+    <h1>{{new Date(props.currentMonth, props.currentMonth).toLocaleDateString('cs-CZ', { month: 'long' })}} {{props.currentYear}}</h1>
 
     <a class="material-symbols-outlined" @click.prevent="showMenuDialog"> menu </a>
 
   </header>
-<div id="popupContainer">
-  <dialog ref="menuDialog" id="popupMenu">
-    <div id="firRow">
-      <a class="material-symbols-outlined" @click.prevent="showMenuDialog"> person </a>
-      <p>{{props.loggedUser}}</p>
-    </div>
-    <div id="secRow">
-      <!--        <img src="vue_calendar/src/assets/settings.svg" alt="settings">-->
-      <div>
-        <!--          <img src="vue_calendar/src/assets/logout.svg">-->
-        <button class="tlacitko" @click="logOut">Log out</button>
-      </div>
-    </div>
-  </dialog>
-</div>
 </template>
 
 <style scoped>
@@ -100,24 +67,20 @@ header {
   padding-left: 2%;
   padding-right: 2%;
 }
-
 h1 {
   margin-right: 11%;
   text-align: center;
   color: rgba(255, 255, 255, 0.9);
 }
-
 #firRow {
   display: flex;
   align-items: center;
   margin-left: -5px;
 }
-
 .tlacitka {
   display: flex;
   gap: 5px;
 }
-
 .tlacitko {
   background-color: #36363650;
   border: 1px solid #36363690;
@@ -125,16 +88,13 @@ h1 {
   color: White;
   border-radius: 5px;
 }
-
 p {
   color: white;
 }
-
 .tlacitko:hover {
   background-color: #36363680;
   -webkit-box-shadow:inset 0px 0px 0px 3px rgba(81, 81, 81, 0.30);
 }
-
 #popupMenu {
   margin-left: auto;
   margin-right: 0;
@@ -144,7 +104,6 @@ p {
   border: none;
   background-color: #1f1f1f;
 }
-
 #popupMenu::backdrop {
   background: none;
 }

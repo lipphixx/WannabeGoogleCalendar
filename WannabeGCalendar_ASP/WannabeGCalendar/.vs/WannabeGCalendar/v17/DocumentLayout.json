@@ -46,21 +46,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "UsersController.cs",
-              "DocumentMoniker": "C:\\Users\\ondra\\OneDrive\\Plocha\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\Controllers\\UsersController.cs",
-              "RelativeDocumentMoniker": "WannabeGCalendar\\Controllers\\UsersController.cs",
-              "ToolTip": "C:\\Users\\ondra\\OneDrive\\Plocha\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\Controllers\\UsersController.cs",
-              "RelativeToolTip": "WannabeGCalendar\\Controllers\\UsersController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-10T10:09:36.718Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Document",
               "DocumentIndex": 4,
@@ -71,8 +58,7 @@
               "RelativeToolTip": "WannabeGCalendar\\Controllers\\EventsController.cs",
               "ViewState": "AgIAADEAAAAAAAAAAAAkwBcAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-22T08:03:19.348Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-22T08:03:19.348Z"
             },
             {
               "$type": "Document",
@@ -89,6 +75,18 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "C:\\Users\\ondra\\OneDrive\\Plocha\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "WannabeGCalendar\\Controllers\\UsersController.cs",
+              "ToolTip": "C:\\Users\\ondra\\OneDrive\\Plocha\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "WannabeGCalendar\\Controllers\\UsersController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-10T10:09:36.718Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 5,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\ondra\\OneDrive\\Plocha\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\Entities\\User.cs",
@@ -97,8 +95,7 @@
               "RelativeToolTip": "WannabeGCalendar\\Entities\\User.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-22T07:32:27.673Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-22T07:32:27.673Z"
             },
             {
               "$type": "Document",
@@ -110,8 +107,7 @@
               "RelativeToolTip": "WannabeGCalendar\\WannabeGCalendar.http",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
-              "WhenOpened": "2025-01-22T07:49:24.932Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-22T07:49:24.932Z"
             },
             {
               "$type": "Document",
@@ -123,8 +119,7 @@
               "RelativeToolTip": "WannabeGCalendar\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-01-22T07:48:34.097Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-22T07:48:34.097Z"
             },
             {
               "$type": "Document",
@@ -136,8 +131,7 @@
               "RelativeToolTip": "WannabeGCalendar\\Entities\\Event.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-22T07:32:35.579Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-22T07:32:35.579Z"
             },
             {
               "$type": "Document",

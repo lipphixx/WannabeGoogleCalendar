@@ -57,9 +57,9 @@ function showNow() {
 
   <header>
     <div class="tlacitka">
-      <button class="tlacitko" @click="previousMonth">Předchozí</button>
-      <button class="tlacitko" @click="nextMonth">Následující</button>
-      <button class="tlacitko" @click="showNow">Nyní</button>
+      <button @click="previousMonth">Předchozí</button>
+      <button @click="nextMonth">Následující</button>
+      <button @click="showNow">Nyní</button>
     </div>
 
     <h1>{{dateNow}}</h1>
@@ -85,39 +85,29 @@ h1 {
   text-align: center;
   color: rgba(255, 255, 255, 0.9);
 }
-#firRow {
-  display: flex;
-  align-items: center;
-  margin-left: -5px;
-}
+
 .tlacitka {
   display: flex;
   gap: 5px;
 }
-.tlacitko {
+
+button {
   background-color: #36363650;
-  border: 1px solid #36363690;
+  border: 2px solid #36363690;
+  box-shadow: inset 0 0 0 0 cornflowerblue;
   padding: 5%;
   color: White;
   border-radius: 5px;
+  transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  cursor: pointer;
 }
 p {
   color: white;
 }
-.tlacitko:hover {
-  background-color: #36363680;
-  -webkit-box-shadow:inset 0px 0px 0px 3px rgba(81, 81, 81, 0.30);
+
+button:hover {
+  border: 2px solid cornflowerblue;
+  box-shadow: inset 0 0 0 1px cornflowerblue;
 }
-#popupMenu {
-  margin-left: auto;
-  margin-right: 0;
-  margin-top: 3%;
-  width: 10%;
-  height: 15%;
-  border: none;
-  background-color: #1f1f1f;
-}
-#popupMenu::backdrop {
-  background: none;
-}
+
 </style>

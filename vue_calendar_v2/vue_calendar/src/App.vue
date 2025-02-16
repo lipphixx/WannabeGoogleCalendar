@@ -6,9 +6,11 @@ import loginPage from "@/components/loginPage.vue";
 import AppHeader from "@/components/AppHeader.vue";
 import AppSidebar from "@/components/AppSidebar.vue";
 import loadingGif from '@/assets/loadingGif.gif';
+import LoginPage from "@/components/loginPage.vue";
+import RegisterPage from "@/components/registerPage.vue";
 
 const onLogin = ref(false);
-const currPath = ref(window.location.hash);
+const currPath = ref(window.location.hash || "#/loginPage");
 const userId = ref(null);
 const username = ref(null);
 const refAction = ref({});
@@ -23,8 +25,8 @@ const showModal = ref({});
 const onLoading = ref(false);
 
 const routes = {
-  "/registerPage": registerPage,
-  "/loginPage": loginPage
+  "/registerPage": RegisterPage,
+  "/loginPage": LoginPage
 };
 
 onMounted(() => {
@@ -34,11 +36,20 @@ onMounted(() => {
 
   console.log(currentYear.value);
   console.log(currentMonth.value);
+
+  if (!currPath.value || currPath.value === "#") {
+    window.location.hash = "#/loginPage";
+    currPath.value = "#/loginPage";
+  }
 })
+
+const isLoginPage = computed(() => currPath.value.replace("#", "") === "/loginPage");
+const isRegisterPage = computed(() => currPath.value.replace("#", "") === "/registerPage");
 
 window.addEventListener("hashchange", () => {
   currPath.value = window.location.hash;
 });
+
 window.addEventListener("load", () => {
   if (localStorage.getItem('loggedUser') && localStorage.getItem('loggedUsername')) {
     userId.value = localStorage.getItem('loggedUser');
@@ -57,10 +68,9 @@ window.addEventListener("load", () => {
 })
 
 const currView = computed(() => {
-  const newRoute = currPath.value.slice(1);
-  if (!newRoute) return null;
-  return routes[newRoute];
+  return routes[currPath.value.slice(1)] || LoginPage;
 });
+
 
 function fetchLogin(loginPhase, user) {
   onLogin.value = loginPhase;
@@ -105,8 +115,8 @@ function loading() {
     </div>
 
     <section v-if="!onLogin" class="buttony">
-      <a href="#/registerPage">Registrovat se</a>
-      <a href="#/loginPage">Přihlásit se</a>
+      <p v-if="isRegisterPage">Máte již účet? <a href="#/loginPage">Přihlaste se</a></p>
+      <p v-if="isLoginPage">Nemáte vytvořený účet? <a href="#/registerPage">Zaregistrujte se</a></p>
     </section>
 
     <component :is="currView" @fetchLogin="fetchLogin" id="loginOrRegister"></component>
@@ -164,18 +174,26 @@ section {
   transform: translate(-50%, -50%);
 }
 
-section a {
+section p {
   height: 10%;
-  width: 150px;
-  text-align: center;
-  background-color: #36363650;
-  border: 2px solid #36363690;
+  width: 300px;
   color: White;
-  border-radius: 5px;
-  cursor: pointer;
-  box-shadow: inset 0 0 0 0px cornflowerblue;
-  transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  font-size: small;
+  display: flex;
+  gap: 5px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
 
+}
+
+a {
+  text-decoration: none;
+  color: cornflowerblue;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 .buttony {
@@ -183,11 +201,6 @@ section a {
   top: 80%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
-
-a:hover {
-  border: 2px solid cornflowerblue;
-  box-shadow: inset 0 0 2px 1px cornflowerblue;
 }
 
 #appHeader {
@@ -211,7 +224,7 @@ a:hover {
   position: fixed;
   right: -15%;
   height: 100vh;
-  top: 7%;
+  top: 6.5%;
   transition: right 1s ease-in-out;
 }
 
@@ -225,6 +238,7 @@ a:hover {
   align-items: center; /* Zarovná vodorovně */
   height: 50vh; /* Zajistí vertikální zarovnání */
   width: 100%;
+  margin-top: 5%;
 }
 
 

@@ -41,27 +41,27 @@ async function postRegister() {
     <div id="inputContainer">
       <label>
         Jméno:
-        <input type="text" placeholder="Jméno" v-model="name">
+        <input type="text" placeholder="Jméno" v-model="name" autocomplete="off">
       </label>
       <label>
         Příjmení:
-        <input type="text" placeholder="Příjmení" v-model="surname">
+        <input type="text" placeholder="Příjmení" v-model="surname" autocomplete="off">
       </label>
       <label>
         Uživatelské jméno:
-        <input type="text" placeholder="Username" v-model="username">
+        <input type="text" placeholder="Username" v-model="username" autocomplete="off">
       </label>
       <label>
         E-mail:
-        <input type="text" placeholder="Email" v-model="email">
+        <input type="text" placeholder="Email" v-model="email" autocomplete="off">
       </label>
       <label>
         Telefonní číslo:
-        <input type="number" placeholder="Tel Aviv" v-model="phone">
+        <input type="number" placeholder="Tel Aviv" v-model="phone" autocomplete="off">
       </label>
       <label>
         Heslo:
-        <input type="password" placeholder="Heslo" v-model="password">
+        <input type="password" placeholder="Heslo" v-model="password" autocomplete="off">
       </label>
     </div>
     <button type="submit">Registrovat se</button>

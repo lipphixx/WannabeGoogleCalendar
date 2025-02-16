@@ -81,7 +81,7 @@ function createEvent()
 
     </div>
     <div id="lastRow">
-      <button class="logOut" @click="logOut">Log out</button>
+      <button class="logOut" @click="logOut">Odhlásit se</button>
     </div>
     <div id="logoBtm">
       <img src="">

@@ -604,18 +604,34 @@ async function resetPage() {
         <div>
           <h3 v-if="!onEdit" class="dialogRow inputStyle" style="font-weight: bold">Událost:
             {{ selectedEvent.name }}</h3>
-          <input type="text" v-if="onEdit" v-model="nameInp" class="inputStyle">
+
+          <label v-if="onEdit">
+            Název
+            <input type="text" v-model="nameInp" class="dialogRow inputStyle" style="margin-bottom: 2%">
+          </label>
 
           <p v-if="!onEdit" class="dialogRow inputStyle">Datum: {{
               new Date(selectedEvent.date).toLocaleDateString()
             }}</p>
-          <input type="date" v-if="onEdit" v-model="dateInp" class="inputStyle editDialogRow">
+
+          <label v-if="onEdit">
+            Datum
+            <input type="date" v-model="dateInp" class="dialogRow inputStyle" style="margin-bottom: 2%">
+          </label>
 
           <p v-if="selectedEvent.time && !onEdit" class="dialogRow inputStyle">Čas: {{ selectedEvent.time }}</p>
-          <input type="time" v-if="onEdit" v-model="timeInp" class="inputStyle editDialogRow">
+
+          <label v-if="onEdit">
+            Čas
+            <input type="time" v-model="timeInp" class="dialogRow inputStyle" style="margin-bottom: 2%">
+          </label>
 
           <p v-if="selectedEvent.note && !onEdit" class="dialogRow inputStyle">Poznámka: {{ selectedEvent.note }}</p>
-          <input type="text" v-if="onEdit" v-model="noteInp" class="inputStyle">
+
+          <label v-if="onEdit">
+            Poznámka
+            <input type="text" v-model="noteInp" class="dialogRow inputStyle" style="margin-bottom: 2%">
+          </label>
 
           <h4 v-if="participantsIncluded && !onEdit">
             Účastníci
@@ -625,6 +641,7 @@ async function resetPage() {
           <button @click="isHostOn = true" v-if="!isHostOn && onEdit" class="dialogRow">Přidat hosty</button>
 
           <div v-if="isHostOn && onEdit" class="dialogColum">
+            Účastníci
             <div class="dialogRow">
               <input type="email" v-model="currentParticipant" class="inputStyle" placeholder="Host"
                      style="border-right: none">
@@ -828,13 +845,12 @@ main {
 }
 
 .editDialogRow {
-  .dialogRow {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    height: 15px;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 25px;
+  margin-bottom: 2%;
 }
 
 .dialogRow:focus,

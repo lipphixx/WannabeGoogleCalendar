@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity.Data;
+﻿using System.Runtime.InteropServices.JavaScript;
+using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using WannabeGCalendar.Data;
 using WannabeGCalendar.Entities;
 
@@ -22,7 +24,7 @@ namespace WannabeGCalendar.Controllers
             User user = dbContext.Users.FirstOrDefault(x => x.Email == request.Email && x.Password == request.Password);
             if (user == null)
             {
-                return Unauthorized("Login Failed!");
+                return Unauthorized();
             }
 
             return Ok(user);
@@ -51,10 +53,10 @@ namespace WannabeGCalendar.Controllers
                 return BadRequest("Email already exists!");
 
             if (dbContext.Users.Any(x => x.PhoneNumber == newUser.PhoneNumber))
-                return BadRequest("Phone number already exists!");
+                return NotFound("Phone number already exists!");
 
             if (dbContext.Users.Any(x => x.Username.ToLower() == newUser.Username.ToLower()))
-                return BadRequest("Username already exists!");
+                return Unauthorized("Username already exists!");
 
             dbContext.Users.Add(newUser);
             dbContext.SaveChanges();

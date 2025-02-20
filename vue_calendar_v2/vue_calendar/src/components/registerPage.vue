@@ -1,6 +1,6 @@
 <script setup>
 
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import axios from "axios";
 
 const name = ref(null);
@@ -9,11 +9,25 @@ const username = ref(null);
 const email = ref(null);
 const phone = ref(null);
 const password = ref(null);
+const errorValue = ref('');
 
-const emit = defineEmits('fetchLogin');
+const emit = defineEmits(['fetchLogin']);
+
+onMounted(() => {
+  errorValue.value = '';
+})
 
 async function postRegister() {
   const url = "https://localhost:5050/api/Auth/register";
+
+  if(name.value === null ||
+      surname.value === null ||
+      phone.value === null ||
+      username.value === null ||
+      password.value === null){
+    errorValue.value = 'invalid';
+    return;
+  }
 
   const fullName = `${name.value} ${surname.value}`
   const registerDetails = {
@@ -26,12 +40,31 @@ async function postRegister() {
 
   try {
     const response = await axios.post(url, registerDetails);
+    errorValue.value = ''; // Vynulovat chybu při úspěchu
     emit("fetchLogin", true, response.data);
   } catch (error) {
-    console.log(error);
+    console.log('Chyba:', error.response?.status);
+
+    if (error.response) {
+      switch (error.response.status) {
+        case 400:
+          errorValue.value = 'mail';
+          break;
+        case 404:
+          errorValue.value = 'phone';
+          break;
+        case 401:
+          errorValue.value = 'username';
+          break;
+        default:
+          errorValue.value = 'network';
+      }
+    } else {
+      errorValue.value = 'network';
+    }
+
     emit("fetchLogin", false);
   }
-
 }
 </script>
 
@@ -51,18 +84,22 @@ async function postRegister() {
         Uživatelské jméno:
         <input type="text" placeholder="Username" v-model="username" autocomplete="off">
       </label>
+      <p v-if="errorValue === 'username'" style="color: red">Účet s tímto uživatelským jménem již existuje.</p>
       <label>
         E-mail:
         <input type="text" placeholder="Email" v-model="email" autocomplete="off">
       </label>
+      <p v-if="errorValue === 'mail'" style="color: red">Účet s tímto e-mailem již existuje.</p>
       <label>
         Telefonní číslo:
         <input type="number" placeholder="Tel Aviv" v-model="phone" autocomplete="off">
       </label>
+      <p v-if="errorValue === 'phone'" style="color: red">Účet s tímto telefonním číslem již existuje.</p>
       <label>
         Heslo:
         <input type="password" placeholder="Heslo" v-model="password" autocomplete="off">
       </label>
+      <p v-if="errorValue === 'invalid'" style="color: red">Pole nesmí být prázdná.</p>
     </div>
     <button type="submit">Registrovat se</button>
   </form>

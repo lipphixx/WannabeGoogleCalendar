@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "3PWZA1MVK6ZoGn+5RVzTyzvf/PV20vMwua9VWiresN4=",
+  "Hash": "StNGvpx8HNjrIfVz03Y91km2TLp0Z/R3wme6jS4zk48=",
   "Source": "WannabeGCalendar",
   "BasePath": "_content/WannabeGCalendar",
   "Mode": "Default",
@@ -8,51 +8,221 @@
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [
     {
-      "Name": "WannabeGCalendar\\wwwroot",
+      "Name": "WannabeGCalendar/wwwroot",
       "Source": "WannabeGCalendar",
-      "ContentRoot": "C:\\Users\\ondra\\OneDrive\\Plocha\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\wwwroot\\",
+      "ContentRoot": "/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/wwwroot/",
       "BasePath": "_content/WannabeGCalendar",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\ondra\\OneDrive\\Plocha\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\wwwroot\\img\\guguColor.png",
+      "Identity": "/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/wwwroot/img/guguColor.png",
       "SourceId": "WannabeGCalendar",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\ondra\\OneDrive\\Plocha\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\wwwroot\\",
+      "ContentRoot": "/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/wwwroot/",
       "BasePath": "_content/WannabeGCalendar",
-      "RelativePath": "img/guguColor.png",
+      "RelativePath": "img/guguColor#[.{fingerprint}]?.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeBehavior": "",
       "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "6c9lpl336j",
+      "Integrity": "hj+51uOOURBpAlS30t66d8+xSUVaz1Hl8CiuEr+ncCA=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\img\\guguColor.png"
+      "OriginalItemSpec": "wwwroot/img/guguColor.png"
     },
     {
-      "Identity": "C:\\Users\\ondra\\OneDrive\\Plocha\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\wwwroot\\img\\guguWhite.png",
+      "Identity": "/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/wwwroot/img/guguWhite.png",
       "SourceId": "WannabeGCalendar",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\ondra\\OneDrive\\Plocha\\WannabeGoogleCalendar\\WannabeGCalendar_ASP\\WannabeGCalendar\\WannabeGCalendar\\wwwroot\\",
+      "ContentRoot": "/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/wwwroot/",
       "BasePath": "_content/WannabeGCalendar",
-      "RelativePath": "img/guguWhite.png",
+      "RelativePath": "img/guguWhite#[.{fingerprint}]?.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeBehavior": "",
       "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
+      "Fingerprint": "stppvz8ytx",
+      "Integrity": "AMYwDoiDS8+OH0amCxrhZNH4uA3YXSppD57PBXCy7kg=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\img\\guguWhite.png"
+      "OriginalItemSpec": "wwwroot/img/guguWhite.png"
+    }
+  ],
+  "Endpoints": [
+    {
+      "Route": "img/guguColor.6c9lpl336j.png",
+      "AssetFile": "/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/wwwroot/img/guguColor.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6330"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"hj+51uOOURBpAlS30t66d8+xSUVaz1Hl8CiuEr+ncCA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 11 Feb 2025 11:53:24 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "6c9lpl336j"
+        },
+        {
+          "Name": "label",
+          "Value": "img/guguColor.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-hj+51uOOURBpAlS30t66d8+xSUVaz1Hl8CiuEr+ncCA="
+        }
+      ]
+    },
+    {
+      "Route": "img/guguColor.png",
+      "AssetFile": "/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/wwwroot/img/guguColor.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6330"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"hj+51uOOURBpAlS30t66d8+xSUVaz1Hl8CiuEr+ncCA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 11 Feb 2025 11:53:24 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-hj+51uOOURBpAlS30t66d8+xSUVaz1Hl8CiuEr+ncCA="
+        }
+      ]
+    },
+    {
+      "Route": "img/guguWhite.png",
+      "AssetFile": "/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/wwwroot/img/guguWhite.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2041"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"AMYwDoiDS8+OH0amCxrhZNH4uA3YXSppD57PBXCy7kg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 11 Feb 2025 11:53:04 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-AMYwDoiDS8+OH0amCxrhZNH4uA3YXSppD57PBXCy7kg="
+        }
+      ]
+    },
+    {
+      "Route": "img/guguWhite.stppvz8ytx.png",
+      "AssetFile": "/Users/filis/Desktop/  /PRG/WannabeGoogleCalendar/WannabeGCalendar_ASP/WannabeGCalendar/WannabeGCalendar/wwwroot/img/guguWhite.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2041"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"AMYwDoiDS8+OH0amCxrhZNH4uA3YXSppD57PBXCy7kg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 11 Feb 2025 11:53:04 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "stppvz8ytx"
+        },
+        {
+          "Name": "label",
+          "Value": "img/guguWhite.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-AMYwDoiDS8+OH0amCxrhZNH4uA3YXSppD57PBXCy7kg="
+        }
+      ]
     }
   ]
 }

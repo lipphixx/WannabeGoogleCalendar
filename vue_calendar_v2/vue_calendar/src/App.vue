@@ -1,11 +1,8 @@
 <script setup>
-import {computed, onMounted, reactive, ref, watch} from "vue";
+import {computed, onMounted, ref} from "vue";
 import Calendar from "@/components/calendar.vue";
-import registerPage from "@/components/registerPage.vue";
-import loginPage from "@/components/loginPage.vue";
 import AppHeader from "@/components/AppHeader.vue";
 import AppSidebar from "@/components/AppSidebar.vue";
-import loadingGif from '@/assets/loadingGif.gif';
 import LoginPage from "@/components/loginPage.vue";
 import RegisterPage from "@/components/registerPage.vue";
 

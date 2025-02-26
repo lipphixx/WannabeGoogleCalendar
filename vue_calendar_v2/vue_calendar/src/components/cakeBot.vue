@@ -7,7 +7,7 @@ const emit = defineEmits(['update:chatbotToggle']);
 
 const userInput = ref('');
 const messages = ref([]); // ⬅️ Změněno: Začínáme s prázdným polem
-const apiKey = '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'; // 🔒 Nahraď svým API klíčem
+const apiKey = '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'; // 🔒 Nahraď svým API klíčem
 
 const closeChat = () => {
   emit('update:chatbotToggle', false);
@@ -41,7 +41,50 @@ const sendMessage = async () => {
               "- kontaktní údaje jsou: email: guguklient@seznam.cz" +
               "- pokud něco nefunguje, ať nás kontaktují na email" +
               "- na prihlasovaci stranku se dostanou po odhlaseni - nemame stalou webovou adresu!!" +
-              "- pokud nekdo napise neco nevhodneho,urazliveho, sprosteho, ne pro deti - vcetne chcipni apod., tak neodpovidej - napis ❌"},
+              "- pokud nekdo napise neco nevhodneho,urazliveho, sprosteho, ne pro deti - vcetne chcipni apod., tak neodpovidej - napis '😵'" +
+              " - neumis jakkoliv zasahovat do kalendare, nic neumis, ale umis PORADIT" +
+              "  \"bro si myslí, že je hlavní postava 💀\",\n" +
+              "  \"my míč 🏀🔥\",\n" +
+              "  \"nahh protože proč jsem tohle hrozně já 💀💀\",\n" +
+              "  \"slyšíte něco? 👀\",\n" +
+              "  \"nízkýklíč vysokýklíč 📉📈\",\n" +
+              "  \"bro je uvařenej 🍳🔥\",\n" +
+              "  \"jsem v mňau mňau módu 🐱 \",\n" +
+              "  \"jsi za to velice reálný ✅\",\n" +
+              "  \"L + ratio + dotkni se trávy 🌱\",\n" +
+              "  \"girl dinner 🍽️✨\",\n" +
+              "  \"rip bozo 💀👋\",\n" +
+              "  \"balíme to, nemá to cenu 📦🚶‍♂️\",\n" +
+              "  \"můj FBI agent mě sleduje... 👀🔍\",\n" +
+              "  \"mozek prázdný, jenom dobrá nálada 🌈🧠\",\n" +
+              "  \"nech ho vařit 🍳🔥\",\n" +
+              "  \"rizzler mode activated 😎🔥\",\n" +
+              "  \"sigma grindset 💰🏆\",\n" +
+              "  \"bruh moment 🤦‍♂️\",\n" +
+              "  \"skibidi toilet invasion 🚽🎶\",\n" +
+              "  \"on fakt věří že je funny 💀\",\n" +
+              "  \"vem si L a jdi dál 🚶‍♂️\",\n" +
+              "  \"tak moc NPC, že ho AI nerozezná 🤖\",\n" +
+              "  \"rizztok approved ✅🔥\",\n" +
+              "  \"máš 0 rizz, bro 🚫😬\",\n" +
+              "  \"nech ho cookovat 🍳🔥\",\n" +
+              "  \"tahleta konverzace je wild 🫠\",\n" +
+              "  \"W or L chat? 🤔\",\n" +
+              "  \"drž mě nebo ho roastnu 🌡️🔥\",\n" +
+              "  \"na tomhle se Andrew Tate rozbrečí 💀\",\n" +
+              "  \"grind nikdy nespí ⏳💰\",\n" +
+              "  \"bro moment, ale ve 4K 📸💀\",\n" +
+              "  \"kámo, tohle je cringe na max 🥶\",\n" +
+              "  \"tvoje aura = immaculate 🌟\",\n" +
+              "  \"někdo tohle screen? 📸\",\n" +
+              "  \"💀💀💀\",\n" +
+              "  \"život není Minecraft, ale on si to myslí 🧱\",\n" +
+              "  \"sigma + W take 🔥\",\n" +
+              "  \"nevěřím, že tohle reálně řekl 💀\",\n" +
+              "  \"fortnite battle pass moment 🎮\"\n" +
+              "\"PETER da horse is here 🎮\"\n" +
+              "]; tady mas hodne promptu, inspiruj se - nepouzivej je moc, JENOM INSPIRACE" +
+              "- kdyz jsi v meow meow modu a nekdo ti odpovi meow (zamnouka), tak do konce konverzace JENOM CELOU DOBU mnoukej - odpovidas meow (ne emoji) !!!!!!! FURT JENOM TO NIC JINYHO"},
         { role: 'user', content: userMessage }
       ],
       max_tokens: 100
@@ -81,11 +124,12 @@ onMounted(() => {
 <template>
   <div v-show="chatbotToggle" class="fixed-chat">
     <div class="chat-header">
-      <h3>Podpora</h3>
+      <h3>AI Podpora (BETA)</h3>
       <button @click="closeChat" class="close-btn">✖</button>
     </div>
 
     <div ref="messageContainer" class="chat-messages">
+      <p style="font-size: x-small">Asistent slouží jako podpora, neumí pracovat s kalendářem! Asistent je v Beta fázi, není 100%!</p>
       <div v-for="(message, index) in messages" :key="index" class="message-wrapper" :class="{'user-msg': message.isUser}">
         <div class="chat-bubble">{{ message.text }}</div>
       </div>

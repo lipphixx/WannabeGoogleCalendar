@@ -72,6 +72,8 @@ namespace WannabeGCalendar.Controllers
                 eventToUpdate.EventNote = updatedEvent.EventNote;
                 eventToUpdate.EventTime = updatedEvent.EventTime;
                 eventToUpdate.ParticipantsIds = updatedEvent.ParticipantsIds;
+                eventToUpdate.EventPlace = updatedEvent.EventPlace;
+                eventToUpdate.EventLabel = updatedEvent.EventLabel;
 
                 return Ok(dbContext.SaveChanges());
             }

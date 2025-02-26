@@ -18,14 +18,15 @@ const emit = defineEmits(['addEvent', 'removeEvent']);
   <div class="day" @click="emit('addEvent')">
 
     <section>
-    <span class="day-number">{{ day }}</span>
-    <span id="day-svatek" v-if="name">{{name}}</span>
+      <span class="day-number">{{ day }}</span>
+      <span id="day-svatek" v-if="name">{{name}}</span>
     </section>
     <div v-if="events && events.length" class="events">
       <div
           v-for="(event, index) in events"
           :key="index"
           :class="[event.time ? 'timeEvent' : 'fDEvent']"
+          :style="[event.time ? {border: `solid 2px ${event.eventLabel}`} : {backgroundColor: event.eventLabel}]"
           @click.stop="emit('showEvent', event)"
       >
         <span>{{ event.name }}</span>
@@ -38,6 +39,16 @@ const emit = defineEmits(['addEvent', 'removeEvent']);
 </template>
 
 <style scoped>
+
+a {
+  text-decoration: none;
+  background-color: #1f1f1f;
+  padding: 1%;
+  padding-left: 3%;
+  padding-right: 3%;
+  border-radius: 5px;
+}
+
 .day {
   border: 1px solid #36363690;
   min-height: 111px;
@@ -55,11 +66,14 @@ const emit = defineEmits(['addEvent', 'removeEvent']);
 .events {
   display: flex;
   flex-direction: column;
-  width: max-content;
   margin-top: 5px;
   font-size: 12px;
   color: white;
+  overflow-y: auto;
+  max-height: 60px;
+  width: 100%;
 }
+
 .timeEvent {
   display: flex;
   justify-content: space-between;

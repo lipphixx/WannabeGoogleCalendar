@@ -5,9 +5,11 @@ import AppHeader from "@/components/AppHeader.vue";
 import AppSidebar from "@/components/AppSidebar.vue";
 import LoginPage from "@/components/loginPage.vue";
 import RegisterPage from "@/components/registerPage.vue";
+import PasswordReset from "@/components/passwordReset.vue";
+import CakeBot from "@/components/cakeBot.vue";
 
 const onLogin = ref(false);
-const currPath = ref(window.location.hash || "#/loginPage");
+const currPath = ref("#/loginPage");
 const userId = ref(null);
 const username = ref(null);
 const refAction = ref({});
@@ -18,12 +20,21 @@ const currentYear = ref(0);
 const showEvents = ref(true);
 const showHolidays = ref(true);
 const showModal = ref({});
+const chatbotToggle = ref(false);
 
 const onLoading = ref(false);
 
 const routes = {
   "/registerPage": RegisterPage,
-  "/loginPage": LoginPage
+  "/loginPage": LoginPage,
+};
+
+const labelColors = {
+  red: { color: '#FF0000', emoji: '🔴' },
+  blue: { color: '#0000FF', emoji: '🔵' },
+  green: { color: '#00FF00', emoji: '🟢' },
+  orange: { color: '#FF8000', emoji: '🟠' },
+  purple: { color: '#8000FF', emoji: '🟣' }
 };
 
 onMounted(() => {
@@ -31,16 +42,13 @@ onMounted(() => {
   currentMonth.value = date.getMonth();
   currentYear.value = date.getFullYear();
 
-  console.log(currentYear.value);
-  console.log(currentMonth.value);
-
   if (!currPath.value || currPath.value === "#") {
     window.location.hash = "#/loginPage";
     currPath.value = "#/loginPage";
   }
 })
 
-const isLoginPage = computed(() => currPath.value.replace("#", "") === "/loginPage");
+
 const isRegisterPage = computed(() => currPath.value.replace("#", "") === "/registerPage");
 
 window.addEventListener("hashchange", () => {
@@ -48,9 +56,9 @@ window.addEventListener("hashchange", () => {
 });
 
 window.addEventListener("load", () => {
-  if (localStorage.getItem('loggedUser') && localStorage.getItem('loggedUsername')) {
-    userId.value = localStorage.getItem('loggedUser');
-    username.value = localStorage.getItem('loggedUsername');
+  if (sessionStorage.getItem('loggedUser') && sessionStorage.getItem('loggedUsername')) {
+    userId.value = sessionStorage.getItem('loggedUser');
+    username.value = sessionStorage.getItem('loggedUsername');
     const user = {
       userId: userId.value,
       username: username.value
@@ -62,7 +70,7 @@ window.addEventListener("load", () => {
     userId.value = null;
     username.value = null;
   }
-})
+});
 
 const currView = computed(() => {
   return routes[currPath.value.slice(1)] || LoginPage;
@@ -82,8 +90,8 @@ function logOut() {
   userId.value = null;
   username.value = null;
   window.location.hash = '#';
-  localStorage.removeItem('loggedUser');
-  localStorage.removeItem('loggedUsername');
+  sessionStorage.removeItem('loggedUser');
+  sessionStorage.removeItem('loggedUsername');
 }
 
 function toggleEvents(state) {
@@ -97,7 +105,6 @@ function toggleHolidays(state) {
 function loading() {
   onLoading.value = !onLoading.value;
 }
-
 </script>
 
 <template>
@@ -113,10 +120,11 @@ function loading() {
 
     <section v-if="!onLogin" class="buttony">
       <p v-if="isRegisterPage">Máte již účet? <a href="#/loginPage">Přihlaste se</a></p>
-      <p v-if="isLoginPage">Nemáte vytvořený účet? <a href="#/registerPage">Zaregistrujte se</a></p>
+      <p v-if="!isRegisterPage">Nemáte vytvořený účet? <a href="#/registerPage">Zaregistrujte se</a></p>
     </section>
 
-    <component :is="currView" @fetchLogin="fetchLogin" id="loginOrRegister"></component>
+    <component :is="currView" @fetchLogin="fetchLogin" id="loginOrRegister"
+               @onLoadin="loading"></component>
     <div class="calendarComp" :class="{ calendarActive: isActive, onLoad : onLoading}">
       <Calendar v-if="onLogin" :loggedUser="userId"
                 :action="refAction" @update:action="refAction = $event"
@@ -124,6 +132,7 @@ function loading() {
                 :showEvents="showEvents"
                 :showHolidays="showHolidays"
                 :createEvent="showModal" @update:createEvent="showModal = $event"
+                :labelColors="labelColors"
                 @onLoading="loading"
       />
     </div>
@@ -134,16 +143,25 @@ function loading() {
                 :currentMonth="currentMonth"
                 :currentYear="currentYear"
                 :createEvent="showModal"
+                :labelColors="labelColors"
+                @chatbotToggle="chatbotToggle = true"
                 @logOut="logOut"
                 @userEvents="toggleEvents"
                 @holidayEvents="toggleHolidays"
     ></AppSidebar>
 
   </main>
+  <div id="bot">
+    <cakeBot :chatbotToggle="chatbotToggle" @update:chatbotToggle="chatbotToggle = $event"></cakeBot>
+  </div>
   </body>
 </template>
 
 <style scoped>
+#bot {
+  width: 200px;
+  position: fixed;
+}
 
 body, main, .calendarComp {
   background-color: #181818FF;
@@ -208,13 +226,15 @@ a:hover {
 .calendarComp {
   display: flex;
   position: fixed;
-  top: 8%;
-  left: 1%;
+  top: 7vh;
+  left: 0;
+  width: 100vw;
+
   transition: filter .2s ease-in, left 1s ease-in-out;
 }
 
 .calendarActive {
-  left: -6%;
+  left: -7vw;
 }
 
 .sidebar {

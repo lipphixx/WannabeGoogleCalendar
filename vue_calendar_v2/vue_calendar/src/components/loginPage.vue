@@ -1,63 +1,69 @@
 <script setup>
-import {onMounted, ref} from "vue";
-import axios from "axios";
+import { ref } from 'vue';
+import axios from 'axios';
+import PasswordReset from './passwordReset.vue';
 
 const email = ref(null);
 const password = ref(null);
-const emit = defineEmits(["fetchLogin"]);
+const emit = defineEmits(['fetchLogin']);
 const correctAuth = ref(true);
+const showPasswordReset = ref(false);
 
 async function fetchLogin() {
-  const url = "https://localhost:5050/api/Auth/login";
-
+  const url = "https://172.20.10.4:5050/api/Auth/login";
   try {
     const loginDetails = {
       email: email.value,
       password: password.value,
-      twoFactorCode: "1234",
-      twoFactorRecoveryCode: "abcd",
     };
-
     const response = await axios.post(url, loginDetails);
 
-    localStorage.setItem("loggedUser", JSON.stringify(response.data.userId));
-    localStorage.setItem("loggedUsername", response.data.username);
-    emit("fetchLogin", true, response.data);
-    correctAuth.value = true;
+    console.log('Server Response:', response.data);
 
+    const { token, userId, username } = response.data;
 
+    if (token && userId && username) {
+      sessionStorage.setItem("token", token);
+      sessionStorage.setItem("loggedUser", JSON.stringify(userId));
+      sessionStorage.setItem("loggedUsername", username);
+      emit("fetchLogin", true, response.data);
+      correctAuth.value = true;
+    } else {
+      console.warn("Server response is missing expected fields.");
+      correctAuth.value = false;
+      emit("fetchLogin", false);
+    }
   } catch (error) {
+    console.error("Error fetching login:", error);
     correctAuth.value = false;
     emit("fetchLogin", false);
   }
 }
-
-function alertik() {
-  alert('tak si vzpomen vole co ja s tim mam delat')
-}
 </script>
 
 <template>
-  <form @submit.prevent="fetchLogin">
-    <h2>Login</h2>
-    <div id="inputContainer">
-      <label>
-        Email:
-        <input class="inputStyle" type="text" placeholder="Email" v-model="email">
-      </label>
-      <label>
-        Heslo:
-        <input class="inputStyle" type="password" placeholder="Heslo" v-model="password">
-      </label>
-      <p v-if="!correctAuth" style="color: red">Špatný e-mail nebo heslo.</p>
-      <a @click="alertik">Zapomenuté heslo</a>
-    </div>
-    <button type="submit">Přihlásit se</button>
-  </form>
+  <div v-if="showPasswordReset" style="margin-bottom: 1%">
+    <PasswordReset @close="showPasswordReset = false" />
+  </div>
+  <div v-else>
+    <form @submit.prevent="fetchLogin">
+      <h2>Login</h2>
+      <div id="inputContainer">
+        <label> Email:
+          <input class="inputStyle" type="text" placeholder="Email" v-model="email">
+        </label>
+        <label> Heslo:
+          <input class="inputStyle" type="password" placeholder="Heslo" v-model="password">
+        </label>
+        <p v-if="!correctAuth" style="color: red">Špatný e-mail nebo heslo.</p>
+        <a @click="showPasswordReset = true">Zapomenuté heslo</a>
+      </div>
+      <button type="submit">Přihlásit se</button>
+    </form>
+  </div>
 </template>
 
 <style scoped>
-
 a {
   cursor: pointer;
   font-size: 90%;
@@ -65,12 +71,14 @@ a {
 }
 
 a:hover {
-  text-decoration: underline
+  text-decoration: underline;
 }
 
 form {
   display: flex;
   width: 100%;
+  flex-direction: column;
+  align-items: center;
 }
 
 label {
@@ -108,5 +116,4 @@ button {
 button:hover {
   background-position: right;
 }
-
 </style>

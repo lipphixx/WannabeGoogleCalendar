@@ -19,5 +19,8 @@ namespace WannabeGCalendar.Entities
         public int OwnerId { get; set; }
         [Column("ParticipantsID")]
         public string? ParticipantsIds { get; set; }
+        public string? EventLabel  { get; set; }
+        public string? EventPlace { get; set; }
+        
     }
 }

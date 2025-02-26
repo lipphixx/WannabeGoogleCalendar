@@ -1,5 +1,7 @@
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using WannabeGCalendar.Configuration;
 using WannabeGCalendar.Data;
 
@@ -11,14 +13,14 @@ namespace WannabeGCalendar
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            // Konfigurace připojení k databázi
             string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-            
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseMySQL(connectionString);
             });
 
-            // P�id�n� CORS politiky spr�vn�
+            // Konfigurace CORS
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowAll", policy =>
@@ -27,18 +29,40 @@ namespace WannabeGCalendar
                 });
             });
 
+            // Konfigurace mailových služeb
             builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
             builder.Services.AddTransient<IMailService, MailService>();
-            
-            // Add services to the container.
+
+            // Přidání JWT autentizace
+            var key = Encoding.ASCII.GetBytes("YourSuperSecretKey"); // Změňte na bezpečný klíč
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key)
+                };
+            });
+
+            // Přidání kontrolerových služeb
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
+
+            // Konfigurace statických souborů
             app.UseStaticFiles();
-            
-            // Configure the HTTP request pipeline.
+
+            // Konfigurace HTTP request pipeline
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -46,15 +70,20 @@ namespace WannabeGCalendar
             }
 
             app.UseRouting();
-            //app.UseHttpsRedirection();
+
+            // Přidání autentizace a autorizace
+            app.UseAuthentication();
             app.UseAuthorization();
 
-            // Pou�it� CORS politiky
+            // Používání CORS politiky
             app.UseCors("AllowAll");
+
+            // Mapování kontrolerů
             app.MapControllers();
 
+            // Nastavení URL aplikace
             app.Urls.Add("https://0.0.0.0:5050");
-            
+
             app.Run();
         }
     }

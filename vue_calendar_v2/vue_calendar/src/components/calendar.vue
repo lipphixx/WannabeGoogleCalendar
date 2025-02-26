@@ -26,9 +26,11 @@ const eventName = ref(null);
 const eventTime = ref(null);
 const isTimeOn = ref(false);
 const isHostOn = ref(false);
-const isNoteOn = ref(false);
+
+const eventPlace = ref(null);
 
 const eventNote = ref(null);
+const isNoteOn = ref(false);
 
 const currentParticipant = ref(null);
 const participants = ref(null);
@@ -40,6 +42,10 @@ const nameInp = ref(null);
 const dateInp = ref(null);
 const timeInp = ref(null);
 const noteInp = ref(null);
+const placeInp = ref(null);
+const labelInp = ref(null);
+
+const selectedLabel = ref(["#6495ED"]);
 
 const onEdit = ref(false);
 const loggedUserId = ref(null);
@@ -48,8 +54,8 @@ const nationalHolidays = ref([]);
 
 const today = new Date();
 
-const props = defineProps(['loggedUser', 'action', 'loggedUsername', 'showEvents', 'showHolidays', 'createEvent']);
-const emit = defineEmits(['onLoading'])
+const props = defineProps(['loggedUser', 'action', 'loggedUsername', 'showEvents', 'showHolidays', 'createEvent', 'labelColors']);
+const emit = defineEmits(['onLoading']);
 
 const filteredEvents = computed(() => {
   if (props.showEvents) {
@@ -83,15 +89,32 @@ onMounted(async () => {
   await fetchHolidays();
   drawCalendar();
 });
-watch(props.action, () => {
+
+watch(props.action, async () => {
   if (props.action.action === 0) {
-    showNow();
+    emit("onLoading");
+    await showNow();
+    setTimeout(() => {
+      emit("onLoading");
+    }, 500)
   } else if (props.action.action === 1) {
-    previousMonth();
+    emit("onLoading");
+    await previousMonth();
+    setTimeout(() => {
+      emit("onLoading");
+    }, 500)
   } else if (props.action.action === 2) {
-    nextMonth()
+    emit("onLoading");
+    await nextMonth();
+    setTimeout(() => {
+      emit("onLoading");
+    }, 500)
   } else if (props.action.action === 3) {
-    showNow();
+    emit("onLoading");
+    await showNow();
+    setTimeout(() => {
+      emit("onLoading");
+    }, 500)
   }
 })
 watch(props.createEvent, () => {
@@ -139,7 +162,6 @@ function drawCalendar() {
   }
   fetchHolidays()
 }
-
 function showModal(day) {
   isTimeOn.value = false;
   isHostOn.value = false;
@@ -156,7 +178,6 @@ function showModal(day) {
   selectedDate.value = new Date(day.getFullYear(), day.getMonth(), day.getDate() + 1).toISOString().split("T")[0];
   addEventDialog.value.showModal();
 }
-
 async function sendEmail() {
   let date = `${selectedDay.value.getDate().toString().padStart(2, '0')}.${(selectedDay.value.getMonth() + 1).toString().padStart(2, '0')}.${selectedDay.value.getFullYear()}`;
   let emailDetails;
@@ -171,8 +192,9 @@ async function sendEmail() {
       Podrobnosti o události:<br>
       Název události: ${eventName.value}<br>
       Datum události: ${date}<br>
+      ${eventPlace.value ? `Místo události: ${eventPlace.value}` : ''}\<br>
       Událost vytvořil: ${props.loggedUsername}<br>
-      Poznámka: ${eventNote.value}`
+      ${eventNote.value ? `Poznámka: ${eventNote.value}` : ''}`
       }
     } else {
       emailDetails = {
@@ -185,19 +207,19 @@ async function sendEmail() {
       Podrobnosti o události:<br>
       Název události: ${eventName.value}<br>
       Datum události: ${date}<br>
+      ${eventPlace.value ? `Místo události: ${eventPlace.value}` : ''}\<br>
       Událost vytvořil: ${props.loggedUsername}<br>
-      Poznámka: ${eventNote.value}`
+      ${eventNote.value ? `Poznámka: ${eventNote.value}` : ''}`
       }
     }
     try {
-      await axios.post(`https://localhost:5050/api/Mail`, emailDetails);
+      await axios.post(`https://172.20.10.4:5050/api/Mail`, emailDetails);
     } catch (error) {
       console.error(`Chyba při odesílání e-mailu na ${x.email}:`, error);
     }
   }
 }
-
-async function sendEmailUpdate(name, date, time, note, owner) {
+async function sendEmailUpdate(name, date, time, note, owner, place) {
   //let dateToSend = `${date.getDate().toString().padStart(2, '0')}.${(date.getMonth() + 1).toString().padStart(2, '0')}.${date.getFullYear()}`;
   let emailDetails;
   for (const x of participants.value) {
@@ -205,13 +227,14 @@ async function sendEmailUpdate(name, date, time, note, owner) {
       emailDetails = {
         emailToId: x.email,
         emailToName: x.fullName,
-        emailSubject: `Upravena událost ${name}`,
+        emailSubject: `Upravena událost - ${name}`,
         emailBody: `Událost ${name} byla upravena.
       <br>
       Podrobnosti o události:<br>
       Název události: ${name}<br>
       Datum události: ${date}<br>
       Čas události: ${time}<br>
+      Místo události: ${place}<br>
       Událost vytvořil: ${owner}<br>
       ${note ? `Poznámka: ${note}` : ''}`
       }
@@ -219,29 +242,28 @@ async function sendEmailUpdate(name, date, time, note, owner) {
       emailDetails = {
         emailToId: x.email,
         emailToName: x.fullName,
-        emailSubject: `Upravena událost ${eventName.value}`,
-        emailBody: `Událost ${eventName.value} byla upravena.
+        emailSubject: `Upravena událost - ${name}`,
+        emailBody: `Událost ${name} byla upravena.
       <br>
       <br>
       Podrobnosti o události:<br>
       Název události: ${name}<br>
       Datum události: ${date}<br>
+      Místo události: ${place}<br>
       Událost vytvořil: ${owner}<br>
       ${note ? `Poznámka: ${note}` : ''}`
       }
     }
     try {
-      await axios.post(`https://localhost:5050/api/Mail`, emailDetails);
+      await axios.post(`https://172.20.10.4:5050/api/Mail`, emailDetails);
     } catch (error) {
       console.error(`Chyba při odesílání e-mailu na ${x.email}:`, error);
     }
   }
 }
-
 async function addEvent() {
   let newEvent;
   selectedDay.value = new Date(selectedDate.value);
-  console.log(new Date(selectedDate.value));
   const key = selectedDay.value.getTime();
 
   if (!eventName.value) {
@@ -279,7 +301,9 @@ async function addEvent() {
       eventTime: eventTime.value ? `${eventTime.value}:00` : null,
       eventNote: eventNote.value,
       ownerId: props.loggedUser,
-      participantsIds: JSON.stringify(participantsIds.value)
+      participantsIds: JSON.stringify(participantsIds.value),
+      eventLabel: selectedLabel.value.toString(),
+      eventPlace: eventPlace.value
     };
     await sendEmail();
   } else {
@@ -289,23 +313,26 @@ async function addEvent() {
       eventTime: eventTime.value ? `${eventTime.value}:00` : null,
       eventNote: eventNote.value,
       ownerId: props.loggedUser,
-      participantsIds: null
+      participantsIds: null,
+      eventLabel: selectedLabel.value.toString(),
+      eventPlace: eventPlace.value
     };
   }
 
   eventName.value = null;
   eventTime.value = null;
   eventNote.value = null;
+  eventPlace.value = null;
   isTimeOn.value = false;
   participantsIds.value = null;
+  selectedLabel.value = [];
 
   addEventDialog.value.close();
 
-  await axios.post(`https://localhost:5050/api/Events/CreateNewEvent`, newEvent);
+  await axios.post(`https://172.20.10.4:5050/api/Events/CreateNewEvent`, newEvent);
 
   await resetPage();
 }
-
 async function addParticipant() {
   if (!Array.isArray(participantsIds.value)) {
     participantsIds.value = [];
@@ -319,10 +346,15 @@ async function addParticipant() {
 
   if (currentParticipant.value !== null) {
 
-    const response = await fetch(`https://localhost:5050/api/Users`);
+    const response = await fetch(`https://172.20.10.4:5050/api/Users`);
     const data = await response.json();
 
     const participant = (data.find(x => x.email === currentParticipant.value));
+    const loggedUser = data.find(x => String(loggedUserId.value) === String(x.userId));
+
+    if (loggedUser.email === currentParticipant.value) {
+      return;
+    }
 
     participants.value.push(participant);
     participantsIds.value.push(participant.userId);
@@ -331,8 +363,7 @@ async function addParticipant() {
     currentParticipant.value = null;
   }
 }
-
-function nextMonth() {
+async function nextMonth() {
   if (currentMonth.value === 11) {
     currentMonth.value = 0;
     currentYear.value++;
@@ -341,8 +372,7 @@ function nextMonth() {
   }
   drawCalendar();
 }
-
-function previousMonth() {
+async function previousMonth() {
   if (currentMonth.value === 0) {
     currentMonth.value = 11;
     currentYear.value--;
@@ -351,21 +381,18 @@ function previousMonth() {
   }
   drawCalendar();
 }
-
-function showNow() {
+async function showNow() {
   const now = new Date();
   currentMonth.value = now.getMonth();
   currentYear.value = now.getFullYear();
   drawCalendar();
 }
-
 async function removeEvent(day, index) {
   const key = events[new Date(day).getTime()].findIndex(x => x.id === index);
   events[new Date(day).getTime()].splice(key, 1);
-  await axios.delete(`https://localhost:5050/api/Events/${index}`);
+  await axios.delete(`https://172.20.10.4:5050/api/Events/${index}`);
   await resetPage();
 }
-
 function sortEventsForDay(dayEvents) {
   dayEvents.sort((a, b) => {
     if (!a.time && b.time) return -1; //celodenni event
@@ -374,14 +401,11 @@ function sortEventsForDay(dayEvents) {
     return 0;
   });
 }
-
 function sortAllEvents() {
-  //prochazime vsechny dny
   for (let day in events) {
     sortEventsForDay(events[day]); //seradime vsechny eventy pro dany den
   }
 }
-
 async function fetchHolidays() {
   const baseUrl = "https://svatkyapi.cz/api/day/";
 
@@ -403,9 +427,8 @@ async function fetchHolidays() {
   }
 
 }
-
 async function fetchEvents() {
-  const url = `https://localhost:5050/api/Events/GetAllEvents`;
+  const url = `https://172.20.10.4:5050/api/Events/GetAllEvents`;
 
   try {
     const response = await fetch(url);
@@ -436,9 +459,10 @@ async function fetchEvents() {
         note: x.eventNote,
         time: x.eventTime ? x.eventTime.slice(0, 5) : null,
         owner: x.ownerId,
-        participantsIds: x.participantsIds || [] // Uložíme účastníky jako pole čísel
+        participantsIds: x.participantsIds || [],
+        eventLabel: x.eventLabel,
+        place: x.eventPlace
       };
-
       const key = new Date(x.eventDate).getTime();
 
       if (!events[key]) {
@@ -453,35 +477,34 @@ async function fetchEvents() {
     console.log("Chyba při načítání událostí:", error);
   }
 }
-
 async function showEventDetail(event) {
   nameInp.value = null;
   dateInp.value = null;
   noteInp.value = null;
   timeInp.value = null;
+  placeInp.value = null;
   onEdit.value = false;
+
   participantsIncluded.value = null;
   selectedEvent.value = event;
+
   selectedEventParticipants.value = [];
   let selectedEventParticipantsIds = [];
 
-  if (event.participantsIds) {
+  if (selectedEvent.value && selectedEvent.value.participantsIds) {
     try {
-      selectedEventParticipantsIds = JSON.parse(event.participantsIds);
+      selectedEventParticipantsIds = JSON.parse(selectedEvent.value.participantsIds);
       participantsIncluded.value = true;
     } catch {
-      selectedEventParticipantsIds = []; // Pokud je nevalidní JSON, nastavíme prázdné pole
+      selectedEventParticipantsIds = [];
       participantsIncluded.value = false;
     }
   }
 
-  if (participantsIncluded.value === false) {
-    eventDialog.value.showModal();
-    return;
-  }
+  eventDialog.value.showModal();
 
   try {
-    const response = await fetch(`https://localhost:5050/api/Users`);
+    const response = await fetch(`https://172.20.10.4:5050/api/Users`);
     const data = await response.json();
 
     const uniqueParticipants = new Set();
@@ -500,7 +523,6 @@ async function showEventDetail(event) {
     console.error("Chyba při načítání účastníků:", error);
   }
 }
-
 async function startEdit(event) {
   participantsIds.value = null;
   onEdit.value = true;
@@ -508,6 +530,14 @@ async function startEdit(event) {
   dateInp.value = selectedEvent.value.date.slice(0, 10);
   noteInp.value = selectedEvent.value.note ? selectedEvent.value.note : null;
   timeInp.value = selectedEvent.value.time ? selectedEvent.value.time : null;
+  placeInp.value = selectedEvent.value.place ? selectedEvent.value.place : null;
+  labelInp.value = selectedEvent.value.eventLabel;
+
+  selectedLabel.value = [];
+
+  selectedLabel.value.push(selectedEvent.value.eventLabel);
+  console.log(selectedLabel.value);
+
   selectedEventParticipants.value = [];
   participants.value = [];
   participantsIds.value = [];
@@ -525,7 +555,7 @@ async function startEdit(event) {
     }
   }
   try {
-    const response = await fetch(`https://localhost:5050/api/Users`);
+    const response = await fetch(`https://172.20.10.4:5050/api/Users`);
     const data = await response.json();
 
     const uniqueParticipants = new Set();
@@ -543,7 +573,6 @@ async function startEdit(event) {
     console.error("Chyba při načítání účastníků:", error);
   }
 }
-
 async function saveEdit() {
   let updatedEvent;
   if (participantsIds.value) {
@@ -551,29 +580,36 @@ async function saveEdit() {
       eventId: selectedEvent.value.id,
       eventName: nameInp.value,
       eventDate: `${dateInp.value}T00:00:00.000Z`,
-      eventTime: `${timeInp.value}:00`,
+      eventTime: timeInp.value ? `${String(timeInp.value)}:00` : null,
       eventNote: noteInp.value,
       ownerId: selectedEvent.value.owner,
-      participantsIds: JSON.stringify(participantsIds.value)
+      participantsIds: JSON.stringify(participantsIds.value),
+      eventLabel: String(selectedLabel.value),
+      eventPlace: placeInp.value ? String(placeInp.value) : null
     };
-    await sendEmailUpdate(nameInp.value, dateInp.value, timeInp.value, noteInp.value, updatedEvent.ownerId);
+    await sendEmailUpdate(updatedEvent.eventName, updatedEvent.eventDate, updatedEvent.eventTime, updatedEvent.eventNote, updatedEvent.ownerId, updatedEvent.eventPlace);
   } else {
     updatedEvent = {
       eventId: selectedEvent.value.id,
       eventName: nameInp.value,
       eventDate: `${dateInp.value}T00:00:00.000Z`,
-      eventTime: `${timeInp.value}:00`,
+      eventTime: timeInp.value ? `${String(timeInp.value)}:00` : null,
       eventNote: noteInp.value,
       ownerId: selectedEvent.value.owner,
-      participantsIds: null
+      participantsIds: null,
+      eventLabel: String(selectedLabel.value),
+      eventPlace: placeInp.value ? String(placeInp.value) : null
     };
   }
+  console.log(updatedEvent);
+  debugger
   try {
-    await axios.post("https://localhost:5050/api/Events/UpdateEvent", updatedEvent);
+    await axios.post("https://172.20.10.4:5050/api/Events/UpdateEvent", updatedEvent);
     nameInp.value = null;
     dateInp.value = null;
     noteInp.value = null;
     timeInp.value = null;
+    placeInp.value = null;
     onEdit.value = false;
     eventDialog.value.close();
 
@@ -582,7 +618,6 @@ async function saveEdit() {
     console.log(error);
   }
 }
-
 async function resetPage() {
   emit('onLoading');
   Object.keys(events).forEach(key => delete events[key]);
@@ -592,6 +627,10 @@ async function resetPage() {
   setTimeout(() => {
     emit('onLoading');
   }, 500)
+}
+function addLabel(color) {
+  selectedLabel.value = [];
+  selectedLabel.value.push(color);
 }
 
 </script>
@@ -627,6 +666,28 @@ async function resetPage() {
           </label>
 
           <p v-if="selectedEvent.note && !onEdit" class="dialogRow inputStyle">Poznámka: {{ selectedEvent.note }}</p>
+
+          <label v-if="onEdit">
+            Štítek
+            <select v-model="labelInp" class="dialogRow">
+              <option value="" disabled selected>Vyberte barvu</option>
+              <option
+                  v-for="(data, label) in labelColors"
+                  :key="label"
+                  :style="{ backgroundColor: data.color, color: 'white' }"
+                  :value="label"
+                  @click="addLabel(data.color)">
+                {{ data.emoji }}
+              </option>
+            </select>
+          </label>
+
+          <label v-if="onEdit">
+            Místo
+            <input type="text" v-model="placeInp" class="dialogRow inputStyle" style="margin-bottom: 2%">
+          </label>
+
+          <p v-if="selectedEvent.place && !onEdit">Místo: {{ selectedEvent.place }}</p>
 
           <label v-if="onEdit">
             Poznámka
@@ -674,7 +735,9 @@ async function resetPage() {
           </button>
           <input class="inputStyle" id="inputTime" type="time" step="900" v-model="eventTime" v-if="isTimeOn"
                  style="border-left: none">
+
         </div>
+        <input type="text" v-model="eventPlace" placeholder="Místo události: " class="inputStyle">
 
         <button @click="isHostOn = true" v-if="!isHostOn" class="dialogRow">Přidat hosty</button>
 
@@ -690,7 +753,17 @@ async function resetPage() {
             {{ parti }}
           </div>
         </div>
-
+        <select class="dialogRow selekta">
+          <option value="" disabled selected>Vyberte štítek</option>
+          <option
+              v-for="(data, label) in labelColors"
+              :key="label"
+              :style="{ backgroundColor: data.color, color: 'white' }"
+              :value="label"
+              @click="addLabel(data.color)">
+            {{ data.emoji }}
+          </option>
+        </select>
         <button @click="isNoteOn = true" v-if="!isNoteOn" class="dialogRow">Přidat poznámku</button>
         <input type="text" v-model="eventNote" v-if="isNoteOn" class="inputStyle dialogRow" placeholder="Poznámka">
         <button @click="addEvent()" class="dialogRow addBtn">Přidat</button>
@@ -767,17 +840,23 @@ body {
   background-color: #181818;
 }
 
-main {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-}
-
 button {
   background-color: #36363650;
   border: 1px solid #36363690;
   color: White;
   cursor: pointer;
   text-align: center;
+  padding: 5px 10px;
+  font-size: 16px;
+  height: 30px;
+  border-radius: 5px;
+}
+
+.selekta {
+  background-color: #36363650;
+  border: 1px solid #36363690;
+  color: White;
+  cursor: pointer;
   padding: 5px 10px;
   font-size: 16px;
   height: 30px;
@@ -813,6 +892,8 @@ main {
   background-color: #1f1f1f;
   padding: 10px;
   border-radius: 10px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
 }
 
 .dialogs {

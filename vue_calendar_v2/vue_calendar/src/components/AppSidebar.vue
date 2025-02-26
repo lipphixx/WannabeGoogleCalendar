@@ -1,9 +1,8 @@
 <script setup>
 import {onMounted, ref, watch} from "vue";
-import LittleCalendar from "@/components/littleCalendar.vue";
 
-const props = defineProps(['loggedUser', 'currentMonth', 'currentYear', 'createEvent']);
-const emit = defineEmits(['logOut', 'userEvents', 'holidayEvents']);
+const props = defineProps(['loggedUser', 'currentMonth', 'currentYear', 'createEvent', 'labelColors']);
+const emit = defineEmits(['logOut', 'userEvents', 'holidayEvents', 'toggleLabel', 'chatbotToggle']);
 const hideEvents = ref(false);
 const hideHolidays = ref(false);
 const daysCurrent = ref([]);
@@ -11,40 +10,52 @@ const daysInCurrentMonth = ref(0);
 
 onMounted(() => {
   drawCalendar();
-})
-watch([() => props.currentMonth, () => props.currentYear], () => {
-  drawCalendar();
 });
-function drawCalendar() {
-  console.log('start');
-  daysCurrent.value = [];
-  daysInCurrentMonth.value = new Date(props.currentYear.value, props.currentMonth.value + 1, 0).getDate();
 
-  let currentDay = 1;
-  for (let i = 0; i < daysInCurrentMonth.value; i++) {
-    console.log(daysInCurrentMonth.value)
-    console.log(i);
-    daysCurrent.value.push(i);
-    currentDay++;
+  watch([() => props.currentMonth, () => props.currentYear], () => {
+    drawCalendar();
+  });
+
+  function drawCalendar() {
+    console.log('start');
+    daysCurrent.value = [];
+    daysInCurrentMonth.value = new Date(props.currentYear.value, props.currentMonth.value + 1, 0).getDate();
+
+    let currentDay = 1;
+    for (let i = 0; i < daysInCurrentMonth.value; i++) {
+      console.log(daysInCurrentMonth.value)
+      console.log(i);
+      daysCurrent.value.push(i);
+      currentDay++;
+    }
   }
+
+  function logOut() {
+    emit('logOut');
+    window.location.reload();
+  }
+
+  function toggleUserEvents() {
+    hideEvents.value = !hideEvents.value
+    emit('userEvents', hideEvents.value)
+  }
+
+  function toggleHolidayEvents() {
+    hideHolidays.value = !hideHolidays.value
+    emit('holidayEvents', hideHolidays.value)
+  }
+
+
+
+  function createEvent() {
+    props.createEvent.action = {};
+    props.createEvent.action = true;
+  }
+
+function openChatbot() {
+    emit('chatbotToggle', true);
 }
-function logOut() {
-  emit('logOut');
-  window.location.reload();
-}
-function toggleUserEvents() {
-  hideEvents.value = !hideEvents.value
-  emit('userEvents', hideEvents.value)
-}
-function toggleHolidayEvents() {
-  hideHolidays.value = !hideHolidays.value
-  emit('holidayEvents', hideHolidays.value)
-}
-function createEvent()
-{
-  props.createEvent.action = {};
-  props.createEvent.action = true;
-}
+
 </script>
 
 <template>
@@ -56,13 +67,6 @@ function createEvent()
     </div>
     <div class="row">
       <button class="addBtn" @click="createEvent">Vytvořit událost</button>
-    </div>
-    <div class="row">
-      <div id="smolCalendar">
-        <littleCalendar v-for="day in daysCurrent"
-                        :key="day"
-                        :day="day"></littleCalendar>
-      </div>
     </div>
     <div class="row">
       <div id="checkboxContainer">
@@ -78,18 +82,33 @@ function createEvent()
       </div>
     </div>
     <div class="row">
+      <div id="checkboxContainer">
+        <h3>Moje štítky</h3>
+        <div style="display: flex">
+          <label class="checkboxik" v-for="lC in labelColors">
+            <input type="checkbox" name="" :style="{accentColor: lC.color}"
+                   style="width: 20px; height: 20px" checked>
+          </label>
+        </div>
+      </div>
 
     </div>
-    <div id="lastRow">
+    <div class="row">
       <button class="logOut" @click="logOut">Odhlásit se</button>
     </div>
     <div id="logoBtm">
       <img src="">
     </div>
+    <a @click="openChatbot" id="lastRow">Kontaktujte Nás!</a>
   </section>
 </template>
 
 <style scoped>
+
+a {
+  justify-content: center;
+}
+
 section {
   display: flex;
   flex-direction: column;
@@ -105,6 +124,17 @@ section {
   color: white;
   margin-left: 5%;
   margin-right: 5%;
+}
+
+#lastRow {
+  color: cornflowerblue;
+  cursor: pointer;
+  margin-top: auto;
+  margin-bottom: 10vh;
+}
+
+#lastRow:hover {
+  text-decoration: underline;
 }
 
 #checkboxContainer {

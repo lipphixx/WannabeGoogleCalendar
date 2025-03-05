@@ -1,7 +1,7 @@
 <script setup>
-import Day from "@/components/day.vue";
-import {computed, onMounted, reactive, ref, watch} from "vue";
-import axios from "axios";
+import Day from '@/components/day.vue';
+import {computed, onMounted, reactive, ref, watch} from 'vue';
+import axios from 'axios';
 
 const currentYear = ref(0);
 const currentMonth = ref(0);
@@ -43,27 +43,21 @@ const dateInp = ref(null);
 const timeInp = ref(null);
 const noteInp = ref(null);
 const placeInp = ref(null);
-const labelInp = ref(null);
 
-const selectedLabel = ref(["#6495ED"]);
+const selectedLabel = ref(null);
 
 const onEdit = ref(false);
 const loggedUserId = ref(null);
+const nullParticipant = ref(false);
+const invalidParticipant = ref(false);
 
 const nationalHolidays = ref([]);
 
 const today = new Date();
 
-const props = defineProps(['loggedUser', 'action', 'loggedUsername', 'showEvents', 'showHolidays', 'createEvent', 'labelColors']);
+const props = defineProps(['loggedUser', 'action', 'loggedUsername', 'showEvents', 'showHolidays', 'createEvent', 'labelColors', 'showParticipantEvents']);
 const emit = defineEmits(['onLoading']);
 
-const filteredEvents = computed(() => {
-  if (props.showEvents) {
-    return events;
-  } else {
-    return {};
-  }
-});
 const filteredHolidays = computed(() => {
   if (props.showHolidays) {
     return nationalHolidays.value;
@@ -162,7 +156,9 @@ function drawCalendar() {
   }
   fetchHolidays()
 }
+
 function showModal(day) {
+  selectedLabel.value = "#6495ED";
   isTimeOn.value = false;
   isHostOn.value = false;
   isNoteOn.value = false;
@@ -178,8 +174,10 @@ function showModal(day) {
   selectedDate.value = new Date(day.getFullYear(), day.getMonth(), day.getDate() + 1).toISOString().split("T")[0];
   addEventDialog.value.showModal();
 }
+
 async function sendEmail() {
   let date = `${selectedDay.value.getDate().toString().padStart(2, '0')}.${(selectedDay.value.getMonth() + 1).toString().padStart(2, '0')}.${selectedDay.value.getFullYear()}`;
+  //let ownerEmail = (await axios.get('https://172.20.10.4:5050/api/Users')).data.find(x => x.userId === owner).email;
   let emailDetails;
   for (const x of participants.value) {
     if (eventTime.value !== null) {
@@ -213,14 +211,16 @@ async function sendEmail() {
       }
     }
     try {
+      console.log(props.loggedUsername)
       await axios.post(`https://172.20.10.4:5050/api/Mail`, emailDetails);
     } catch (error) {
       console.error(`Chyba při odesílání e-mailu na ${x.email}:`, error);
     }
   }
 }
+
 async function sendEmailUpdate(name, date, time, note, owner, place) {
-  //let dateToSend = `${date.getDate().toString().padStart(2, '0')}.${(date.getMonth() + 1).toString().padStart(2, '0')}.${date.getFullYear()}`;
+  let ownerEmail = (await axios.get('https://172.20.10.4:5050/api/Users')).data.find(x => x.userId === owner).username;
   let emailDetails;
   for (const x of participants.value) {
     if (time !== null) {
@@ -232,10 +232,10 @@ async function sendEmailUpdate(name, date, time, note, owner, place) {
       <br>
       Podrobnosti o události:<br>
       Název události: ${name}<br>
-      Datum události: ${date}<br>
-      Čas události: ${time}<br>
-      Místo události: ${place}<br>
-      Událost vytvořil: ${owner}<br>
+      Datum události: ${date.slice(0, 10)}<br>
+      Čas události: ${time.slice(0, 5)}<br>
+      ${place ? `Místo události: ${place}` : ''}<br>
+      Událost vytvořil: ${ownerEmail}<br>
       ${note ? `Poznámka: ${note}` : ''}`
       }
     } else {
@@ -248,9 +248,9 @@ async function sendEmailUpdate(name, date, time, note, owner, place) {
       <br>
       Podrobnosti o události:<br>
       Název události: ${name}<br>
-      Datum události: ${date}<br>
-      Místo události: ${place}<br>
-      Událost vytvořil: ${owner}<br>
+      Datum události: ${date.slice(0, 10)}<br>
+      ${place ? `Místo události: ${place}` : ''}<br>
+      Událost vytvořil: ${ownerEmail}<br>
       ${note ? `Poznámka: ${note}` : ''}`
       }
     }
@@ -261,6 +261,7 @@ async function sendEmailUpdate(name, date, time, note, owner, place) {
     }
   }
 }
+
 async function addEvent() {
   let newEvent;
   selectedDay.value = new Date(selectedDate.value);
@@ -302,7 +303,7 @@ async function addEvent() {
       eventNote: eventNote.value,
       ownerId: props.loggedUser,
       participantsIds: JSON.stringify(participantsIds.value),
-      eventLabel: selectedLabel.value.toString(),
+      eventLabel: selectedLabel.value ? String(selectedLabel.value) : '#6495ED',
       eventPlace: eventPlace.value
     };
     await sendEmail();
@@ -314,7 +315,7 @@ async function addEvent() {
       eventNote: eventNote.value,
       ownerId: props.loggedUser,
       participantsIds: null,
-      eventLabel: selectedLabel.value.toString(),
+      eventLabel: selectedLabel.value ? String(selectedLabel.value) : '#6495ED',
       eventPlace: eventPlace.value
     };
   }
@@ -325,7 +326,7 @@ async function addEvent() {
   eventPlace.value = null;
   isTimeOn.value = false;
   participantsIds.value = null;
-  selectedLabel.value = [];
+  selectedLabel.value = null;
 
   addEventDialog.value.close();
 
@@ -333,7 +334,10 @@ async function addEvent() {
 
   await resetPage();
 }
+
 async function addParticipant() {
+  nullParticipant.value = false;
+  invalidParticipant.value = false;
   if (!Array.isArray(participantsIds.value)) {
     participantsIds.value = [];
   }
@@ -352,7 +356,13 @@ async function addParticipant() {
     const participant = (data.find(x => x.email === currentParticipant.value));
     const loggedUser = data.find(x => String(loggedUserId.value) === String(x.userId));
 
+    if (!participant) {
+      nullParticipant.value = true;
+      return;
+    }
+
     if (loggedUser.email === currentParticipant.value) {
+      invalidParticipant.value = true;
       return;
     }
 
@@ -363,6 +373,7 @@ async function addParticipant() {
     currentParticipant.value = null;
   }
 }
+
 async function nextMonth() {
   if (currentMonth.value === 11) {
     currentMonth.value = 0;
@@ -372,6 +383,7 @@ async function nextMonth() {
   }
   drawCalendar();
 }
+
 async function previousMonth() {
   if (currentMonth.value === 0) {
     currentMonth.value = 11;
@@ -381,18 +393,21 @@ async function previousMonth() {
   }
   drawCalendar();
 }
+
 async function showNow() {
   const now = new Date();
   currentMonth.value = now.getMonth();
   currentYear.value = now.getFullYear();
   drawCalendar();
 }
+
 async function removeEvent(day, index) {
   const key = events[new Date(day).getTime()].findIndex(x => x.id === index);
   events[new Date(day).getTime()].splice(key, 1);
   await axios.delete(`https://172.20.10.4:5050/api/Events/${index}`);
   await resetPage();
 }
+
 function sortEventsForDay(dayEvents) {
   dayEvents.sort((a, b) => {
     if (!a.time && b.time) return -1; //celodenni event
@@ -401,11 +416,13 @@ function sortEventsForDay(dayEvents) {
     return 0;
   });
 }
+
 function sortAllEvents() {
   for (let day in events) {
     sortEventsForDay(events[day]); //seradime vsechny eventy pro dany den
   }
 }
+
 async function fetchHolidays() {
   const baseUrl = "https://svatkyapi.cz/api/day/";
 
@@ -427,6 +444,7 @@ async function fetchHolidays() {
   }
 
 }
+
 async function fetchEvents() {
   const url = `https://172.20.10.4:5050/api/Events/GetAllEvents`;
 
@@ -477,6 +495,7 @@ async function fetchEvents() {
     console.log("Chyba při načítání událostí:", error);
   }
 }
+
 async function showEventDetail(event) {
   nameInp.value = null;
   dateInp.value = null;
@@ -523,6 +542,7 @@ async function showEventDetail(event) {
     console.error("Chyba při načítání účastníků:", error);
   }
 }
+
 async function startEdit(event) {
   participantsIds.value = null;
   onEdit.value = true;
@@ -531,12 +551,8 @@ async function startEdit(event) {
   noteInp.value = selectedEvent.value.note ? selectedEvent.value.note : null;
   timeInp.value = selectedEvent.value.time ? selectedEvent.value.time : null;
   placeInp.value = selectedEvent.value.place ? selectedEvent.value.place : null;
-  labelInp.value = selectedEvent.value.eventLabel;
 
-  selectedLabel.value = [];
-
-  selectedLabel.value.push(selectedEvent.value.eventLabel);
-  console.log(selectedLabel.value);
+  selectedLabel.value = (selectedEvent.value.eventLabel);
 
   selectedEventParticipants.value = [];
   participants.value = [];
@@ -573,6 +589,7 @@ async function startEdit(event) {
     console.error("Chyba při načítání účastníků:", error);
   }
 }
+
 async function saveEdit() {
   let updatedEvent;
   if (participantsIds.value) {
@@ -618,6 +635,7 @@ async function saveEdit() {
     console.log(error);
   }
 }
+
 async function resetPage() {
   emit('onLoading');
   Object.keys(events).forEach(key => delete events[key]);
@@ -628,10 +646,47 @@ async function resetPage() {
     emit('onLoading');
   }, 500)
 }
+
 function addLabel(color) {
-  selectedLabel.value = [];
-  selectedLabel.value.push(color);
+  selectedLabel.value = color;
 }
+
+const filteredEvents = computed(() => {
+  if (!props.showEvents) {
+    return {};
+  }
+
+  const filtered = {};
+
+  for (const dateKey in events) {
+    const visibleEvents = events[dateKey].filter(event => {
+      const labelEntry = Object.entries(props.labelColors).find(
+          ([_, data]) => data.color === event.eventLabel
+      );
+      const isLabelVisible = !labelEntry || labelEntry[1].visible !== false;
+
+      const isOwner = String(event.owner) === String(props.loggedUser);
+
+      const hasParticipants = event.participantsIds && event.participantsIds.length > 0;
+      const isParticipant = hasParticipants &&
+          (typeof event.participantsIds === 'string' ?
+              event.participantsIds.includes(props.loggedUser) :
+              event.participantsIds.includes(props.loggedUser));
+
+      if (!props.showParticipantEvents && isParticipant && !isOwner) {
+        return false;
+      }
+
+      return isLabelVisible;
+    });
+
+    if (visibleEvents.length > 0) {
+      filtered[dateKey] = visibleEvents;
+    }
+  }
+
+  return filtered;
+});
 
 </script>
 
@@ -668,40 +723,28 @@ function addLabel(color) {
           <p v-if="selectedEvent.note && !onEdit" class="dialogRow inputStyle">Poznámka: {{ selectedEvent.note }}</p>
 
           <label v-if="onEdit">
-            Štítek
-            <select v-model="labelInp" class="dialogRow">
-              <option value="" disabled selected>Vyberte barvu</option>
-              <option
-                  v-for="(data, label) in labelColors"
-                  :key="label"
-                  :style="{ backgroundColor: data.color, color: 'white' }"
-                  :value="label"
-                  @click="addLabel(data.color)">
-                {{ data.emoji }}
-              </option>
-            </select>
-          </label>
-
-          <label v-if="onEdit">
             Místo
             <input type="text" v-model="placeInp" class="dialogRow inputStyle" style="margin-bottom: 2%">
           </label>
 
-          <p v-if="selectedEvent.place && !onEdit">Místo: {{ selectedEvent.place }}</p>
+          <p v-if="selectedEvent.place && !onEdit" class="dialogRow inputStyle">Místo: {{ selectedEvent.place }}</p>
 
           <label v-if="onEdit">
             Poznámka
             <input type="text" v-model="noteInp" class="dialogRow inputStyle" style="margin-bottom: 2%">
           </label>
 
-          <h4 v-if="participantsIncluded && !onEdit">
-            Účastníci
-          </h4>
-          <p v-for="participant in selectedEventParticipants" v-if="!onEdit">{{ participant }}</p>
-
+          <div class="inputStyle" style="height: fit-content">
+            <h4 v-if="participantsIncluded && !onEdit">
+              Účastníci
+            </h4>
+            <div style="display: flex; gap: 5px; flex-direction: column">
+            <p v-for="participant in selectedEventParticipants" v-if="!onEdit">{{ participant }}</p>
+            </div>
+          </div>
           <button @click="isHostOn = true" v-if="!isHostOn && onEdit" class="dialogRow">Přidat hosty</button>
 
-          <div v-if="isHostOn && onEdit" class="dialogColum">
+          <div v-if="isHostOn && onEdit" class="dialogColumn ucastnikRow">
             Účastníci
             <div class="dialogRow">
               <input type="email" v-model="currentParticipant" class="inputStyle" placeholder="Host"
@@ -710,16 +753,35 @@ function addLabel(color) {
                       style="border-bottom-left-radius: 0; border-top-left-radius: 0; border-left: none;">Pozvat
               </button>
             </div>
-            <div v-for="parti in participantsEmails">
+            <div v-for="parti in participantsEmails" style="font-size: smaller; margin-left: 1%">
               {{ parti }}
             </div>
           </div>
+
+          <div class="dialogRow" v-if="onEdit" style="margin-top: 5px">
+            <h4>Štítky</h4>
+            <div style="display: flex; gap: 5px">
+              <div v-for="(data, index) in labelColors"
+                   :key="index"
+                   :style="{
+           backgroundColor: selectedLabel === data.color ? data.color : 'transparent',
+           boxShadow: `inset 0 0 0 2px ${data.color}`
+         }"
+                   class="checkboxik"
+                   @click="addLabel(data.color)"
+                   style="width: 30px; height: 30px; cursor: pointer">
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="dialogRow" style="gap: 10px">
-          <button @click="startEdit(selectedEvent)" v-if="!onEdit" class="editBtn">Upravit</button>
-          <button @click="eventDialog.close()" v-if="!onEdit">Zavřít</button>
+        <div class="dialogRow" style="gap: 10px" v-if="!onEdit">
+          <button @click="startEdit(selectedEvent)" class="editBtn">Upravit</button>
+          <button @click="eventDialog.close()" class="closeBtn">Zavřít</button>
         </div>
-        <button class="dialogRow addBtn" @click="saveEdit()" v-if="onEdit" style="margin-top: -5%">Uložit</button>
+        <div class="dialogRow" style="gap: 10px" v-if="onEdit">
+          <button class="addBtn" @click="saveEdit()">Uložit</button>
+          <button class="closeBtn" @click="onEdit = false">Zrušit</button>
+        </div>
       </div>
     </dialog>
   </div>
@@ -741,7 +803,7 @@ function addLabel(color) {
 
         <button @click="isHostOn = true" v-if="!isHostOn" class="dialogRow">Přidat hosty</button>
 
-        <div v-if="isHostOn" class="dialogColumn">
+        <div v-if="isHostOn" class="dialogColumn" style="margin-bottom: 2%">
           <div class="dialogRow">
             <input type="email" v-model="currentParticipant" class="inputStyle" placeholder="Host"
                    style="border-right: none">
@@ -749,23 +811,29 @@ function addLabel(color) {
                     style="border-bottom-left-radius: 0; border-top-left-radius: 0; border-left: none;">Pozvat
             </button>
           </div>
-          <div v-for="parti in participantsEmails" class="dialogRow" style="font-size: smaller">
+          <p v-if="nullParticipant" style="color: red">Uživatel neexistuje</p>
+          <p v-if="invalidParticipant" style="color: red">Nelze pozvat samo sebe</p>
+          <div v-for="parti in participantsEmails" style="font-size: smaller; margin-left: 1%">
             {{ parti }}
           </div>
         </div>
-        <select class="dialogRow selekta">
-          <option value="" disabled selected>Vyberte štítek</option>
-          <option
-              v-for="(data, label) in labelColors"
-              :key="label"
-              :style="{ backgroundColor: data.color, color: 'white' }"
-              :value="label"
-              @click="addLabel(data.color)">
-            {{ data.emoji }}
-          </option>
-        </select>
         <button @click="isNoteOn = true" v-if="!isNoteOn" class="dialogRow">Přidat poznámku</button>
         <input type="text" v-model="eventNote" v-if="isNoteOn" class="inputStyle dialogRow" placeholder="Poznámka">
+        <div class="dialogRow labeling">
+          Štítky
+          <div style="display: flex; gap: 5px">
+            <div v-for="(data, index) in labelColors"
+                 :key="index"
+                 :style="{
+           backgroundColor: selectedLabel === data.color ? data.color : 'transparent',
+           boxShadow: `inset 0 0 0 2px ${data.color}`
+         }"
+                 class="checkboxik"
+                 @click="addLabel(data.color)"
+                 style="width: 30px; height: 30px; cursor: pointer">
+            </div>
+          </div>
+        </div>
         <button @click="addEvent()" class="dialogRow addBtn">Přidat</button>
       </div>
     </dialog>
@@ -870,6 +938,15 @@ button {
   transition: box-shadow 0.3s ease-in-out;
 }
 
+.closeBtn {
+  transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.closeBtn:hover {
+  border: 2px solid cornflowerblue;
+  box-shadow: inset 0 0 0 1px cornflowerblue;
+}
+
 .editBtn:hover {
   box-shadow: inset 0 0 2px 3px cornflowerblue;
 }
@@ -896,6 +973,17 @@ main {
   grid-template-columns: repeat(7, 1fr);
 }
 
+.checkboxik {
+  border-radius: 10px;
+}
+
+.labeling {
+  padding-left: 9px;
+  border-radius: 5px;
+  background: linear-gradient(to right, #36363650, #36363600) no-repeat;
+  background-size: 80% 100%;
+}
+
 .dialogs {
   width: 400px;
   padding: 20px;
@@ -915,6 +1003,11 @@ main {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.ucastnikRow {
+  display: flex;
+  justify-content: space-between;
 }
 
 .dialogRow {

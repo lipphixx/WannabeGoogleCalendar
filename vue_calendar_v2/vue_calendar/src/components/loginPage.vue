@@ -50,10 +50,10 @@ async function fetchLogin() {
       <h2>Login</h2>
       <div id="inputContainer">
         <label> Email:
-          <input class="inputStyle" type="text" placeholder="Email" v-model="email">
+          <input class="inputStyle" type="text" placeholder="Email" v-model="email" required>
         </label>
         <label> Heslo:
-          <input class="inputStyle" type="password" placeholder="Heslo" v-model="password">
+          <input class="inputStyle" type="password" placeholder="Heslo" v-model="password" required>
         </label>
         <p v-if="!correctAuth" style="color: red">Špatný e-mail nebo heslo.</p>
         <a @click="showPasswordReset = true">Zapomenuté heslo</a>

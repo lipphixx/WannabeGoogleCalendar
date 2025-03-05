@@ -6,5 +6,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="vue-knihaJizd" />
     <orderEntry type="module" module-name="vue_todo" />
+    <orderEntry type="module" module-name="students" />
+    <orderEntry type="module" module-name="project" />
   </component>
 </module>

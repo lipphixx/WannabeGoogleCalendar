@@ -30,29 +30,23 @@ namespace WannabeGCalendar.Controllers
                 return StatusCode(500, new { message = "Chyba serveru", error = ex.Message });
             }
         }
-        
+
         [HttpPost("CreateNewEvent")]
         public IActionResult CreateEvent([FromBody] Event newEvent)
         {
-            if (newEvent == null)
-            {
-                return BadRequest("Invalid event data.");
-            }
+            if (newEvent == null) return BadRequest("Invalid event data.");
 
             dbContext.Events.Add(newEvent);
             dbContext.SaveChanges();
 
             return Ok(new { message = "Event byl úspěšně vytvořen", eventId = newEvent.EventId });
         }
-        
+
         [HttpDelete("{id}", Name = "RemoveEvent")]
-        public IActionResult RemoveEvent(Int64 id)
+        public IActionResult RemoveEvent(long id)
         {
             var eventToRemove = dbContext.Events.FirstOrDefault(e => e.EventId == id);
-            if (eventToRemove == null)
-            {
-                return NotFound("Event not found.");
-            }
+            if (eventToRemove == null) return NotFound("Event not found.");
 
             dbContext.Events.Remove(eventToRemove);
             dbContext.SaveChanges();
@@ -66,7 +60,7 @@ namespace WannabeGCalendar.Controllers
             try
             {
                 var eventToUpdate = dbContext.Events.FirstOrDefault(e => e.EventId == updatedEvent.EventId);
-                
+
                 eventToUpdate.EventName = updatedEvent.EventName;
                 eventToUpdate.EventDate = updatedEvent.EventDate;
                 eventToUpdate.EventNote = updatedEvent.EventNote;
@@ -81,6 +75,27 @@ namespace WannabeGCalendar.Controllers
             {
                 return StatusCode(500, new { message = ex.Message });
             }
+        }
+
+        [HttpGet("GetEventLabels")]
+        public IActionResult GetEventLabels()
+        {
+            try
+            {
+                return Ok(dbContext.UserLabels.ToList());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = ex.Message });
+            }
+        }
+
+        [HttpPost("PostEventLabel")]
+        public IActionResult PostEventLabel([FromBody] UserLabel userLabel)
+        {
+            var labelToEdit = dbContext.UserLabels.FirstOrDefault(l => l.UserId == userLabel.UserId);
+            labelToEdit.Labels = userLabel.Labels;
+            return Ok(dbContext.SaveChanges());
         }
     }
 }

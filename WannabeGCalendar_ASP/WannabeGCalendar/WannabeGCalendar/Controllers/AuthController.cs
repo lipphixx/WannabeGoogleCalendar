@@ -69,8 +69,7 @@ namespace WannabeGCalendar.Controllers
 
             dbContext.Users.Add(newUser);
             dbContext.SaveChanges();
-
-            // Vložení nového uživatele bez použití nesprávného názvu argumentu
+            
             return Ok(newUser);
         }
 
@@ -85,6 +84,7 @@ namespace WannabeGCalendar.Controllers
             r.ExpiresAt = DateTime.UtcNow.AddMinutes(10); // Expirace po 10 minutách
             dbContext.Recoveries.Add(r);
             dbContext.SaveChanges();
+
             return Ok(new { message = "Recovery was successfully created", r });
         }
 
@@ -144,6 +144,55 @@ namespace WannabeGCalendar.Controllers
         {
             public string Email { get; set; }
             public string NewPassword { get; set; }
+        }
+
+        public class ChangeUserCredentialsRequest
+        {
+            public int UserId { get; set; }
+            public string Username { get; set; }
+            public string FullName { get; set; }
+            public string Email { get; set; }
+            public string PhoneNumber { get; set; }
+        }
+
+        [HttpPost("ChangeCredentials")]
+        public IActionResult ChangeUserCredentials([FromBody] ChangeUserCredentialsRequest credentials)
+        {
+            var user = dbContext.Users.FirstOrDefault(x => x.UserId == credentials.UserId);
+            
+            bool usernameExists = dbContext.Users.Any(x => x.Username == credentials.Username && x.UserId != credentials.UserId);
+            bool emailExists = dbContext.Users.Any(x => x.Email == credentials.Email && x.UserId != credentials.UserId);
+            bool phoneNumberExists = dbContext.Users.Any(x => x.PhoneNumber == credentials.PhoneNumber && x.UserId != credentials.UserId);
+
+            if (usernameExists)
+            {
+                return BadRequest(new { message = "Tento username už je obsazený!" });
+            }
+
+            if (emailExists)
+            {
+                return Unauthorized(new { message = "Tento e-mail už je obsazený!" });
+            }
+
+            if (phoneNumberExists)
+            {
+                return NotFound(new { message = "Toto telefonní číslo už je obsazené!" });
+            }
+            
+            user.Username = credentials.Username;
+            user.FullName = credentials.FullName;
+            user.Email = credentials.Email;
+            user.PhoneNumber = credentials.PhoneNumber;
+
+            dbContext.SaveChanges();
+
+            return Ok(new { message = "Uživatelské údaje byly úspěšně změněny!" });
+        }
+
+        [HttpPut("RemoveOldRecoveries")]
+        public void RemoveOldRecoveries()
+        {
+            dbContext.Recoveries.Where(x => x.ExpiresAt < DateTime.UtcNow).ToList().ForEach(x => dbContext.Recoveries.Remove(x));
         }
     }
 }

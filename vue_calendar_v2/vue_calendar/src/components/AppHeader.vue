@@ -64,7 +64,7 @@ function showNow() {
 
     <h1>{{dateNow}}</h1>
 
-    <a class="material-symbols-outlined" @click.prevent="showMenuDialog"> menu </a>
+    <a class="material-symbols-outlined menu" @click.prevent="showMenuDialog"> menu </a>
 
   </header>
 </template>
@@ -108,6 +108,14 @@ p {
 button:hover {
   border: 2px solid cornflowerblue;
   box-shadow: inset 0 0 0 1px cornflowerblue;
+}
+.menu  {
+  transition: color 0.2s ease-in-out;
+  cursor: pointer;
+  color: white;
+}
+.menu:hover {
+  color: cornflowerblue;
 }
 
 </style>

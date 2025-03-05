@@ -22,6 +22,13 @@ async function postRegister() {
     return;
   }
 
+  const phoneRegex = /^\+420\d{9}$/;
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  if(!phoneRegex.test(phone.value) || !emailRegex.test(email.value)){
+    errorValue.value = 'invalid';
+    return;
+  }
+
   const fullName = `${name.value} ${surname.value}`;
   const registerDetails = {
     email: email.value,
@@ -76,17 +83,17 @@ async function postRegister() {
       </label>
       <p v-if="errorValue === 'username'" style="color: red">Účet s tímto uživatelským jménem již existuje.</p>
       <label> E-mail:
-        <input type="text" placeholder="Emailová adresa" v-model="email" autocomplete="off">
+        <input type="text" placeholder="email@domain.cz" v-model="email" autocomplete="off">
       </label>
       <p v-if="errorValue === 'mail'" style="color: red">Účet s tímto e-mailem již existuje.</p>
       <label> Telefonní číslo:
-        <input type="tel" placeholder="Telefonní číslo" v-model="phone" autocomplete="off">
+        <input type="tel" placeholder="+420000000000" v-model="phone" autocomplete="off">
       </label>
       <p v-if="errorValue === 'phone'" style="color: red">Účet s tímto telefonním číslem již existuje.</p>
       <label> Heslo:
         <input type="password" placeholder="Heslo" v-model="password" autocomplete="off">
       </label>
-      <p v-if="errorValue === 'invalid'" style="color: red">Pole nesmí být prázdná.</p>
+      <p v-if="errorValue === 'invalid'" style="color: red">Neplatné údaje!</p>
       <button type="submit">Registrovat se</button>
     </div>
   </form>

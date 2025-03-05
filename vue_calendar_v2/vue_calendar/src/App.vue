@@ -1,5 +1,5 @@
 <script setup>
-import {computed, onMounted, ref} from "vue";
+import {computed, onMounted, ref, watch} from "vue";
 import Calendar from "@/components/calendar.vue";
 import AppHeader from "@/components/AppHeader.vue";
 import AppSidebar from "@/components/AppSidebar.vue";
@@ -7,6 +7,7 @@ import LoginPage from "@/components/loginPage.vue";
 import RegisterPage from "@/components/registerPage.vue";
 import PasswordReset from "@/components/passwordReset.vue";
 import CakeBot from "@/components/cakeBot.vue";
+import axios from "axios";
 
 const onLogin = ref(false);
 const currPath = ref("#/loginPage");
@@ -19,43 +20,48 @@ const currentYear = ref(0);
 
 const showEvents = ref(true);
 const showHolidays = ref(true);
+const showParticipantEvents = ref(true);
 const showModal = ref({});
 const chatbotToggle = ref(false);
 
 const onLoading = ref(false);
+const labelColors = ref({
+  default: { color: '#6495ED', visible: true, labelName: 'Základní modrá' },
+  red: { color: '#FF0000', visible: true, labelName: 'Červená' },
+  blue: { color: '#0000FF', visible: true, labelName: 'Modrá' },
+  green: { color: '#00FF00', visible: true, labelName: 'Zelená' },
+  orange: { color: '#FF8000', visible: true, labelName: 'Orandžová' },
+  purple: { color: '#8000FF', visible: true, labelName: 'Fialová' }
+});
 
 const routes = {
   "/registerPage": RegisterPage,
   "/loginPage": LoginPage,
 };
 
-const labelColors = {
-  red: { color: '#FF0000', emoji: '🔴' },
-  blue: { color: '#0000FF', emoji: '🔵' },
-  green: { color: '#00FF00', emoji: '🟢' },
-  orange: { color: '#FF8000', emoji: '🟠' },
-  purple: { color: '#8000FF', emoji: '🟣' }
-};
-
-onMounted(() => {
+onMounted(async () => {
   const date = new Date();
   currentMonth.value = date.getMonth();
   currentYear.value = date.getFullYear();
+  document.title = 'GuguCalendar';
 
   if (!currPath.value || currPath.value === "#") {
     window.location.hash = "#/loginPage";
     currPath.value = "#/loginPage";
   }
-})
 
+  await axios.put('https://localhost:5050/api/Auth/RemoveOldRecoveries');
+  setInterval(async () => {
+    await axios.put('https://localhost:5050/api/Auth/RemoveOldRecoveries');
+  }, 600000)
+
+});
 
 const isRegisterPage = computed(() => currPath.value.replace("#", "") === "/registerPage");
-
 window.addEventListener("hashchange", () => {
   currPath.value = window.location.hash;
 });
-
-window.addEventListener("load", () => {
+window.addEventListener("load", async () => {
   if (sessionStorage.getItem('loggedUser') && sessionStorage.getItem('loggedUsername')) {
     userId.value = sessionStorage.getItem('loggedUser');
     username.value = sessionStorage.getItem('loggedUsername');
@@ -63,7 +69,7 @@ window.addEventListener("load", () => {
       userId: userId.value,
       username: username.value
     }
-    fetchLogin(true, user);
+    await fetchLogin(true, user);
   } else {
     onLogin.value = false;
     window.location.hash = '#';
@@ -71,13 +77,10 @@ window.addEventListener("load", () => {
     username.value = null;
   }
 });
-
 const currView = computed(() => {
   return routes[currPath.value.slice(1)] || LoginPage;
 });
-
-
-function fetchLogin(loginPhase, user) {
+async function fetchLogin(loginPhase, user) {
   onLogin.value = loginPhase;
   if (loginPhase) {
     window.location.hash = '#/calendar';
@@ -85,7 +88,6 @@ function fetchLogin(loginPhase, user) {
     username.value = user.username;
   }
 }
-
 function logOut() {
   userId.value = null;
   username.value = null;
@@ -93,17 +95,22 @@ function logOut() {
   sessionStorage.removeItem('loggedUser');
   sessionStorage.removeItem('loggedUsername');
 }
-
 function toggleEvents(state) {
   showEvents.value = !state;
 }
-
 function toggleHolidays(state) {
   showHolidays.value = !state;
 }
-
+function toggleParticipantEvents(state){
+  showParticipantEvents.value = !state;
+}
 function loading() {
   onLoading.value = !onLoading.value;
+}
+function toggleLabel(label) {
+  labelColors.value[label].visible = !labelColors.value[label].visible;
+  const temp = {...labelColors.value};
+  labelColors.value = temp;
 }
 </script>
 
@@ -131,12 +138,13 @@ function loading() {
                 :loggedUsername="username"
                 :showEvents="showEvents"
                 :showHolidays="showHolidays"
+                :showParticipantEvents="showParticipantEvents"
                 :createEvent="showModal" @update:createEvent="showModal = $event"
                 :labelColors="labelColors"
                 @onLoading="loading"
       />
     </div>
-    <p v-if="onLoading" id="fixed" style="font-weight: bolder">Loading...</p>
+    <p v-if="onLoading" id="fixed" style="font-weight: bolder">Načítání...</p>
     <AppSidebar class="sidebar" :class="{ sidebarActive: isActive }"
                 :loggedUser="username" v-if="onLogin"
                 :action="refAction"
@@ -148,6 +156,8 @@ function loading() {
                 @logOut="logOut"
                 @userEvents="toggleEvents"
                 @holidayEvents="toggleHolidays"
+                @toggleLabel="toggleLabel"
+                @participantEvents="toggleParticipantEvents"
     ></AppSidebar>
 
   </main>
@@ -226,22 +236,21 @@ a:hover {
 .calendarComp {
   display: flex;
   position: fixed;
-  top: 7vh;
-  left: 0;
+  top: 6vh;
+  left: -1.5%;
   width: 100vw;
-
   transition: filter .2s ease-in, left 1s ease-in-out;
 }
 
 .calendarActive {
-  left: -7vw;
+  left: -8.2vw;
 }
 
 .sidebar {
   position: fixed;
   right: -15%;
   height: 100vh;
-  top: 6.5%;
+  top: 6%;
   transition: right 1s ease-in-out;
 }
 

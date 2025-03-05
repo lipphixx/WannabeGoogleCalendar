@@ -6,7 +6,6 @@ using WannabeGCalendar.Data;
 public class MailController : ControllerBase
 {
     IMailService mailService;
-//injecting the IMailService into the constructor
     public MailController(IMailService _MailService)
     {
         mailService = _MailService;

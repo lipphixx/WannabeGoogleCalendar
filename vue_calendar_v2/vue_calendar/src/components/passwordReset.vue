@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import {onMounted, ref} from 'vue';
 import axios from 'axios';
 
 const recEmail = ref(null);
@@ -16,7 +16,11 @@ const onPassword = ref(false);
 const recoveryDetails = ref(null);
 
 const emit = defineEmits(["close"]);
+const props = defineProps(['email']);
 
+onMounted(() => {
+  recEmail.value = props.email ? props.email : null;
+})
 async function resetPassword() {
   const response = await axios.get('https://172.20.10.4:5050/api/Users');
   if (!(response.data.find(x => x.email === recEmail.value))) {
@@ -52,6 +56,7 @@ async function resetPassword() {
 }
 async function checkRecoveryCode() {
   try {
+    console.log(recCode.value)
     const details = {
       recoveryEmail: recoveryDetails.value.recoveryEmail,
       recoveryCode: recCode.value
@@ -75,7 +80,11 @@ async function changePassword() {
       email: recEmail.value,
       newPassword: newPass.value
     });
-    alert('Změna hesla proběhla úspěšně!');
+    if (confirm("Chcete opravdu pokračovat?")) {
+      alert("Úspěšně uloženo! - Budete přesměrováni na přihlášení.");
+      sessionStorage.clear();
+      window.location.reload();
+    }
     emit("close");
   } catch (error) {
     console.log(error);
@@ -88,7 +97,7 @@ async function changePassword() {
       <h2>Obnova hesla</h2>
       <label>
         Email:
-        <input class="inputStyle" type="email" placeholder="Email" v-model="recEmail" :disabled="onCode">
+        <input class="inputStyle" type="email" placeholder="Email" v-model="recEmail" :disabled="onCode || onPassword" required>
       </label>
       <p v-if="!emailCorrect">Email neexistuje!</p>
       <button type="submit" v-if="onEmail">Odeslat</button>
@@ -97,7 +106,7 @@ async function changePassword() {
     <form v-if="onCode || onPassword" @submit.prevent="checkRecoveryCode">
       <label>
         Ověřovací kód:
-        <input class="inputStyle" type="text" placeholder="Kód" v-model="recCode" :disabled="onPassword">
+        <input class="inputStyle" type="text" placeholder="Kód" v-model="recCode" :disabled="onPassword || onEmail" required>
       </label>
       <p v-if="!codeCorrect">Nesprávný kód!</p>
       <button type="submit" v-if="onCode">Odeslat</button>

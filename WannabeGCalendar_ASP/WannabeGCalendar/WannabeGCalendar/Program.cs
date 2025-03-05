@@ -11,16 +11,15 @@ namespace WannabeGCalendar
     {
         public static void Main(string[] args)
         {
+            
             var builder = WebApplication.CreateBuilder(args);
-
-            // Konfigurace připojení k databázi
+            
             string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseMySQL(connectionString);
             });
-
-            // Konfigurace CORS
+            
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowAll", policy =>
@@ -28,13 +27,11 @@ namespace WannabeGCalendar
                     policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
                 });
             });
-
-            // Konfigurace mailových služeb
+            
             builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
             builder.Services.AddTransient<IMailService, MailService>();
-
-            // Přidání JWT autentizace
-            var key = Encoding.ASCII.GetBytes("YourSuperSecretKey"); // Změňte na bezpečný klíč
+            
+            var key = Encoding.ASCII.GetBytes("YourSuperSecretKey");
             builder.Services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -52,17 +49,14 @@ namespace WannabeGCalendar
                 };
             });
 
-            // Přidání kontrolerových služeb
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
 
-            // Konfigurace statických souborů
             app.UseStaticFiles();
 
-            // Konfigurace HTTP request pipeline
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -70,21 +64,18 @@ namespace WannabeGCalendar
             }
 
             app.UseRouting();
-
-            // Přidání autentizace a autorizace
+            
             app.UseAuthentication();
             app.UseAuthorization();
-
-            // Používání CORS politiky
+            
             app.UseCors("AllowAll");
-
-            // Mapování kontrolerů
+            
             app.MapControllers();
-
-            // Nastavení URL aplikace
+            
             app.Urls.Add("https://0.0.0.0:5050");
 
             app.Run();
+            
         }
     }
 }
